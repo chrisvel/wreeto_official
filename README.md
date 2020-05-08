@@ -20,6 +20,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Search
 - Share notes in public with a __secure__ link
 - Zip and download notes in markdown format
+- Responsive mobile web UI
 
 ## Roadmap
 
@@ -31,8 +32,11 @@ Initially this was built because I didn't like the note-taking apps out there an
 - [TODO] Encryption
 - [TODO] Different Levels of security access for users
 - [TODO] User access control
+- [TODO] Note Tags
+- [TODO] Dark mode
 - [TODO] Cloud backups
 - [TODO] Move UI to ReactJS
+- [TODO] Mobile apps
 - A lot more ..
 
 ## Requirements
