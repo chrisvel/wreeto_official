@@ -22,12 +22,15 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 ## Roadmap
 
-- [DONE] Note Templates
+- [TODO] Test everything, everywhere. More testing..
+- [TODO] Improve UI inconsistencies
+- [TODO] Note Templates
 - [TODO] Ability to attach files (e.g. Documents)
 - [TODO] Encryption
 - [TODO] Different Levels of security access for users
 - [TODO] User access control
 - [TODO] Cloud backups
+- [TODO] Move UI to ReactJS
 - A lot more ..
 
 ## Requirements
