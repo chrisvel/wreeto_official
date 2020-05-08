@@ -10,7 +10,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 ## Features
 
-- No more crappy UIs
+- No more crappy UIs, less is more
 - Create unlimited notes with Markdown format
 - Unlimited Categories
 - List notes by Category or SubCategory
@@ -18,12 +18,14 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Authentication, authorization 
 - Google oAuth integration
 - Search
-- Share public notes
+- Share notes in public with a __secure__ link
+- Zip and download notes in markdown format
 
 ## Roadmap
 
 - [TODO] Test everything, everywhere. More testing..
 - [TODO] Improve UI inconsistencies
+- [TODO] Upgrade to Rails v6
 - [TODO] Note Templates
 - [TODO] Ability to attach files (e.g. Documents)
 - [TODO] Encryption
