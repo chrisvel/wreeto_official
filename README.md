@@ -34,6 +34,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - [TODO] User access control
 - [TODO] Note Tags
 - [TODO] Dark mode
+- [TODO] Export notes to PDF format
 - [TODO] Cloud backups
 - [TODO] Move UI to ReactJS
 - [TODO] Mobile apps
