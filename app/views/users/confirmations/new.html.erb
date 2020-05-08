@@ -1,0 +1,27 @@
+<div class="ui center aligned grid">
+  <div class="column login-box">
+    <div class="logo">
+      wreeto
+    </div>
+      <br>
+      <h3>Resend confirmation instructions</h3>
+
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "ui large form login-form" }) do |f| %>
+        <%= render 'layouts/error_messages', object: f.object %>
+
+        <div class="ui segment">
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          </div>
+
+          <div class="actions">
+              <%= f.submit "RESEND CONFIRMATION INSTRUCTIONS",
+              class: "ui purple fluid large button login-button" %>
+          </div>
+      <% end %>
+
+      <%# render "users/shared/links" %>
+    </div>
+  </div>
+</div>

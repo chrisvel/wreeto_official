@@ -1,0 +1,18 @@
+<div class="modal fade" id="delete-<%= @category.id %>" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Category deletion confirmation</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>WARNING:</strong> By deleting this category, all related notes will be also deleted.
+
+        <p>Are you sure to delete this category?</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Delete', category_path(@category), method: :delete, :class => 'btn btn-sm btn-danger' %>
+        <a href="#" data-dismiss="modal" class="btn btn-sm btn-light">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

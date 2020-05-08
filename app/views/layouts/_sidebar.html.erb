@@ -1,0 +1,88 @@
+
+<div class="sidebar-sticky">
+  <div class="top-item-menu-height">
+  </div>
+  <ul class="nav flex-column mt-3 mb-2 mx-3">
+    <% if policy(Inventory::Note.new).display_sidebar_item? %>
+      <li class="nav-item">
+        <%= link_to '<i class="fa fa-plus fa-fw mr-1"></i>Create Note'.html_safe,
+              new_inventory_note_path,
+              {remote: false, class: "btn btn-outline-purple-transparent btn-block btn-sm", data: { turbolinks: false }}
+              %>
+      </li>
+    <% end %>
+  </ul>
+
+  <ul class="nav flex-column mt-3 mb-4 mx-3">
+    <% if policy(Inventory::Note.new).display_sidebar_item? %>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-purple-transparent btn-block btn-sm" data-toggle="modal" data-target="#searchModal">
+          <i class="fa mr-1 fa-search"></i> QUICK SEARCH
+        </button>
+      </li>
+    <% end %>
+  </ul>
+
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <span>FAVORITES</span>
+    <i class="fa fa-star text-warning"></i>
+  </h6>
+  <% if user_signed_in? && current_user.inventory_items.favorites.any? %>
+    <ul class="nav flex-column mb-2">
+      <% current_user.inventory_items.favorites.each do |item| %>
+        <li class="nav-item">
+          <%= link_to "#{truncate(item.title, length: 33)} <span class='badge badge-purple pull-right'>#{item.category.title}</span>".html_safe, item, class: 'nav-link link-purple', data: { turbolinks: false } %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <span class="nav-link text-secondary">No favorite items yet</span>
+      </li>
+    </ul>
+  <% end %>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= link_to 'NOTES'.html_safe, inventory_notes_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fa fa-pencil"></i>
+  </h6>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <span>PROJECTS</span>
+    <i class="fa fa-briefcase"></i>
+  </h6>
+  <% if user_signed_in? %>
+    <% if current_user.categories.projects.any? %>
+      <ul class="nav flex-column mb-2">
+        <% current_user.categories.projects.active.ordered_by_title.each do |category| %>
+          <li class="nav-item">
+            <%= link_to "#{truncate(category.title, length: 30)}".html_safe, category, class: 'nav-link link-purple', data: { turbolinks: false } %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <ul class="nav flex-column mb-2">
+        <li class="nav-item">
+          <span class="nav-link text-secondary">No projects yet - <%= link_to 'Create one?',
+                                                                              new_category_path(params: {parent_id: current_user.categories.find_by(title: 'Projects', deletable: false).id}),
+                                                                              class: 'link-purple-white',
+                                                                              data: { turbolinks: false }%></span>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= link_to 'CATEGORIES'.html_safe, categories_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fa fa-folder"></i>
+  </h6>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= link_to 'WIKI', wiki_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fa fa-book"></i>
+  </h6>

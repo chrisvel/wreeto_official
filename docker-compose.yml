@@ -1,0 +1,54 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=wreeto_admin
+      - POSTGRES_PASSWORD=wreeto_password
+      - POSTGRES_DB=wreeto_dev
+    ports:
+      - 5433:5432
+    volumes:
+    - ~/.volume-data/wreeto/postgres-data:/var/lib/postgresql/data
+  app:
+    build: .
+    entrypoint: ["./docker-entrypoint.sh"]
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -p 8383 -b 0.0.0.0"
+    volumes:
+      - .:/app/wreeto
+      - ./public/assets:/app/wreeto/public/assets
+    ports:
+      - 8383:8383
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      RAILS_ENV: 'development'
+      RACK_ENV: 'development'
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: wreeto_admin
+      POSTGRES_PASSWORD: wreeto_password
+      POSTGRES_DB: wreeto_dev
+      REDIS_URL: 'redis://redis:6379'
+  redis:
+    image: redis
+    ports:
+      - 6380:6379
+  sidekiq:
+    build: .
+    depends_on:
+      - postgres
+      - redis
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
+    volumes:
+      - .:/app/wreeto
+    # env_file:
+    #   - '.env'
+    environment:
+      RAILS_ENV: 'development'
+      RACK_ENV: 'development'
+      POSTGRES_USER: 'wreeto_admin'
+      POSTGRES_PASSWORD: 'wreeto_password'
+      POSTGRES_DB: 'wreeto_dev'
+      POSTGRES_HOST: 'postgres'
+      REDIS_URL: 'redis://redis:6379'

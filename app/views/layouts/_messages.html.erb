@@ -1,0 +1,20 @@
+<div class="container-fluid alert-container">
+  <div class="row">
+    <div class="col-12 alert-message">
+      <% flash.each do |message_type, msg| %>
+        <% if message_type == 'success' %>
+          <%= content_tag :div, msg, class: "alert alert-success", role: :alert %>
+        <% elsif message_type == 'error' %>
+          <%= content_tag :div, msg, class: "alert alert-warning", role: :alert %>
+        <% elsif message_type == 'notice' %>
+          <%= content_tag :div, msg, class: "alert alert-info", role: :alert %>
+        <% elsif message_type == 'alert' %>
+          <%= content_tag :div, msg, class: "alert alert-danger", role: :alert %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-danger", role: :alert %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% flash.clear %>

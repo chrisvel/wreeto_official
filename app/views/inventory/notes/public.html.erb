@@ -1,0 +1,31 @@
+<% if @note %>
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <h2>
+        <%= @note.title %>
+      </h2>
+    </div>
+    <div class="col-lg-3 col-md-12 align-middle text-lg-right text-sm-left">
+      <span class="badge badge-success public-tag">
+        <i class="fa fas fa-globe icon-tag"></i>Publicly shared note
+      </span>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-12">
+      <div class="note-content border rounded-lg shadow-sm bg-white mt-1 mb-4">
+        <%= markdown(@note.content) %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="public-note-not-found text-center">
+    <div class="content">
+      <i class="fa fas fa-map-signs" style="font-size: 13rem; color: grey;"></i>
+      <br><br>
+      We couldn't find that note :(
+      <br>
+      Please make sure the note exists and is publicly shared.
+    </div>
+<% end %>

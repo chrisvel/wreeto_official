@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-4 col-md-8">
+    <h3>Notes</h3>
+  </div>
+  <div class="col-8 col-md-4 text-right">
+    <%= add_note_button %>
+  </div>
+</div>
+<hr/>
+<%# render partial: 'filter_search_widget' %>
+<% if @inventory_notes.any? %>
+  <%= render partial: 'notes_list', locals: {inventory_notes: @inventory_notes, notes_list: true} %>
+<% else %>
+  <% if params[:search].present? %>
+    <%= no_results_slate %>
+  <% else %>
+    <%= blank_slate(:notes) %>
+  <% end %>
+<% end %>
+<%= paginate @inventory_notes %>

@@ -1,0 +1,28 @@
+@import 'colors';
+
+.pagination-menu {
+  a {
+    color: #444444;
+    &:hover{
+      color: #B413EC;
+    }
+  }
+  span.current.item{
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #B413EC;
+  }
+}
+
+.page-item.active .page-link{
+  color: #eeeeee;
+  background-color: $purple;
+  border-color: $purple-dark;
+}
+
+.pagination-sm .page-link{
+  color: $dark-grey;
+  &:hover{
+    color: $purple !important;
+  }
+}

@@ -1,0 +1,37 @@
+<table id="inventory_notes-table" class="ui very basic table mb-0">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <% inventory_notes.each do |item| %>
+      <tr>
+        <td class="pt-0 pb-1 px-0 border-0">
+          <% if item.favorite %>
+            <i class="fa fa-star text-warning fa-fw mr-1" style="margin-left: -26px;"></i>
+          <% end %>
+          <%= link_to "#{item.title}".html_safe,
+                inventory_note_path(item.guid),
+                class: 'note-child-item link-purple',
+                data: { turbolinks: false }
+                %>
+          <div class="col-md-12 pl-0 ml-0">
+            <% if notes_list %>
+              <%= link_to "<span class='badge badge-light'>#{item.category.title}</span>".html_safe,
+                  item.category,
+                  data: { turbolinks: false }
+                  %>
+            <% end %>
+          </div>
+        </td>
+        <% link_to '<i class="pencil icon"></i>'.html_safe,
+                    edit_inventory_note_path(item),
+                    class: "ui icon mini yellow button",
+                    data: { turbolinks: false }
+                    %>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>

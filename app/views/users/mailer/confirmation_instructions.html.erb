@@ -1,0 +1,12 @@
+<p>Welcome to wreeto!</p>
+
+<p>You are receiving this email because you signed up on <a href="http://wreeto.com" target="_blank">wreeto.com</a>.</p>
+
+<p>You can confirm your account email (<%= @email %>) through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>
+  Thank you!<br>
+  <em>the wreeto.com team</em>
+</p>

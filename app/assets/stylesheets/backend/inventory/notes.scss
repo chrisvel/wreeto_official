@@ -1,0 +1,80 @@
+.inline {
+  display: inline-block;
+}
+
+.ui.transparent.inverted.input input{
+  color: #fff;
+}
+
+a.note-item{
+  font-size: 1.1rem;
+  &.small-item{
+    font-size: 1rem;
+  }
+}
+
+pre, code, .editor-preview pre {
+  font-size: 0.9rem;
+}
+
+code {
+  color: #222;
+}
+
+.CodeRay code, .CodeRay pre, .editor-preview pre{
+  background: #444444 !important;
+  padding: 1em 1.5em !important;
+  border-radius: 0.3rem !important;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  color: #eee;
+  margin: 10px 0;
+  code {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+input textarea:focus,
+form textarea:focus,
+form input:focus{
+  border-color: #B413EC !important;
+}
+
+.input-group-sm .form-control.public-input {
+  height: 35px;
+}
+
+.public-btn {
+  margin-top: -4px;
+}
+
+textarea.relaxed{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.note-content {
+  font-weight: 300;
+  font-size: 1.0rem;
+  line-height: 2rem;
+  padding: 20px 20px 10px;
+  width: 100%;
+  overflow-x: auto;
+  table {
+    line-height: 1.5rem;
+  }
+  img{
+    max-width:100%;
+    max-height:100%;
+  }
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+  }
+}
+
+.editor-toolbar.fullscreen, .CodeMirror-fullscreen {
+  z-index: 1009 !important;
+}
+
+.editor-toolbar {
+  border-color: #ddd;
+}

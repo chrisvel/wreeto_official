@@ -1,0 +1,63 @@
+<header class="navbar navbar-expand-lg navbar-light fixed-top static-top bg-white p-2 wt-navbar">
+  <div class="navbar-brand col-2 text-lg-center logo-item">
+    <%= link_to 'wreeto', base_url, class: "logo text-dark", data: { turbolinks: false } %>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarWtBase" aria-controls="navbarWtBase"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <% if user_signed_in? %>
+    <%# link_to '<i class="fa fa-home"></i>'.html_safe,
+          inventory_notes_path,
+          {remote: false, class: "item", data: { turbolinks: false }}
+          %>
+
+    <div class="navbar-collapse collapse pr-2 py-2 py-md-0" id="navbarWtBase">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%# link_to '<i class="fa fa-sticky-note fa-2x fa-fw "></i>'.html_safe,
+                new_inventory_note_path,
+                {remote: false, class: "link-purple-icon", data: { turbolinks: false }}
+                %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
+          <%= link_to "Notes", inventory_notes_path, class: "nav-link text-center", data: { turbolinks: false } %>
+        </li>
+        <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
+          <%= link_to "Categories", categories_path, class: "nav-link text-center", data: { turbolinks: false } %>
+        </li>
+        <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
+          <%= link_to "Wiki", wiki_path, class: "nav-link text-center", data: { turbolinks: false } %>
+        </li>
+        <li class="nav-item dropdown py-1 py-md-0">
+          <a class="nav-link dropdown-toggle text-center text-lg-left pl-sm-2 mt-sm-2" href="#" id="navbarDropdown"
+              role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email %>
+            <i class="dropdown icon"></i>
+          </a>
+          <div class="dropdown-menu shadow nav-item py-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
+            <%= link_to 'Profile Settings', edit_user_registration_path,
+              class: 'dropdown-item', data: { turbolinks: false } %>
+            <%= link_to 'Download data', download_export_zip_path,
+              class: 'dropdown-item', data: { turbolinks: false } %>
+            <%= link_to "Log out", main_app.destroy_user_session_url,
+              method: :delete, class: 'dropdown-item' %>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  <% else %>
+    <div class="navbar-collapse collapse pr-2" id="navbarWtBase">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to "LOGIN", main_app.new_user_session_url, class:'btn btn-sm btn-light' %>
+          <%= link_to 'SIGN UP', new_user_registration_path, class: "btn btn-sm btn-purple" %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</header>

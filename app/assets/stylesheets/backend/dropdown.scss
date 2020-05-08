@@ -1,0 +1,9 @@
+@import 'colors';
+
+.dropdown-item.active{
+  background-color: $dark-grey !important;
+}
+
+.dropdown-menu{
+  font-size: 0.9rem !important;
+}

@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-2">
+    <h3>Categories</h3>
+  </div>
+  <div class="col-10 text-right">
+    <%= add_category_button %>
+  </div>
+</div>
+
+<hr/>
+<br>
+
+<div class="card border rounded-lg shadow-sm p-5">
+  <table class="table">
+    <thead>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td>
+              <%= link_to category.full_title, category, data: { turbolinks: false }, class: "category-link link-purple" %>
+              <% if category.items_amount > 0 %>
+                <span class="category-amount">(<%= category.items_amount %>)</span>
+              <% end %>
+              <span class="ml-4" style="color: #cccccc;"><%= category.description %></span>
+              <% if category.subcategories.size > 0 %>
+                <div class="subcategories-list">
+                  <% category.subcategories.ordered_by_active.ordered_by_title.each do |cat| %>
+                    <div class="subcategory-item">
+                      <% if cat.is_a_project? && cat.active? %>
+                        <i class="fa fa-folder fa-fw text-purple"></i>
+                      <% elsif cat.is_a_project? && cat.inactive? %>
+                        <i class="fa fa-folder fa-fw text-grey" style="color: lightgrey;"></i>
+                      <% else %>
+                        <i class="fa fa-folder fa-fw text-purple"></i>
+                      <% end %>
+                      <%= link_to cat.title, cat, data: { turbolinks: false }, class: 'subcategory-link link-purple' %>
+                      <% if cat.items_amount > 0 %>
+                        <span class="category-amount">(<%= cat.items_amount %>)</span>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+          </td>
+          <td></td>
+          <td class="text-center">
+          </td>
+          <td class="text-right">
+            <%= "#{distance_of_time_in_words(Time.now, category.updated_at)}" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

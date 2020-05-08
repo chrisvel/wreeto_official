@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id          :bigint           not null, primary key
+#  title       :string
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer
+#  parent_id   :integer
+#  active      :boolean          default(TRUE), not null
+#  deletable   :boolean          default(TRUE), not null
+#  slug        :string
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+ideas:
+  title: Ideas
+  description: Ideas
+  user: jack_sparrow
+  deletable: true
+  active: true
+
+projects:
+  title: Projects
+  description: projects
+  user: jack_sparrow
+  deletable: false
+  active: true

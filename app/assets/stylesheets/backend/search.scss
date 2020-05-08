@@ -1,0 +1,33 @@
+@import 'colors';
+
+.search_modal {
+    background: transparent;
+    border: 0 none;
+    border-radius: 0;
+    .modal-content {
+        border: 0 none;
+        border-radius: 0;
+        input {
+            border-radius: 0;
+        }
+    }
+
+    span.input-group-text {
+        border-radius: 0 !important;
+        border-top: 0 none;
+        border-left: 0 none;
+        border-right: 0 none;
+        border-bottom: 1px solid $purple;
+    }
+
+    input.search-input {
+        border-top: 0 none;
+        border-left: 0 none;
+        border-right: 0 none;
+        border-bottom: 1px solid $purple;
+    }
+}
+
+.search-result-link {
+    font-size: 1.1em;
+}

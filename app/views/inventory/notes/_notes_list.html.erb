@@ -1,0 +1,46 @@
+<div class="card border rounded-lg shadow-sm px-5 py-4">
+  <table id="inventory_notes-table" class="ui very basic table mb-0">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <% inventory_notes.each do |item| %>
+        <tr>
+          <td class="px-0">
+            <% if item.favorite %>
+              <i class="fa fa-star text-warning fa-fw mr-1" style="margin-left: -26px;"></i>
+            <% else %>
+            <% end %>
+            <%= link_to item.title,
+                  inventory_note_path(item.guid),
+                  class: 'note-item link-purple mr-3',
+                  data: { turbolinks: false }
+                  %>
+            <div class="col-md-12 pl-0 ml-0">
+              <% if item.is_public? %>
+                <span class='badge badge-success prl-2'><i class="fa fa-globe text-white fa-fw"></i> Public</span>
+              <% end %>
+              <% if notes_list || @category != item.category %>
+                <%= link_to "<span class='badge badge-light'>#{item.category.title}</span>".html_safe,
+                    item.category,
+                    data: { turbolinks: false }
+                    %>
+              <% end %>
+            </div>
+          </td>
+          <td class="text-right pr-0">
+            <%= "#{distance_of_time_in_words(Time.now, item.updated_at)}" %>
+          </td>
+            <% link_to '<i class="pencil icon"></i>'.html_safe,
+                        edit_inventory_note_path(item),
+                        class: "ui icon mini yellow button",
+                        data: { turbolinks: false }
+                        %>
+          </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

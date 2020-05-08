@@ -1,0 +1,58 @@
+<main class="col-12 col-sm-12 col-md-8 col-xl-4 wt-content" role="main">
+  <div class="login-box mt-md-5 pt-md-5">
+    <div class="logo text-center pb-5 ml-auto">
+      <%= link_to 'wreeto', root_path %>
+    </div>
+
+    <%= form_for(resource,
+          as: resource_name,
+          url: session_path(resource_name),
+          html: { class: 'form login-form' }) do |f| %>
+
+      <div class="card border-light">
+        <div class="card-body">
+          <h5 class="text-center">Log in with wreeto</h5>
+          <br>
+
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-group">
+              <div class="form-check">
+                <%= f.check_box :remember_me, {class: "form-check-input"} %>
+                <%= f.label :remember_me %>
+              </div>
+            </div>
+          <% end %>
+
+          <div class="text-center">
+            <%= f.button "CONTINUE", type: 'submit', class: "btn btn-sm btn-dark mb-2" %>
+          </div>
+
+          <div class="text-center text-secondary py-4">OR</div>
+
+          <div class="text-center pb-2">
+            <%= link_to '<i class="fa fa-2x fa-fw fa-google align-middle"></i> Sign In with Google'.html_safe,
+                  user_google_oauth2_omniauth_authorize_path,
+                  class: 'btn btn-sm btn-primary text-center align-middle' %>
+          </div>
+
+          <hr/>
+
+          <div class="text-right">
+            <%= link_to 'Sign Up for an account', new_user_registration_path, class: "ml-1 stext-right" %>
+          </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>

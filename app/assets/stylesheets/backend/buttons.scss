@@ -1,0 +1,53 @@
+@import 'colors';
+
+.btn{
+  font-weight: bold !important;
+  text-transform: uppercase;
+  &.btn-sm{
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    line-height: 1.3rem;
+  }
+  &.btn-input-sm{
+    font-size: 0.8rem;
+    padding: 0.3rem 1rem;
+  }
+
+  &.btn-light{
+    color: #555555;
+    background: #dddddd;
+    border: 1px solid #cccccc;
+    &:hover{
+      color: #333333;
+      background: #cccccc;
+      border: 1px solid #bbbbbb;
+    }
+  }
+  &.btn-purple{
+    // background: #B413EC;
+    background: $purple;
+    color: #eeeeee;
+    &:hover{
+      background: $purple-dark;
+      color: $white;
+    }
+  }
+  &.btn-outline-purple{
+    border: 1px solid $purple;
+    background: $white;
+    color: $purple;
+    &:hover{
+      background: $light-grey;
+      color: $purple-dark;
+    }
+  }
+  &.btn-outline-purple-transparent{
+    border: 1px solid $purple;
+    background: rgba(255, 255, 255, 0.05);
+    color: $light-grey;
+    &:hover{
+      background: $purple-dark;
+      color: $light-grey;
+    }
+  }
+}

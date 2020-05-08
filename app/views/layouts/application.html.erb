@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>wreeto.com</title>
+    <%= csrf_meta_tags %>
+
+    <%= tag :meta, name: :psj, action: action_name, controller: controller_name %>
+    <%= render partial: 'layouts/google_analytics' %>
+
+    <%= stylesheet_link_tag 'application-backend', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700&display=swap" rel="stylesheet">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <% if user_signed_in? %>
+      <nav class="d-none d-md-block sidebar">
+        <%= render 'layouts/sidebar' %>
+      </nav>
+    <% end %>
+    <%= render 'layouts/messages' %>
+    <%= render 'layouts/header' %>
+
+    <main class="px-4 main-content" role="main">
+      <div class="container">
+        <%= render partial: 'search/search_widget' %>
+        <%= yield %>
+      </div>
+    </main>
+
+    <%= render 'layouts/footer' %>
+  </body>
+
+</html>

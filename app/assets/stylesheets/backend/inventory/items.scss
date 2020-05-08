@@ -1,0 +1,21 @@
+.inventory-card-link{
+  font-family: 'Titillium Web', sans-serif !important;
+  color: #444;
+  &:hover{
+    color: #000;
+    .ui.grey.segment{
+      // @extend .ui.black.segment;
+    }
+  }
+}
+
+.inventory-idea-link{
+  font-family: 'Titillium Web', sans-serif !important;
+  color: #555;
+  &:hover{
+    color: #000;
+    .ui.segment{
+      // @extend .ui.tertiary.segment;
+    }
+  }
+}

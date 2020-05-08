@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>wreeto.com</title>
+    <%= csrf_meta_tags %>
+
+    <%= render partial: 'layouts/google_analytics' %>
+    <%= stylesheet_link_tag 'application-backend', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700&display=swap" rel="stylesheet">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <% if user_signed_in? %>
+      <%= render 'layouts/sidebar' %>
+    <% end %>
+    <%= render 'layouts/messages' %>
+    <%= render 'layouts/header' %>
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 px-4 wt-content" role="main">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
+
+    <div id='thought-modal-content'></div>
+  </body>
+
+</html>

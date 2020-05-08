@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  firstname              :string
+#  lastname               :string
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+
+jack_sparrow:
+  email: 'jack@sparrow.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'Password1!') %>
+  confirmed_at: <%= 2.hours.ago %>
+
+john_rambo:
+  email: 'john@rambo.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'Password1!') %>
+  confirmed_at: <%= 2.hours.ago %>

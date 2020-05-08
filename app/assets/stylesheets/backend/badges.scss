@@ -1,0 +1,45 @@
+@import 'colors';
+
+.badge{
+  font-size: 0.7em !important;
+  padding: 0.4em 0.7em !important;
+  font-weight: 600 !important;
+
+  &.badge-light{
+    color: #555555;
+    background: #e4e4e4;
+    &:hover{
+      color: #333333;
+      background: #cccccc;
+    }
+  }
+  &.badge-purple{
+    // background: #B413EC;
+    background: #A333C8;
+    color: #eeeeee;
+    &:hover{
+      color: #fff;
+    }
+  }
+  &.badge-purple-outline{
+    background: $white;
+    color: $purple;
+    border: 1px solid $purple;
+    &:hover{
+      background: $light-grey;
+    }
+  }
+}
+
+.badge.public-tag {
+  margin-top: 15px;
+  padding: 0 10px 0 0 !important;
+  .icon-tag {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 3px 0 0 3px;
+    margin-right: 10px;
+  }
+}

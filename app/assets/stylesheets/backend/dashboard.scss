@@ -1,0 +1,13 @@
+.blue-link {
+  color: #eee;
+  &:hover {
+    color: #fff;
+  }
+}
+
+ul.dashboard-list{
+  list-style: none;
+  line-height: 1.6em;
+  margin: 5px 0 0 0;
+  padding-left: 10px;
+}

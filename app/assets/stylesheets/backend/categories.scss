@@ -1,0 +1,23 @@
+a.category-link{
+  font-size: 1.2rem;
+}
+
+.category-amount{
+  color: #cccccc;
+  margin-left: 5px;
+  // font-size: 0.8rem;
+  display: inline-block;
+}
+
+.subcategories-list{
+  margin: 5px 0px 0px 10px;
+
+  .subcategory-item{
+    display: block;
+
+    .subcategory-link{
+      font-size: 1rem;
+      line-height: 1.8rem;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>wreeto.com</title>
+    <%= csrf_meta_tags %>
+    <%= render partial: 'layouts/google_analytics' %>
+    <%= stylesheet_link_tag 'application-backend', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Beth+Ellen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700&display=swap" rel="stylesheet">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller_name %> <%= action_name %>">
+    <%= render 'layouts/messages' %>
+    <%= render 'layouts/header' %>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <main class="col-12 col-md-11 col-xl-8 pt-5 mt-5 wt-content" role="main">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+  </body>
+
+</html>

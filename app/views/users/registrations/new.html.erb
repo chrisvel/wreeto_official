@@ -1,0 +1,52 @@
+<main class="col-12 col-sm-12 col-md-8 col-xl-4 wt-content" role="main">
+  <div class="login-box mt-md-5 pt-md-5">
+    <div class="logo text-center pb-5 ml-auto">
+      <%= link_to 'wreeto', root_path %>
+    </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form signup-form"}) do |f| %>
+        <%= render 'layouts/error_messages', object: f.object %>
+
+        <div class="card border-light">
+          <div class="card-body">
+            <h5>Sign Up</h5>
+            <br>
+
+            <div class="form-group">
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+            </div>
+
+            <%= flash[:recaptcha_error] %>
+            <div class="form-group">
+              <%= recaptcha_tags %>
+            </div>
+
+            <div class="actions text-center">
+              <%= f.button "SIGNUP WITH A WREETO ACCOUNT", type: 'submit', class: "btn btn-sm btn-purple" %>
+            </div>
+
+            <div class="text-center text-secondary py-4">OR</div>
+
+            <div class="text-center pb-2">
+              <%= link_to '<i class="fa fa-2x fa-fw fa-google align-middle"></i> Sign Up with your Google account'.html_safe,
+                    user_google_oauth2_omniauth_authorize_path,
+                    class: 'btn btn-sm btn-primary text-center align-middle' %>
+            </div>
+
+          </div>
+      <% end %>
+    </div>
+  </div>

@@ -1,0 +1,23 @@
+@import 'colors';
+
+.blank-slate, .public-note-not-found {
+  font-size: 1.1rem !important;
+  line-height: 2.0rem;
+  padding: 80px 0px !important;
+  display: block;
+  background: #f8f8f8;
+  .emphatext {
+    font-family: 'Beth Ellen', cursive;
+    display: inline-block;
+    font-size: 1.5rem;
+    margin: 0 5px;
+  }
+}
+
+.public-note-not-found {
+  min-height: 600px;
+  text-align: middle;
+  .content {
+    padding: 5rem 0 0 0;
+  }
+}

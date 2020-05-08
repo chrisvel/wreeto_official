@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-12 mt-3 mt-sm-0 col-lg-10">
+    <h3>
+      <%= @inventory_note.title %>
+      <% if @inventory_note.favorite %>
+        <i class="ui yellow star icon"></i>
+      <% end %>
+    </h3>
+  </div>
+  <div class="col-12 col-lg-2 text-right">
+    <%= link_to 'EDIT',
+      edit_inventory_note_path(@inventory_note.guid),
+      class: "btn btn-sm btn-warning text-white",
+      data: { turbolinks: false } %>
+
+    <%= back_button %>
+  </div>
+</div>
+<hr/>
+
+<div class="row">
+  <div class="d-none d-md-block col-md-6">
+    <h5>
+      <%= link_to @inventory_note.category.title, @inventory_note.category,
+          class: "badge badge-purple-outline", data: { turbolinks: false } %>
+    </h5>
+  </div>
+  <div class="col-md-6 text-right">
+    <% if @inventory_note.is_private? %>
+      <%= link_to "SHARE TO PUBLIC", make_public_inventory_note_path(@inventory_note.guid),
+                          class: "btn btn-sm btn-purple",
+                          data: { turbolinks: false } %>
+    <% else %>
+      <div class="d-inline-block">
+        <div class="input-group input-group-sm middle-aligned mr-2 mb-2 mb-lg-0">
+          <input type="text"
+                id="public_share_url"
+                class="form-control public-input"
+                value="<%= @inventory_note.public_url %>">
+          <div class="input-group-append">
+            <button class="btn btn-light copy-to-clipboard"
+                    data-clipboard-action="copy"
+                    data-clipboard-target="#public_share_url">
+              <i class="fa fa-copy"></i>
+            </button>
+            <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                        @inventory_note.public_url,
+                        class: "btn btn-light",
+                        data: { turbolinks: false } %>
+          </div>
+        </div>
+      </div>
+      <div class="d-inline-block">
+        <%= link_to "SHARED TO PUBLIC", make_private_inventory_note_path(@inventory_note.guid),
+                            class: "btn btn-sm btn-success public-btn",
+                            data: { turbolinks: false } %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="note-content border rounded-lg shadow-sm bg-white mt-2 p-4">
+  <%= markdown(@inventory_note.content) %>
+</div>

@@ -1,0 +1,18 @@
+<div class="card bg-light border-light my-3">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 col-lg-8 mb-2 mb-lg-0">
+        <%= render partial: 'inventory/notes/search' %>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <%= select_tag "category",
+            options_from_collection_for_select(@categories, :slug, :title),
+            include_blank: 'Filter by category',
+            id: "notes-category-select",
+            class: "selectpicker show-tick",
+            data: {live_search: "true", width: '100%'}
+        %>
+      </div>
+    </div>
+  </div>
+</div>
