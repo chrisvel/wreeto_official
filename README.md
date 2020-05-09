@@ -67,6 +67,14 @@ docker-compose build
 docker-compose up
 ```
 
+## Web UI
+
+To access the web application please go to
+
+```
+http://localhost:8383
+```
+
 ## Screenshots
 
 #### Login
