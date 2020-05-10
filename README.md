@@ -58,6 +58,9 @@ As for every Rails project:
 
 The default credentials are: username `user@email.com` and password `password`.
 
+You can create another account from the Rails console by running `rails console` or `docker-compose run app bundle exec rails c` and then
+`User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})` by changing the values as you wish, then `exit`. 
+
 ## Docker
 
 I've included a Dockerfile to run standalone and a docker-compose.yml file to add an external DB later. In order to build and run:
