@@ -30,6 +30,12 @@ services:
       POSTGRES_PASSWORD: wreeto_password
       POSTGRES_DB: wreeto_dev
       REDIS_URL: 'redis://redis:6379'
+      OAUTH_GOOGLE_ID: 
+      OAUTH_GOOGLE_SECRET: 
+      RECAPTCHA_SITE_KEY:
+      RECAPTCHA_SECRET_KEY:
+      SMTP_USERNAME:
+      SMTP_PASSWORD:
   redis:
     image: redis
     ports:
