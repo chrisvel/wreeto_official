@@ -7,7 +7,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 ### Current version
 
-_v2.0.1_
+_v2.0.2_
 
 ## Features
 
@@ -73,6 +73,10 @@ I've included a Dockerfile to run standalone and a docker-compose.yml file to ad
 docker-compose build
 docker-compose up
 ```
+
+### Docker hub builds
+
+https://hub.docker.com/r/chrisvel/wreeto
 
 ## Web UI
 
