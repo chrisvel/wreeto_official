@@ -5,12 +5,13 @@
 Wreeto is an open source note-taking, knowledge management and wiki system built on Ruby on Rails framework.  
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured, with no bells and whistles.
 
-### Current status
-* _In development_
+### Current version
+
+_v2.0.1_
 
 ## Features
 
-- No more crappy UIs, less is more
+- No more crappy UIs, _less is more_
 - Create unlimited notes with Markdown format
 - Unlimited Categories
 - List notes by Category or SubCategory
@@ -24,20 +25,21 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 ## Roadmap
 
-- [TODO] Test everything, everywhere. More testing..
-- [TODO] Improve UI inconsistencies
-- [TODO] Upgrade to Rails v6
-- [TODO] Note Templates
-- [TODO] Ability to attach files (e.g. Documents)
-- [TODO] Encryption
-- [TODO] Different Levels of security access for users
-- [TODO] User access control
-- [TODO] Note Tags
-- [TODO] Dark mode
-- [TODO] Export notes to PDF format
-- [TODO] Cloud backups
-- [TODO] Move UI to ReactJS
-- [TODO] Mobile apps
+- Test everything, everywhere. More testing..
+- Improve UI inconsistencies
+- Upgrade to Rails v6
+- Note Templates
+- Ability to attach files (e.g. Documents)
+- Encryption
+- Different Levels of security access for users
+- User access control
+- Note Tags
+- Dark mode
+- Export notes to PDF format
+- Cloud backups
+- Version tracking
+- Move UI to ReactJS
+- Mobile apps
 - A lot more ..
 
 ## Requirements
