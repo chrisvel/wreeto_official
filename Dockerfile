@@ -32,11 +32,5 @@ COPY config/database.docker.yml $APP_HOME/config/database.yml
 
 RUN bundle exec rake assets:precompile
 
-# ARG CURRENT_UID
-# ARG CURRENT_GID
-# RUN groupadd --gid $CURRENT_GID builder && useradd --uid $CURRENT_UID --gid builder --shell /bin/bash --create-home builder
-# RUN mkdir -p $APP_HOME/tmp $APP_HOME/log && chown -R builder $APP_HOME/tmp $APP_HOME/public $APP_HOME/log
-
 EXPOSE 8383
 ENTRYPOINT ["bundle", "exec"]
-# CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "4321"]
