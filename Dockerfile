@@ -13,6 +13,7 @@ RUN apt-get install -y \
     software-properties-common
 
 RUN npm install yarn -g
+RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
 
 ENV APP_HOME /app/wreeto
 RUN mkdir -p $APP_HOME
