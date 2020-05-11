@@ -53,15 +53,17 @@ _v2.0.1_
 
 As for every Rails project:
 - `bundle install`
-- `bundle exec rake db:setup`
-- `bundle exec rake db:seed`
+- `bundle exec rake db:setup db:seed`
 
 ## Usage
 
 The default credentials are: username `user@email.com` and password `password`.
 
 You can create another account from the Rails console by running `rails console` or `docker-compose run app bundle exec rails c` and then
-`User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})` by changing the values as you wish, then `exit`. 
+```
+User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
+```
+by changing the values as you wish, then `exit`. 
 
 ## Docker
 
