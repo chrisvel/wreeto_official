@@ -9,6 +9,7 @@ services:
     build:
       context: . 
       dockerfile: Dockerfile
+    command: foreman start 
     volumes:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets
