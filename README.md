@@ -7,7 +7,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 ### Current version
 
-_v2.0.5_
+_v2.0.6_
 
 ## Features
 
