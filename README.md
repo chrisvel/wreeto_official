@@ -3,7 +3,6 @@
 ### {{ [twitter](https://twitter.com/wreeto_official) ~ [reddit](https://www.reddit.com/r/wreeto/) }}
 
 ## Introduction
----------------
 
 Wreeto is an open source note-taking, knowledge management and wiki system built on Ruby on Rails framework.  
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured, with no bells and whistles.
@@ -11,7 +10,6 @@ Initially this was built because I didn't like the note-taking apps out there an
 ### Current version: _v2.0.6_
 
 ## Features
----------------
 
 - No more crappy UIs, _less is more_
 - Create unlimited notes with Markdown format
@@ -26,7 +24,6 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Responsive mobile web UI
 
 ## Roadmap
----------------
 
 - Test everything, everywhere. More testing..
 - Improve UI inconsistencies
@@ -46,7 +43,6 @@ Initially this was built because I didn't like the note-taking apps out there an
 - A lot more ..
 
 ## Requirements
----------------
 
 - Docker (optional)
   
@@ -57,7 +53,6 @@ or
 - Redis
 
 ## Installation
----------------
 
 ### Using docker
 
@@ -76,7 +71,6 @@ As for every Rails project:
 - `bundle exec rake db:setup db:seed`
 
 ## Usage
----------------
 
 The default credentials are: username `user@email.com` and password `password`.
 
@@ -87,7 +81,6 @@ User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', p
 by changing the values as you wish, then `exit`. 
 
 ## Web UI
----------------
 
 To access the web application please go to
 
@@ -96,7 +89,6 @@ http://localhost:8383
 ```
 
 ## Screenshots
----------------
 
 #### Login
 ![Screenshot Running Command](/public/screenshots/scr_1.png?raw=true)
