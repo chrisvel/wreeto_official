@@ -7,7 +7,7 @@
 Wreeto is an open source note-taking, knowledge management and wiki system built on Ruby on Rails framework.  
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured, with no bells and whistles.
 
-### Current version: _v2.0.7_
+### Current version: _v2.0.8_
 
 ## Features
 
