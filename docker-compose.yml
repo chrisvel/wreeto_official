@@ -24,17 +24,3 @@ services:
     image: redis:5.0.7
     ports:
       - 6380:6379
-  sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - app
-      - postgres
-      - redis
-    volumes:
-      - .:/app/wreeto
-    env_file: .env
-    environment:
-      RAILS_ENV: 'development'
-    entrypoint: ./sidekiq-entrypoint.sh

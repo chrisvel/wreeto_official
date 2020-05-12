@@ -29,6 +29,7 @@ gem 'sidekiq-scheduler', '3.0.1'
 gem 'sidekiq-status', '1.1.4'
 gem 'clipboard-rails'
 gem 'recaptcha', '5.5.0'
+gem 'foreman', '~> 0.87.1'
 
 # Auth
 gem 'devise', '4.7.1'

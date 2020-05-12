@@ -3,8 +3,6 @@ services:
   postgres:
     image: postgres:11
     env_file: .env
-    ports:
-      - 5433:5432
     volumes:
     - ~/.volume-data/wreeto/postgres-data:/var/lib/postgresql/data
   app:
@@ -24,19 +22,3 @@ services:
       RAILS_ENV: 'development'
   redis:
     image: redis:5.0.7
-    ports:
-      - 6380:6379
-  sidekiq:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - app
-      - postgres
-      - redis
-    volumes:
-      - .:/app/wreeto
-    env_file: .env
-    environment:
-      RAILS_ENV: 'development'
-    entrypoint: ./sidekiq-entrypoint.sh
