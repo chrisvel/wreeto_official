@@ -28,7 +28,9 @@ RUN apk add --update --no-cache \
       tzdata \
       yarn 
 
+RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
 RUN gem install bundler -v 2.0.2
+
 ENV APP_HOME /app/wreeto
 WORKDIR $APP_HOME
 COPY Gemfile Gemfile.lock $APP_HOME/
