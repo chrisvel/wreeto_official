@@ -29,7 +29,7 @@
   </h6>
   <% if user_signed_in? && current_user.inventory_items.favorites.any? %>
     <ul class="nav flex-column mb-2">
-      <% current_user.inventory_items.favorites.each do |item| %>
+      <% current_user.inventory_notes.favorites.each do |item| %>
         <li class="nav-item">
           <%= link_to "#{truncate(item.title, length: 33)} <span class='badge badge-purple pull-right'>#{item.category.title}</span>".html_safe, item, class: 'nav-link link-purple', data: { turbolinks: false } %>
         </li>
