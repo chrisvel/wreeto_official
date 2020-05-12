@@ -1,13 +1,13 @@
 ![Logo](/public/header_logo.png?raw=true)
 
+### {{ [twitter](https://twitter.com/wreeto_official) ~ [reddit](https://www.reddit.com/r/wreeto/) }}
+
 ## Introduction
 
 Wreeto is an open source note-taking, knowledge management and wiki system built on Ruby on Rails framework.  
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured, with no bells and whistles.
 
-### Current version
-
-_v2.0.2_
+### Current version: _v2.0.6_
 
 ## Features
 
@@ -44,12 +44,27 @@ _v2.0.2_
 
 ## Requirements
 
+- Docker (optional)
+  
+or 
+
 - Ruby
 - PostgreSQL
 - Redis
-- Docker (optional)
 
 ## Installation
+
+### Using docker
+
+The easiest way to get started *now* is to use `docker-compose` and simply execute:
+
+```
+docker-compose up
+```
+
+### Installing locally
+
+You will need to setup postgres, ruby and their appropriate dependencies necessary by your O/S and environment. 
 
 As for every Rails project:
 - `bundle install`
@@ -64,19 +79,6 @@ You can create another account from the Rails console by running `rails console`
 User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
 ```
 by changing the values as you wish, then `exit`. 
-
-## Docker
-
-I've included a Dockerfile to run standalone and a docker-compose.yml file to add an external DB later. In order to build and run:
-
-```
-docker-compose build
-docker-compose up
-```
-
-### Docker hub builds
-
-https://hub.docker.com/r/chrisvel/wreeto
 
 ## Web UI
 

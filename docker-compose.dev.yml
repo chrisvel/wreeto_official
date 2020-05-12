@@ -8,7 +8,9 @@ services:
     volumes:
     - ~/.volume-data/wreeto/postgres-data:/var/lib/postgresql/data
   app:
-    image: chrisvel/wreeto:latest
+    build:
+      context: . 
+      dockerfile: Dockerfile
     volumes:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets

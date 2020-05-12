@@ -1,32 +1,41 @@
-FROM ruby:2.6.3
+FROM ruby:2.7.1-alpine
 
-RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+ENV BUNDLER_VERSION=2.0.2
 
-RUN apt-get install -y \
-    libpq-dev \
-    build-essential \
-    nodejs \
-    ruby-dev \
-    postgresql-client \
-    poppler-utils \
-    software-properties-common
+RUN apk add --update --no-cache \
+      binutils-gold \
+      build-base \
+      curl \
+      file \
+      g++ \
+      gcc \
+      git \
+      less \
+      libstdc++ \
+      libffi-dev \
+      libc-dev \ 
+      linux-headers \
+      libxml2-dev \
+      libxslt-dev \
+      libgcrypt-dev \
+      make \
+      netcat-openbsd \
+      nodejs \
+      openssl \
+      pkgconfig \
+      postgresql-dev \
+      python \
+      tzdata \
+      yarn 
 
-RUN npm install yarn -g
 RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
+RUN gem install bundler -v 2.0.2
 
 ENV APP_HOME /app/wreeto
-RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
-
-COPY Gemfile $APP_HOME/Gemfile
-COPY Gemfile.lock $APP_HOME/Gemfile.lock
-
-ARG RAILS_ENV="development"
-ARG RACK_ENV="development"
-
-RUN gem install bundler
-RUN bundle install --jobs 20 --retry 5
+COPY Gemfile Gemfile.lock $APP_HOME/
+RUN bundle config build.nokogiri --use-system-libraries
+RUN bundle check || bundle install --jobs 20 --retry 5
 
 COPY . $APP_HOME/
 COPY config/database.docker.yml $APP_HOME/config/database.yml
@@ -34,4 +43,5 @@ COPY config/database.docker.yml $APP_HOME/config/database.yml
 RUN bundle exec rake assets:precompile
 
 EXPOSE 8383
-ENTRYPOINT ["bundle", "exec"]
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
