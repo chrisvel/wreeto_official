@@ -2,16 +2,6 @@ FROM ruby:2.7.1-alpine
 
 ENV BUNDLER_VERSION=2.0.2
 
-# RUN apk add --update --no-cache \
-#         libpq-dev \
-#         build-essential \
-#         nodejs \
-#         ruby-dev \
-#         postgresql-client \
-#         poppler-utils \
-#         software-properties-common \ 
-#         yarn
-
 RUN apk add --update --no-cache \
       binutils-gold \
       build-base \
@@ -51,3 +41,5 @@ COPY config/database.docker.yml $APP_HOME/config/database.yml
 RUN bundle exec rake assets:precompile
 
 EXPOSE 8383
+
+ENTRYPOINT ["./docker-entrypoint.sh"]

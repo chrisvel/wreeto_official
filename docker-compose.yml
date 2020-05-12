@@ -2,18 +2,13 @@ version: '3.7'
 services:
   postgres:
     image: postgres:11
-    environment:
-      - POSTGRES_USER=wreeto_admin
-      - POSTGRES_PASSWORD=wreeto_password
-      - POSTGRES_DB=wreeto_dev
+    env_file: .env
     ports:
       - 5433:5432
     volumes:
     - ~/.volume-data/wreeto/postgres-data:/var/lib/postgresql/data
   app:
     image: chrisvel/wreeto:latest
-    entrypoint: ["./docker-entrypoint.sh"]
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -p 8383 -b 0.0.0.0"
     volumes:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets
@@ -26,17 +21,20 @@ services:
     environment:
       RAILS_ENV: 'development'
   redis:
-    image: redis
+    image: redis:5.0.7
     ports:
       - 6380:6379
   sidekiq:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
+      - app
       - postgres
       - redis
-    command: bundle exec sidekiq -C ./config/sidekiq.yml
     volumes:
       - .:/app/wreeto
     env_file: .env
     environment:
       RAILS_ENV: 'development'
+    entrypoint: ./sidekiq-entrypoint.sh
