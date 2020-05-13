@@ -10,7 +10,7 @@ class DataExporterService
     export_notes
     create_zip
   rescue => e
-    e
+    raise StandardError, "#{e.msg}"
   end
 
   def zip_path

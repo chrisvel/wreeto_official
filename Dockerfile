@@ -26,7 +26,8 @@ RUN apk add --update --no-cache \
       postgresql-dev \
       python \
       tzdata \
-      yarn 
+      yarn \
+      zip
 
 RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
 RUN gem install bundler -v 2.0.2
