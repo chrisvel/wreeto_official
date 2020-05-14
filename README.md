@@ -64,13 +64,21 @@ docker-compose up
 
 If you decide to just copy the `docker-compose.yml` file in order to deploy it locally, you'll also need `.env` and `docker-entrypoint.sh`. Make sure to add execute permissions to it `sudo chmod +x docker-entrypoint.sh`. 
 
+You may need to run 
+
+```
+docker-compose run app bundle exec rake db:drop db:migrate db:setup
+```
+
+If you have any issues with logging with the default account. 
+
 ### Installing locally
 
 You will need to setup postgres, ruby and their appropriate dependencies necessary by your O/S and environment. 
 
 As for every Rails project:
 - `bundle install`
-- `bundle exec rake db:setup db:seed`
+- `bundle exec rake db:drop db:migrate db:setup`
 
 ## Usage
 
