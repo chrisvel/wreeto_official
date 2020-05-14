@@ -62,6 +62,8 @@ The easiest way to get started *now* is to use `docker-compose` and simply execu
 docker-compose up
 ```
 
+If you decide to just copy the `docker-compose.yml` file in order to deploy it locally, you'll also need `.env` and `docker-entrypoint.sh`. Make sure to add execute permissions to it `sudo chmod +x docker-entrypoint.sh`. 
+
 ### Installing locally
 
 You will need to setup postgres, ruby and their appropriate dependencies necessary by your O/S and environment. 
