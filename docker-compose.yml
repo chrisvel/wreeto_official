@@ -16,8 +16,6 @@ services:
     depends_on:
       - postgres
       - redis
-    env_file: .env
-    environment:
-      RAILS_ENV: 'development'
+    env_file: .env      
   redis:
     image: redis:5.0.7
