@@ -4,14 +4,25 @@
 
 ## Introduction
 
-Wreeto is an open source note-taking, knowledge management and wiki system built on Ruby on Rails framework.  
-Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured, with no bells and whistles.
+Wreeto is an open source note-taking, knowledge management and wiki system built on top of Ruby on Rails framework.  
+
+Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
 ### Current version: _v2.0.10_
 
-## Features
+## Table of Contents 
+1. Features 
+2. Roadmap
+3. Requirements 
+4. Installation
+5. Usage 
+6. Screenshots 
+7. License 
+8. Professional edition
 
-- No more crappy UIs, _less is more_
+## 1. Features
+
+- Simple, minimal UI - _less is more_
 - Create unlimited notes with Markdown format
 - Unlimited Categories
 - List notes by Category or SubCategory
@@ -23,7 +34,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Zip and download notes in markdown format
 - Responsive mobile web UI
 
-## Roadmap
+## 2. Roadmap
 
 - Test everything, everywhere. More testing..
 - Improve UI inconsistencies
@@ -42,19 +53,19 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Mobile apps
 - A lot more ..
 
-## Requirements
+## 3. Requirements
 
 - Docker (optional)
   
 or 
 
-- Ruby
-- PostgreSQL
-- Redis
+- Ruby 2.6.6
+- PostgreSQL 11
+- Redis 5.0.7
 
-## Installation
+## 4. Installation
 
-### Setting up your environment 
+### 4.1 Set up your environment 
 
 Copy the `.env.development.local` to `.env`:
 
@@ -84,7 +95,7 @@ WREETO_HOST=localhost # your IP Address or domain
 WREETO_PORT=8383
 ```
 
-### Using docker
+### 4.2 Use docker
 
 The easiest way to get started *now* is to use `docker-compose` and simply execute:
 
@@ -92,41 +103,50 @@ The easiest way to get started *now* is to use `docker-compose` and simply execu
 docker-compose up
 ```
 
-If you decide to just copy the `docker-compose.yml` file in order to deploy it locally, you'll also need `.env` and `docker-entrypoint.sh`. Make sure to add execute permissions to it `sudo chmod +x docker-entrypoint.sh`. 
+If you decide to just copy the `docker-compose.yml` file in order to deploy it locally, you'll also need to create `.env` (instructions in 4.1) and `docker-entrypoint.sh`. Make sure to add execute permissions to it `sudo chmod +x docker-entrypoint.sh`. 
 
-In order to initialize the database and load the default account, you also need to run: 
+In order to initialize the database and load the default account, you'll need to run: 
 
 ```
 docker-compose run app bundle exec rake db:drop db:migrate db:setup
 ``` 
 
-### Installing locally
+### 4.3 Install locally 
 
-You will need to setup postgres, ruby and their appropriate dependencies necessary by your O/S and environment. 
+You will need to setup postgres, ruby, redis and their appropriate dependencies necessary by your O/S and environment. 
 
 As for every Rails project:
 - `bundle install`
 - `bundle exec rake db:drop db:migrate db:setup`
+- `bundle exec rails s`
 
-## Usage
+Do not forget to create the `.env` file. 
+
+## 5. Usage
+
+### 5.1 Default account 
 
 The default credentials are: username `user@email.com` and password `password`.
 
-You can create another account from the Rails console by running `rails console` or `docker-compose run app bundle exec rails c` and then
+### 5.2 Create a new account (rails console)
+
+You can create another account from the Rails console by running `bundle exec rails console` or `docker-compose run app bundle exec rails console` and then
+
 ```
 User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
 ```
+
 by changing the values as you wish, then `exit`. 
 
-## Web UI
+### 5.3 Web UI
 
-To access the web application (default) please go to
+To access the web application with default settings (hostname/port) please go to
 
 ```
 http://localhost:8383
 ```
 
-## Screenshots
+## 6. Screenshots
 
 #### Login
 ![Screenshot Running Command](/public/screenshots/scr_1.png?raw=true)
@@ -155,10 +175,10 @@ http://localhost:8383
 #### Search
 ![Screenshot Running Command](/public/screenshots/scr_9.png?raw=true)
 
-## License
+## 7. License
 
 AGPLv3 License for the community version 
 
-## Professional edition 
+## 8. Professional edition 
 
-There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com 
+There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com for more details (currently updating).
