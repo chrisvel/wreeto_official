@@ -19,6 +19,8 @@
 
 module Inventory
   class Note < Inventory::Item
+    include Utils::BaseConfig
+    
     attr_accessor :new_category_id
     
     # Associations
@@ -59,14 +61,6 @@ module Inventory
       loop do
         self.guid = SecureRandom.uuid
         break unless Inventory::Note.where(guid: self.guid).exists?
-      end
-    end
-
-    def base_url
-      if Rails.env.development?
-        'http://localhost:8383'
-      else
-        'https://yourdomainhere.com'
       end
     end
 

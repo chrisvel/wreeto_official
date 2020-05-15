@@ -37,4 +37,4 @@ public/packs/
 public/assets
 public/assets/*
 
-# .env
+.env

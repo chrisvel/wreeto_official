@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Utils::BaseConfig
+  
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
       language.nil? ? CodeRay.scan(code, "text").div : CodeRay.scan(code, language).div
@@ -19,14 +21,6 @@ module ApplicationHelper
     }
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
     markdown_to_html.render(text).html_safe
-  end
-
-  def base_url
-    if Rails.env.development?
-      'http://localhost:8383'
-    else
-      'https://wreeto.com'
-    end
   end
 
   def greet

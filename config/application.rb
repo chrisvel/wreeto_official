@@ -13,6 +13,6 @@ module Wreeto
     # -- all .rb files in that directory are automatically loaded.
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class='field error'>#{html_tag}</span>".html_safe }
-    config.autoload_paths += %W(#{config.root}/app/services)
+    config.autoload_paths += %W(#{config.root}/app/services #{config.root}/lib)
   end
 end

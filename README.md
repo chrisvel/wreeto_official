@@ -54,6 +54,36 @@ or
 
 ## Installation
 
+### Setting up your environment 
+
+Copy the `.env.development.local` to `.env`:
+
+```
+cp .env.development.local .env 
+```
+
+and set up your variables:
+
+```
+OAUTH_GOOGLE_ID=
+OAUTH_GOOGLE_SECRET=
+POSTGRES_HOST=postgres
+POSTGRES_USER=wreeto_admin
+POSTGRES_PASSWORD=wreeto_password
+POSTGRES_DB=wreeto_dev
+POSTGRES_PORT=5432
+RACK_ENV=development
+RAILS_ENV=development
+RECAPTCHA_SITE_KEY=
+RECAPTCHA_SECRET_KEY=
+REDIS_HOST=redis
+REDIS_PASSWORD=
+SMTP_USERNAME=
+SMTP_PASSWORD=
+WREETO_HOST=localhost # your IP Address or domain 
+WREETO_PORT=8383
+```
+
 ### Using docker
 
 The easiest way to get started *now* is to use `docker-compose` and simply execute:
@@ -64,13 +94,11 @@ docker-compose up
 
 If you decide to just copy the `docker-compose.yml` file in order to deploy it locally, you'll also need `.env` and `docker-entrypoint.sh`. Make sure to add execute permissions to it `sudo chmod +x docker-entrypoint.sh`. 
 
-You may need to run 
+In order to initialize the database and load the default account, you also need to run: 
 
 ```
 docker-compose run app bundle exec rake db:drop db:migrate db:setup
-```
-
-If you have any issues with logging with the default account. 
+``` 
 
 ### Installing locally
 
@@ -92,7 +120,7 @@ by changing the values as you wish, then `exit`.
 
 ## Web UI
 
-To access the web application please go to
+To access the web application (default) please go to
 
 ```
 http://localhost:8383
