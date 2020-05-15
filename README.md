@@ -11,16 +11,16 @@ Initially this was built because I didn't like the note-taking apps out there an
 ### Current version: _v2.0.10_
 
 ## Table of Contents 
-1. Features 
-2. Roadmap
-3. Requirements 
-4. Installation
-5. Usage 
-6. Screenshots 
-7. License 
-8. Professional edition
+1. [Features](#features)
+2. [Roadmap](#roadmap)
+3. [Requirements](#requirements)
+4. [Installation](#installation)
+5. [Usage](#usage) 
+6. [Screenshots](#screenshots) 
+7. [License](#license) 
+8. [Professional edition](#professional-edition)
 
-## 1. Features
+## <a name="features"></a> 1. Features 
 
 - Simple, minimal UI - _less is more_
 - Create unlimited notes with Markdown format
@@ -34,7 +34,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Zip and download notes in markdown format
 - Responsive mobile web UI
 
-## 2. Roadmap
+## <a name="roadmap"></a> 2. Roadmap 
 
 - Test everything, everywhere. More testing..
 - Improve UI inconsistencies
@@ -53,7 +53,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Mobile apps
 - A lot more ..
 
-## 3. Requirements
+## <a name="requirements"></a> 3. Requirements
 
 - Docker (optional)
   
@@ -63,7 +63,7 @@ or
 - PostgreSQL 11
 - Redis 5.0.7
 
-## 4. Installation
+## <a name="installation"></a> 4. Installation
 
 ### 4.1 Set up your environment 
 
@@ -122,7 +122,7 @@ As for every Rails project:
 
 Do not forget to create the `.env` file. 
 
-## 5. Usage
+## <a name="usage"></a> 5. Usage
 
 ### 5.1 Default account 
 
@@ -146,7 +146,7 @@ To access the web application with default settings (hostname/port) please go to
 http://localhost:8383
 ```
 
-## 6. Screenshots
+## <a name="screenshots"></a> 6. Screenshots
 
 #### Login
 ![Screenshot Running Command](/public/screenshots/scr_1.png?raw=true)
@@ -175,10 +175,10 @@ http://localhost:8383
 #### Search
 ![Screenshot Running Command](/public/screenshots/scr_9.png?raw=true)
 
-## 7. License
+## <a name="license"></a> 7. License
 
 AGPLv3 License for the community version 
 
-## 8. Professional edition 
+## <a name="professional-edition"></a> 8. Professional edition 
 
 There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com for more details (currently updating).
