@@ -1,5 +1,4 @@
 module ButtonsHelper
-
   def back_button
     link_to 'BACK',
       :back,

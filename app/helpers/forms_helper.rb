@@ -1,5 +1,4 @@
 module FormsHelper
-
   def blank_slate(entity)
     content_tag :div,
     "<i class=\"fa fas fa-sticky-note fa-5x \"></i><br><br> \

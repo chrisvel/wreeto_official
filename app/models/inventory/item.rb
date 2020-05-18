@@ -21,7 +21,10 @@ require_dependency 'inventory'
 
 module Inventory
   class Item < ApplicationRecord
+    # Associations
     belongs_to :user
+    has_many :taggings
+    has_many :tags, through: :taggings
 
     validates :content, presence: true, allow_blank: false
 

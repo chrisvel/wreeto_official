@@ -14,7 +14,9 @@ module Inventory
         @inventory_notes = current_user.inventory_notes.search(params[:search]).order(favorite: :desc, updated_at: :desc).page params[:page]
       elsif params[:category].present?
         @inventory_notes = current_user.inventory_notes.for_category(params[:category]).order(favorite: :desc, updated_at: :desc).page params[:page]
-      else
+      elsif params[:tags].present?
+        @inventory_notes = current_user.inventory_notes.tagged_with(params[:tag]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      else 
         @inventory_notes = current_user.inventory_notes.order(favorite: :desc, updated_at: :desc).page params[:page]
       end
     end
@@ -136,7 +138,7 @@ module Inventory
       # Never trust parameters from the scary internet, only allow the white list through.
       def inventory_note_params
         params.fetch(:inventory_note, {})
-          .permit(:user_id, :title, :content, :favorite, :category_id, :guid)
+              .permit(:user_id, :title, :content, :favorite, :category_id, :guid, :all_tags)
       end
 
       def public_note_params

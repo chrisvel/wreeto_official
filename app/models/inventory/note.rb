@@ -22,11 +22,13 @@ module Inventory
     include Utils::BaseConfig
     
     attr_accessor :new_category_id
-    
-    # Associations
-    belongs_to :category
+
+    # Callbacks
     before_validation :set_defaults, if: :new_record?
     before_validation :set_guid, if: :new_record?
+    
+    # Associations
+    belongs_to :category   
 
     # Validations
     validates :title, presence: true, allow_blank: false
@@ -70,6 +72,20 @@ module Inventory
 
     def to_param
       self.guid
+    end
+
+    def all_tags=(names)
+      self.tags = names.split(",").map do |name|
+        Tag.where(name: name.strip).first_or_create!
+      end
+    end
+    
+    def all_tags
+      self.tags.map(&:name).join(", ")
+    end
+
+    def self.tagged_with(name)
+      Tag.find_by_name!(name).inventory_notes
     end
   end
 end
