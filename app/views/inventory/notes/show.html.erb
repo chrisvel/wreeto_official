@@ -23,6 +23,7 @@
     <h5>
       <%= link_to @inventory_note.category.title, @inventory_note.category,
           class: "badge badge-purple-outline", data: { turbolinks: false } %>
+      <%= tag_links(@inventory_note) %>
     </h5>
   </div>
   <div class="col-md-6 text-right">

@@ -7,6 +7,12 @@ $.urlParam = function(name){
 }
 
 var ready = function(){
+  $('.tag-picker').select2(
+    {
+      tags: true,
+      multiple: true
+    });
+  
   let category = $.urlParam('category');
 
   if (category == null){
@@ -35,7 +41,6 @@ var ready = function(){
       showIcons: ["code", "table"],
       status: false
     });
-
 };
 
 $(document).ready(ready);

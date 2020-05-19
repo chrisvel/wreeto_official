@@ -1,4 +1,4 @@
 class Tagging < ApplicationRecord
-  belongs_to :inventory_item, foreign_key: 'inventory_item_id', class_name: "Inventory::Item"
+  belongs_to :inventory_note, foreign_key: 'inventory_note_id', class_name: "Inventory::Note"
   belongs_to :tag
 end

@@ -48,6 +48,7 @@ class User < ApplicationRecord
   has_many :inventory_items, class_name: "Inventory::Item", dependent: :destroy
   has_many :inventory_notes, class_name: "Inventory::Note", dependent: :destroy
   has_many :categories, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   def setup_default_categories
     Category.create!(title: 'Personal',      deletable: true,  user_id: self.id)

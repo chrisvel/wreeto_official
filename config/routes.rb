@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post 'search', to: 'search#index'
 
+  get 'tags/:tag', to: 'inventory/notes#index', as: :tag
+
   namespace :inventory do
     resources :notes, param: :guid do
       get '/make_public', to: 'notes#make_public', on: :member

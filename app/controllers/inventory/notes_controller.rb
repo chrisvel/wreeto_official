@@ -5,6 +5,7 @@ module Inventory
     before_action :set_inventory_note, only: [:show, :edit, :update, :destroy, :make_public, :make_private]
     before_action :set_categories, only: [:index, :show, :new, :create, :edit, :update]
     before_action :set_parent_categories, only: [:index, :show, :new, :edit, :update]
+    before_action :set_tags, only: [:show, :new, :create, :edit, :update]
 
     def index
       @categories = current_user.categories.ordered_by_title
@@ -14,8 +15,9 @@ module Inventory
         @inventory_notes = current_user.inventory_notes.search(params[:search]).order(favorite: :desc, updated_at: :desc).page params[:page]
       elsif params[:category].present?
         @inventory_notes = current_user.inventory_notes.for_category(params[:category]).order(favorite: :desc, updated_at: :desc).page params[:page]
-      elsif params[:tags].present?
-        @inventory_notes = current_user.inventory_notes.tagged_with(params[:tag]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      elsif params[:tag].present?
+        @inventory_notes = current_user.inventory_notes.tagged_with(params[:tag], current_user.id)
+        @inventory_notes.order(favorite: :desc, updated_at: :desc)&.page params[:page] if @inventory_notes.any? 
       else 
         @inventory_notes = current_user.inventory_notes.order(favorite: :desc, updated_at: :desc).page params[:page]
       end
@@ -36,10 +38,11 @@ module Inventory
     end
 
     def create
-      @inventory_note = current_user.inventory_notes.new(inventory_note_params)
+      params_with_user = inventory_note_params.merge!(user: current_user)
+      @inventory_note = current_user.inventory_notes.new(params_with_user)
       @inventory_note.new_category_id = inventory_note_params[:category_id]
       authorize @inventory_note
-
+      
       respond_to do |format|
         if @inventory_note.save
           format.html { redirect_to @inventory_note, notice: 'Note was successfully created.' }
@@ -135,10 +138,21 @@ module Inventory
         @parent_categories = current_user.categories.parents_ordered_by_title
       end
 
+      def set_tags 
+        @tags = current_user.tags.order(:name)
+      end
+
       # Never trust parameters from the scary internet, only allow the white list through.
       def inventory_note_params
         params.fetch(:inventory_note, {})
-              .permit(:user_id, :title, :content, :favorite, :category_id, :guid, :all_tags)
+              .permit(
+                :user_id, 
+                :title, 
+                :content, 
+                :favorite, 
+                :category_id, 
+                :guid, 
+                :tag_list)
       end
 
       def public_note_params

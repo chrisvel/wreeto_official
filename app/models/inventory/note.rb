@@ -21,7 +21,7 @@ module Inventory
   class Note < Inventory::Item
     include Utils::BaseConfig
     
-    attr_accessor :new_category_id
+    attr_accessor :new_category_id, :tag_list
 
     # Callbacks
     before_validation :set_defaults, if: :new_record?
@@ -29,6 +29,8 @@ module Inventory
     
     # Associations
     belongs_to :category   
+    has_many :taggings, foreign_key: 'inventory_note_id'
+    has_many :tags, through: :taggings
 
     # Validations
     validates :title, presence: true, allow_blank: false
@@ -74,18 +76,20 @@ module Inventory
       self.guid
     end
 
-    def all_tags=(names)
+    def tag_list
+      self.tags.map(&:name).join(', ')
+    end
+  
+    def tag_list=(names)
       self.tags = names.split(",").map do |name|
-        Tag.where(name: name.strip).first_or_create!
+        Tag.where(name: name.strip, user: user).first_or_create!
       end
     end
-    
-    def all_tags
-      self.tags.map(&:name).join(", ")
-    end
 
-    def self.tagged_with(name)
-      Tag.find_by_name!(name).inventory_notes
+    def self.tagged_with(id, user_id)
+      user = User.find(user_id)
+      tag = user.tags.find(id)
+      tag.present? ? tag.inventory_notes : []
     end
   end
 end

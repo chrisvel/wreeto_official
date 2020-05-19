@@ -1,6 +1,7 @@
 class Tag < ApplicationRecord
 
-    # Associations
-    has_many :taggings
-    has_many :inventory_items, through: :taggings
+  # Associations
+  belongs_to :user
+  has_many :taggings
+  has_many :inventory_notes, through: :taggings
 end

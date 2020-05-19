@@ -27,7 +27,7 @@ var ready = function(){
     clearTimeout(alertTimeout);
   }
   alertTimeout = setTimeout(function() {
-  $('.alert-container').slideUp();
+    $('.alert-container').slideUp();
   }, 3000);
 };
 

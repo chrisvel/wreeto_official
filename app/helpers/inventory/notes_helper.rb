@@ -1,5 +1,8 @@
 module Inventory::NotesHelper
-  def tag_links(tags)
-    tags.split(",").map{|tag| link_to tag.strip, tag_path(tag.strip) }.join(", ") 
+  def tag_links(note)
+    tags_formatted = note.tags.map do |tag| 
+      link_to("##{tag.name}", tag_path(tag: tag), class: 'badge badge-dark text-white') 
+    end
+    tags_formatted.join(" ").html_safe
   end
 end
