@@ -8,8 +8,8 @@
 </div>
 <hr/>
 <%# render partial: 'filter_search_widget' %>
-<% if @inventory_notes.any? %>
-  <%= render partial: 'notes_list', locals: {inventory_notes: @inventory_notes, notes_list: true} %>
+<% if @notes.any? %>
+  <%= render partial: 'notes_list', locals: {notes: @notes, notes_list: true} %>
 <% else %>
   <% if params[:search].present? %>
     <%= no_results_slate %>
@@ -17,4 +17,4 @@
     <%= blank_slate(:notes) %>
   <% end %>
 <% end %>
-<%= paginate @inventory_notes %>
+<%= paginate @notes %>

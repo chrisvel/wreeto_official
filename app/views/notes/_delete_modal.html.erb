@@ -1,4 +1,4 @@
-<div class="modal fade" id="delete-<%= @inventory_note.id %>" role="dialog">
+<div class="modal fade" id="delete-<%= @note.id %>" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,7 +8,7 @@
         <p>Are you sure to delete this note?</p>
       </div>
       <div class="modal-footer">
-        <%= link_to 'Delete', inventory_note_path(@inventory_note), method: :delete, :class => 'btn btn-sm btn-danger' %>
+        <%= link_to 'Delete', note_path(@note), method: :delete, :class => 'btn btn-sm btn-danger' %>
         <a href="#" data-dismiss="modal" class="btn btn-sm btn-light">Cancel</a>
       </div>
     </div>

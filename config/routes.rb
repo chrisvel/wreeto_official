@@ -3,16 +3,14 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post 'search', to: 'search#index'
 
-  get 'tags/:tag', to: 'inventory/notes#index', as: :tag
+  get 'tags/:tag', to: 'notes#index', as: :tag
 
-  namespace :inventory do
-    resources :notes, param: :guid do
-      get '/make_public', to: 'notes#make_public', on: :member
-      get '/make_private', to: 'notes#make_private', on: :member
-    end
+  resources :notes, param: :guid do
+    get '/make_public', to: 'notes#make_public', on: :member
+    get '/make_private', to: 'notes#make_private', on: :member
   end
 
-  get '/public/:guid', to: 'inventory/notes#public', params: :guid, as: :public_note
+  get '/public/:guid', to: 'notes#public', params: :guid, as: :public_note
 
   devise_for :users, controllers: {
     registrations: "registrations",
@@ -24,7 +22,7 @@ Rails.application.routes.draw do
   get '/wiki', to: 'categories#wiki'
   get '/download', to: 'downloads#export_zip', as: 'download_export_zip'
 
-  root to: "inventory/notes#index"
+  root to: "notes#index"
 
   if Rails.env.development?
     require 'sidekiq/web'

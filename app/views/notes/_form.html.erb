@@ -1,4 +1,4 @@
-<%= form_with(model: @inventory_note, html: { class: 'form', novalidate: true }) do |f| %>
+<%= form_with(model: @note, html: { class: 'form', novalidate: true }) do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="form-group mb-4">
@@ -42,11 +42,11 @@
   <div class="actions">
     <div class="row">
       <div class="col-5">
-        <% if @inventory_note.id %>
+        <% if @note.id %>
           <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
                       "#",
                       class: "btn btn-sm btn-danger",
-                      data: { toggle: "modal", target: "#delete-#{@inventory_note.id}", turbolinks: false }
+                      data: { toggle: "modal", target: "#delete-#{@note.id}", turbolinks: false }
                       %>
           <%= render partial: 'delete_modal' %>
         <% end %>

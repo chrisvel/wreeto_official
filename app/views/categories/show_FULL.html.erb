@@ -11,7 +11,7 @@
         <div class="menu">
           <div class="item"><i class="plus purple icon"></i>
             <%= link_to 'Note',
-                  new_inventory_note_path(params: {category_id: @category.id}),
+                  new_note_path(params: {category_id: @category.id}),
                   class: "link-purple",
                   data: { turbolinks: false }
                   %>
@@ -36,9 +36,9 @@
 <hr/>
 
 <h5>NOTES</h5>
-<% if @category.inventory_notes.any? %>
+<% if @category.notes.any? %>
   <%= render partial: 'inventory/notes/notes_list',
-    locals: {inventory_notes: @category.inventory_notes.order(favorite: :desc, updated_at: :desc), notes_list: false} %>
+    locals: {notes: @category.notes.order(favorite: :desc, updated_at: :desc), notes_list: false} %>
 <% else %>
   <%= blank_slate(:notes) %>
 <% end %>

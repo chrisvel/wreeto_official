@@ -21,8 +21,7 @@ class Category < ApplicationRecord
   before_create  :set_slug
 
   has_many :subcategories, class_name: 'Category', foreign_key: "parent_id", dependent: :destroy
-  has_many :inventory_items, class_name: 'Inventory::Item'
-  has_many :inventory_notes, class_name: 'Inventory::Note'
+  has_many :notes, class_name: 'Note'
   belongs_to :parent, class_name: 'Category', optional: true
   belongs_to :user
 
@@ -49,12 +48,12 @@ class Category < ApplicationRecord
   end
 
   def subcategories_notes
-    self.subcategories.map{|a| a.inventory_notes}.flatten
+    self.subcategories.map{|a| a.notes}.flatten
   end
 
   def items_amount
-    itcat = self.inventory_items.count || 0
-    itsub = self.subcategories.map{|a| a.inventory_items.count}.inject(:+) || 0
+    itcat = self.notes.count || 0
+    itsub = self.subcategories.map{|a| a.notes.count}.inject(:+) || 0
     itcat + itsub
   end
 

@@ -8,7 +8,7 @@ module ButtonsHelper
 
   def add_note_button
     link_to 'ADD NEW NOTE',
-    new_inventory_note_path,
+    new_note_path,
     class: "btn btn-sm btn-purple",
     data: { turbolinks: false }
   end

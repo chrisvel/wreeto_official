@@ -19,7 +19,7 @@ module FormsHelper
     case entity
     when :notes
       link_to text,
-      new_inventory_note_path,
+      new_note_path,
       class: 'link-purple',
       data: { turbolinks: false }
     when :ideas

@@ -9,7 +9,7 @@
   </button>
   <% if user_signed_in? %>
     <%# link_to '<i class="fa fa-home"></i>'.html_safe,
-          inventory_notes_path,
+          notes_path,
           {remote: false, class: "item", data: { turbolinks: false }}
           %>
 
@@ -17,14 +17,14 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <%# link_to '<i class="fa fa-sticky-note fa-2x fa-fw "></i>'.html_safe,
-                new_inventory_note_path,
+                new_note_path,
                 {remote: false, class: "link-purple-icon", data: { turbolinks: false }}
                 %>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
-          <%= link_to "Notes", inventory_notes_path, class: "nav-link text-center", data: { turbolinks: false } %>
+          <%= link_to "Notes", notes_path, class: "nav-link text-center", data: { turbolinks: false } %>
         </li>
         <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
           <%= link_to "Categories", categories_path, class: "nav-link text-center", data: { turbolinks: false } %>
