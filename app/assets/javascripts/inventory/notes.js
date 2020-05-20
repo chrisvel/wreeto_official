@@ -17,14 +17,14 @@ var ready = function(){
 
   if (category == null){
     $('#notes-category-select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-      window.location.href = '/inventory/notes?category=' + e.target.value;
+      window.location.href = '/notes?category=' + e.target.value;
     });
   }
   else{
     console.log(category);
     $('#notes-category-select').selectpicker('val', category);
     $('#notes-category-select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-      window.location.href = '/inventory/notes?category=' + e.target.value;
+      window.location.href = '/notes?category=' + e.target.value;
     });
   }
 

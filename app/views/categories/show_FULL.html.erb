@@ -37,7 +37,7 @@
 
 <h5>NOTES</h5>
 <% if @category.notes.any? %>
-  <%= render partial: 'inventory/notes/notes_list',
+  <%= render partial: 'notes/notes_list',
     locals: {notes: @category.notes.order(favorite: :desc, updated_at: :desc), notes_list: false} %>
 <% else %>
   <%= blank_slate(:notes) %>

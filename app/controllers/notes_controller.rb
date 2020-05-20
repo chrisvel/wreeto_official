@@ -12,11 +12,15 @@ class NotesController < ApplicationController
 
     if params[:search].present?
       @notes = current_user.notes.search(params[:search]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      @filter = 'search'
     elsif params[:category].present?
       @notes = current_user.notes.for_category(params[:category]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      @filter = 'category'
     elsif params[:tag].present?
-      @notes = current_user.notes.tagged_with(params[:tag], current_user.id)
-      @notes.order(favorite: :desc, updated_at: :desc)&.page params[:page] if @notes.any? 
+      notes = current_user.notes.tagged_with(params[:tag], current_user.id)
+      @notes = notes.order(favorite: :desc, updated_at: :desc).page params[:page] if notes.any? 
+      @filter = 'tag'
+      @tag_name = params[:tag]
     else 
       @notes = current_user.notes.order(favorite: :desc, updated_at: :desc).page params[:page]
     end
@@ -75,7 +79,10 @@ class NotesController < ApplicationController
   def destroy
     @note.new_category_id = note_params[:category_id] || @note.category_id
     authorize @note
-    @note.destroy
+    ActiveRecord::Base.transaction do
+      @note.taggings.destroy_all
+      @note.destroy
+    end
     respond_to do |format|
       format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }

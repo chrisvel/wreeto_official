@@ -23,7 +23,7 @@
             <% if category.notes.any? %>
               <br/>
               <div class="ml-4 mt-2">
-                <%= render partial: 'inventory/notes/notes_list_wiki',
+                <%= render partial: 'notes/notes_list_wiki',
                   locals: {notes: category.notes.order(favorite: :desc, title: :asc), notes_list: false, small: true} %>
               </div>
             <% end %>
@@ -35,7 +35,7 @@
                     <% if cat.notes.any? %>
                       <br/>
                       <div class="ml-4">
-                        <%= render partial: 'inventory/notes/notes_list_wiki',
+                        <%= render partial: 'notes/notes_list_wiki',
                           locals: {notes: cat.notes.order(favorite: :desc, title: :asc), notes_list: false} %>
                       </div>
                     <% end %>

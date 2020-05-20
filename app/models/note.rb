@@ -77,9 +77,9 @@ class Note < ApplicationRecord
     self.tags += new_tags
   end
 
-  def self.tagged_with(id, user_id)
+  def self.tagged_with(name, user_id)
     user = User.find(user_id)
-    tag = user.tags.find(id)
+    tag = user.tags.find_by(name: name)
     tag.present? ? tag.notes : []
   end
 end

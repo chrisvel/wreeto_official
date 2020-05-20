@@ -51,7 +51,7 @@
 
 <h5>NOTES</h5>
 <% if @all_notes.any? %>
-  <%= render partial: 'inventory/notes/notes_list',
+  <%= render partial: 'notes/notes_list',
     locals: {notes: @all_notes, notes_list: false} %>
 <% else %>
   <%= blank_slate(:notes) %>
