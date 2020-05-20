@@ -7,7 +7,13 @@
   </div>
 
   <div class="form-group mb-4">
-    <%= f.text_field :tag_list, class: 'form-control' %>
+    <%# <%= f.text_field :tag_list, class: 'form-control tag-picker' %>
+    <%= f.collection_select :tag_list, @tags, :id, :name, {selected: @note.tag_list},
+          {
+            id: "form-category-select",
+            class: 'form-control tag-picker',
+            multiple: true
+          } %>
   </div>
 
   <div class="form-group mb-4">

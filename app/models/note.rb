@@ -1,7 +1,7 @@
 class Note < ApplicationRecord
   include Utils::BaseConfig
 
-  attr_accessor :new_category_id, :tag_list
+  attr_accessor :new_category_id
 
   # Callbacks
   before_validation :set_defaults, if: :new_record?
@@ -64,13 +64,17 @@ class Note < ApplicationRecord
   end
 
   def tag_list
-    self.tags.map(&:name).join(', ')
+    self.tags
   end
 
   def tag_list=(names)
-    self.tags = names.split(",").map do |name|
-      Tag.where(name: name.strip, user: user).first_or_create!
-    end
+    ids = names.reject(&:blank?).map{|a| a.to_i}.select{|s| s > 0}
+    self.tags = Tag.where(id: ids)
+    new_tag_names = names.reject(&:blank?) - ids.map(&:to_s)
+    new_tags = new_tag_names.map do |tag_name|
+      Tag.where(name: tag_name.strip, user: user).create!
+    end 
+    self.tags += new_tags
   end
 
   def self.tagged_with(id, user_id)

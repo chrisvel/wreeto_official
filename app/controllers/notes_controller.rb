@@ -155,7 +155,8 @@ class NotesController < ApplicationController
               :favorite, 
               :category_id, 
               :guid, 
-              :tag_list)
+              :tag_list, 
+              tag_list: [])
     end
 
     def public_note_params
