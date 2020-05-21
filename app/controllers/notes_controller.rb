@@ -79,13 +79,20 @@ class NotesController < ApplicationController
   def destroy
     @note.new_category_id = note_params[:category_id] || @note.category_id
     authorize @note
+    taggings_destroyed = false
+    note_destroyed = false
     ActiveRecord::Base.transaction do
-      @note.taggings.destroy_all
-      @note.destroy
+      taggings_destroyed = @note.taggings.destroy_all
+      note_destroyed = @note.destroy
     end
-    respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
-      format.json { head :no_content }
+    if taggings_destroyed && note_destroyed
+      respond_to do |format|
+        format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      format.html { redirect_to @note, status: 422 }
+      format.json { render :show, status: 422, location: @note }
     end
   end
 

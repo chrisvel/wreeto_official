@@ -1,53 +1,18 @@
-<%= form_for(@category, html: { class: "form "} ) do |f| %>
+<%= form_for(tag, html: { class: "form "} ) do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control form-control-lg' %>
-  </div>
-
-  <% if @category.is_a_project? %>
-    <div class="form-group">
-      <div class="ui checkbox">
-        <%= f.check_box :active %>
-        <%= f.label :active %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :parent_id %>
-    <%= f.collection_select :parent_id,
-        @parent_categories,
-        :id,
-        :title,
-        {include_blank: 'None'},
-        {
-          id: "form-parent-select",
-          class: 'form-control selectpicker show-tick',
-          data: {live_search: "true", width: '100%'}
-        } %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control relaxed' %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control form-control-lg' %>
   </div>
 
   <div class="actions">
     <div class="row">
       <div class="col-5">
-        <% if @category.id %>
-          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
-                      "#",
-                      class: "btn btn-sm btn-danger",
-                      data: { toggle: "modal", target: "#delete-#{@category.id}", turbolinks: false }
-                      %>
-          <%= render partial: 'delete_modal' %>
-        <% end %>
+       
       </div>
       <div class="col-7 text-right">
-        <%= link_to 'BACK', categories_path, class: "btn btn-sm btn-secondary" %>
+        <%= link_to 'BACK', tags_path, class: "btn btn-sm btn-secondary" %>
         <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
       </div>
     </div>

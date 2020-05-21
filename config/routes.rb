@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks" }
 
   resources :categories
-  resources :tags
+  resources :tags, param: :name
 
   get '/wiki', to: 'categories#wiki'
   get '/download', to: 'downloads#export_zip', as: 'download_export_zip'

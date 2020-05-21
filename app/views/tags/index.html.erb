@@ -29,11 +29,17 @@
           </td>
           <td class="text-right">
             <%= "#{distance_of_time_in_words(Time.now, tag.updated_at)}" %>
-            <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+            <%= link_to 'EDIT'.html_safe,
                       "#",
-                      class: "btn btn-sm btn-outline-danger ml-2",
-                      data: { toggle: "modal", target: "#delete-#{tag.id}", turbolinks: false }
+                      class: "text-bold text-warning ml-2",
+                      data: { toggle: "modal", target: "#edit-#{tag.name}", turbolinks: false }
                       %>
+            <%= link_to 'DELETE'.html_safe,
+                      "#",
+                      class: "text-bold text-danger ml-2",
+                      data: { toggle: "modal", target: "#delete-#{tag.name}", turbolinks: false }
+                      %>
+            <%= render partial: 'edit_modal', locals: {tag: tag} %>
             <%= render partial: 'delete_modal', locals: {tag: tag} %>
           </td>
         </tr>

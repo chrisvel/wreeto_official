@@ -19,7 +19,7 @@ class TagsController < ApplicationController
 
   def create
     @tag = current_user.tags.new(tag_params)
-
+    authorize @tag
     respond_to do |format|
       if @tag.save
         format.html { redirect_to tags_path, notice: 'Tag was successfully created.' }
@@ -32,9 +32,10 @@ class TagsController < ApplicationController
   end
 
   def update
+    authorize @tag
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to tags_path, notice: 'Tag was successfully updated.' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -44,8 +45,15 @@ class TagsController < ApplicationController
   end
 
   def destroy
+    authorize @tag
+    taggings_destroyed = false 
+    tag_destroyed = false
     respond_to do |format|
-      if @tag.destroy
+      ActiveRecord::Base.transaction do
+        taggings_destroyed = @tag.taggings.destroy_all
+        tag_destroyed = @tag.destroy
+      end
+      if taggings_destroyed && tag_destroyed
         format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
         format.json { head :no_content }
       else
@@ -57,8 +65,7 @@ class TagsController < ApplicationController
 
   private
     def set_tag
-      #TODO: Change param in routes to :name
-      @tag = current_user.tags.find_by(name: params[:id])
+      @tag = current_user.tags.find_by(name: params[:name])
     end
 
     def tag_params

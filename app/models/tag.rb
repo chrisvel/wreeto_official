@@ -7,6 +7,8 @@ class Tag < ApplicationRecord
 
   scope :ordered_by_name, -> { order('name ASC') }
 
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+
   def notes_amount 
     self.notes.count 
   end
