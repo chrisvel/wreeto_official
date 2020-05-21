@@ -1,3 +1,5 @@
+@import '../colors';
+
 .inline {
   display: inline-block;
 }
@@ -77,4 +79,9 @@ textarea.relaxed{
 
 .editor-toolbar {
   border-color: #ddd;
+}
+
+// Select2
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $purple !important;
 }

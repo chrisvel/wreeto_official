@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-8">
+    <h3><%= @category.title %></h3>
+    <%= @category.description %>
+  </div>
+  <div class="col-8">
+    <div class="ui small purple buttons">
+      <div class="ui button">ADD NEW</div>
+      <div class="ui pointing dropdown generic-dropdown icon button">
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item"><i class="plus purple icon"></i>
+            <%= link_to 'Note',
+                  new_note_path(params: {category_id: @category.id}),
+                  class: "link-purple",
+                  data: { turbolinks: false }
+                  %>
+          </div>
+          <% if @category.parent_id.nil? %>
+            <div class="item"><i class="plus purple icon"></i>
+              <%= link_to 'Subcategory',
+                      new_category_path(params: {parent_id: @category.id}),
+                      class: "link-purple",
+                      data: { turbolinks: false }
+                      %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= link_to 'EDIT', edit_category_path(@category),
+      class: "ui yellow small button", data: { turbolinks: false } %>
+    <%= link_to 'BACK', categories_path, class: "ui small button"  %>
+  </div>
+</div>
+<hr/>
+
+<h5>NOTES</h5>
+<% if @category.notes.any? %>
+  <%= render partial: 'notes/notes_list',
+    locals: {notes: @category.notes.order(favorite: :desc, updated_at: :desc), notes_list: false} %>
+<% else %>
+  <%= blank_slate(:notes) %>
+<% end %>

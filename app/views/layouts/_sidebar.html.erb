@@ -83,6 +83,12 @@
 
   <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= link_to 'TAGS'.html_safe, tags_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fa fa-tag"></i>
+  </h6>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
     <%= link_to 'WIKI', wiki_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
     <i class="fa fa-book"></i>
   </h6>

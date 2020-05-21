@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post 'search', to: 'search#index'
 
-  get 'tags/:tag', to: 'notes#index', as: :tag
-
   resources :notes, param: :guid do
     get '/make_public', to: 'notes#make_public', on: :member
     get '/make_private', to: 'notes#make_private', on: :member
@@ -18,6 +16,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "omniauth_callbacks" }
 
   resources :categories
+  resources :tags
 
   get '/wiki', to: 'categories#wiki'
   get '/download', to: 'downloads#export_zip', as: 'download_export_zip'

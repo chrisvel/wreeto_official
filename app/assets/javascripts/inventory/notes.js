@@ -21,7 +21,6 @@ var ready = function(){
     });
   }
   else{
-    console.log(category);
     $('#notes-category-select').selectpicker('val', category);
     $('#notes-category-select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
       window.location.href = '/notes?category=' + e.target.value;

@@ -2,12 +2,10 @@
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="form-group mb-4">
-    <%# f.label :title %>
     <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Untitled note' %>
   </div>
 
   <div class="form-group mb-4">
-    <%# <%= f.text_field :tag_list, class: 'form-control tag-picker' %>
     <%= f.collection_select :tag_list, @tags, :id, :name, {selected: @note.tag_list.ids},
           {
             id: "form-category-select",
@@ -17,7 +15,6 @@
   </div>
 
   <div class="form-group mb-4">
-    <%# f.label :content %>
     <%= f.text_area :content, size: "30x20", id: 'note-content' %>
   </div>
 
