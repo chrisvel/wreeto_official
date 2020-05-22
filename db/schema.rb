@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_194032) do
+ActiveRecord::Schema.define(version: 2020_05_22_151207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,28 +51,6 @@ ActiveRecord::Schema.define(version: 2020_05_19_194032) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "inventory_items", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "title"
-    t.text "content"
-    t.bigint "category_id"
-    t.boolean "favorite"
-    t.string "serial_no"
-    t.string "images"
-    t.integer "sharestate"
-    t.string "guid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_inventory_items_on_category_id"
-    t.index ["guid"], name: "index_inventory_items_on_guid", unique: true
-    t.index ["user_id"], name: "index_inventory_items_on_user_id"
-  end
-
-  create_table "inventory_notes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "notes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "category_id"
@@ -91,12 +69,10 @@ ActiveRecord::Schema.define(version: 2020_05_19_194032) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.bigint "inventory_note_id"
     t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "note_id"
-    t.index ["inventory_note_id"], name: "index_taggings_on_inventory_note_id"
     t.index ["note_id"], name: "index_taggings_on_note_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
@@ -142,11 +118,8 @@ ActiveRecord::Schema.define(version: 2020_05_19_194032) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "categories", "users"
-  add_foreign_key "inventory_items", "categories"
-  add_foreign_key "inventory_items", "users"
   add_foreign_key "notes", "categories"
   add_foreign_key "notes", "users"
-  add_foreign_key "taggings", "inventory_notes"
   add_foreign_key "taggings", "notes"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "users"
