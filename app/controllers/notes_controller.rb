@@ -66,6 +66,7 @@ class NotesController < ApplicationController
     authorize @note
     guid = @note.guid
     respond_to do |format|
+      
       if @note.update(note_params)
         format.html { redirect_to note_path(guid), notice: 'Note was successfully updated.' }
         format.json { render :show, status: :ok, location: @note }

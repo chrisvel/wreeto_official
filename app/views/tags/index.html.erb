@@ -3,7 +3,7 @@
     <h3>Tags</h3>
   </div>
   <div class="col-10 text-right">
-    <%= add_category_button %>
+    <%= add_tag_button %>
   </div>
 </div>
 
@@ -32,12 +32,12 @@
             <%= link_to 'EDIT'.html_safe,
                       "#",
                       class: "text-bold text-warning ml-2",
-                      data: { toggle: "modal", target: "#edit-#{tag.name}", turbolinks: false }
+                      data: { toggle: "modal", target: "#edit-#{tag.name}".html_safe, turbolinks: false }
                       %>
             <%= link_to 'DELETE'.html_safe,
                       "#",
                       class: "text-bold text-danger ml-2",
-                      data: { toggle: "modal", target: "#delete-#{tag.name}", turbolinks: false }
+                      data: { toggle: "modal", target: "#delete-#{tag.name}".html_safe, turbolinks: false }
                       %>
             <%= render partial: 'edit_modal', locals: {tag: tag} %>
             <%= render partial: 'delete_modal', locals: {tag: tag} %>

@@ -72,9 +72,11 @@ class Note < ApplicationRecord
     self.tags = Tag.where(id: ids)
     new_tag_names = names.reject(&:blank?) - ids.map(&:to_s)
     new_tags = new_tag_names.map do |tag_name|
-      Tag.where(name: tag_name.strip, user: user).create!
+      Tag.create(name: tag_name.strip, user: user)
     end 
     self.tags += new_tags
+  rescue ActiveRecord::RecordInvalid => error
+    errors.add(:tag_list, error.message)
   end
 
   def self.tagged_with(name, user_id)
