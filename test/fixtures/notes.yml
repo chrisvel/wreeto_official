@@ -8,7 +8,5 @@ something:
   title: 'Something'
   content: 'This is something'
   category: ideas
-  type: Inventory::Note
-  category: ideas
   user: jack_sparrow
   guid: <%= SecureRandom.hex(6) %>
