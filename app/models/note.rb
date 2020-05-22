@@ -9,14 +9,15 @@ class Note < ApplicationRecord
   
   # Associations
   belongs_to :category   
-  has_many :taggings #, foreign_key: 'note_id'
-  has_many :tags, through: :taggings
+  has_many :taggings 
+  has_many :tags, through: :taggings, validate: false
   belongs_to :user
 
   # Validations
   validates :title, presence: true, allow_blank: false
   validates :category, presence: true, allow_blank: false
   validates :content, presence: true, allow_blank: false
+  validates_associated :tags , message: 'are invalid. Only numbers, letters, _ and - characters allowed.'
 
   # Scopes
   scope :for_category, ->(slug) { eager_load(:category).where({categories: {slug: slug}}) }
@@ -71,12 +72,9 @@ class Note < ApplicationRecord
     ids = names.reject(&:blank?).map{|a| a.to_i}.select{|s| s > 0}
     self.tags = Tag.where(id: ids)
     new_tag_names = names.reject(&:blank?) - ids.map(&:to_s)
-    new_tags = new_tag_names.map do |tag_name|
-      Tag.create(name: tag_name.strip, user: user)
+    new_tags = new_tag_names.each do |tag_name|
+      tags.build(name: tag_name.strip, user: user)
     end 
-    self.tags += new_tags
-  rescue ActiveRecord::RecordInvalid => error
-    errors.add(:tag_list, error.message)
   end
 
   def self.tagged_with(name, user_id)
