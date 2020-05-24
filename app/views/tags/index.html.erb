@@ -3,49 +3,21 @@
     <h3>Tags</h3>
   </div>
   <div class="col-10 text-right">
-    <%= add_tag_button %>
+    <%# add_tag_button %>
+     <%= link_to 'ADD NEW TAG'.html_safe,
+                      "#",
+                      class: "btn btn-sm btn-purple",
+                      data: { toggle: "modal", target: "#add-tag".html_safe, turbolinks: false }
+                      %>
   </div>
 </div>
 
 <hr/>
 <br>
 
-<div class="card border rounded-lg shadow-sm p-5">
-  <table class="table">
-    <thead>
-    </thead>
-    <tbody>
-      <% @tags.each do |tag| %>
-        <tr>
-          <td>
-            <%= link_to tag.name, tag_path(tag.name), data: { turbolinks: false }, class: "category-link link-purple" %>
-            <% if tag.notes_amount > 0 %>
-              <span class="category-amount">(<%= tag.notes_amount %>)</span>
-            <% end %>
-            <span class="ml-4" style="color: #cccccc;"><%= tag.name %></span>
-          </td>
-          <td></td>
-          <td class="text-center">
-          </td>
-          <td class="text-right">
-            <%= "#{distance_of_time_in_words(Time.now, tag.updated_at)}" %>
-            <%= link_to 'EDIT'.html_safe,
-                      "#",
-                      class: "text-bold text-warning ml-2",
-                      data: { toggle: "modal", target: "#edit-#{tag.name}".html_safe, turbolinks: false }
-                      %>
-            <%= link_to 'DELETE'.html_safe,
-                      "#",
-                      class: "text-bold text-danger ml-2",
-                      data: { toggle: "modal", target: "#delete-#{tag.name}".html_safe, turbolinks: false }
-                      %>
-            <%= render partial: 'edit_modal', locals: {tag: tag} %>
-            <%= render partial: 'delete_modal', locals: {tag: tag} %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-    <tfoot>
-    </tfoot>
-  </table>
-</div>
+<% if @tags.any? %>
+  <%= render partial: 'tag_list', locals: {tags: @tags} %>
+<% else %>
+  <%= blank_slate(:tags) %>
+  <%= render partial: 'add_modal' %>
+<% end %>

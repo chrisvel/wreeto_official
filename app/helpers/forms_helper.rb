@@ -22,16 +22,11 @@ module FormsHelper
       new_note_path,
       class: 'link-purple',
       data: { turbolinks: false }
-    when :ideas
+    when :tags
       link_to text,
-      new_inventory_idea_path,
+      "#",
       class: 'link-purple',
-      data: { turbolinks: false }
-    when :thoughts
-      link_to text,
-      new_inventory_thought_path,
-      class: 'link-purple',
-      data: { turbolinks: false }
+      data: { toggle: "modal", target: "#add-tag".html_safe, turbolinks: false }
     else
       entity
     end

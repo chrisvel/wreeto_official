@@ -22,8 +22,8 @@ module ButtonsHelper
 
   def add_tag_button
     link_to 'ADD NEW TAG',
-    new_tag_path,
+    '#',
     class: "btn btn-sm btn-purple",
-    data: { turbolinks: false }
+    data: { toggle: "modal", target: "#add-tag".html_safe, turbolinks: false }
   end
 end

@@ -4,6 +4,7 @@ class TagsController < ApplicationController
 
   def index
     @tags = current_user.tags.ordered_by_name
+    @tag = current_user.tags.new
   end
 
   def show

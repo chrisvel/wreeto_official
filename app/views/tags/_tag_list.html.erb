@@ -1,0 +1,38 @@
+<div class="card border rounded-lg shadow-sm p-5">
+  <table class="table">
+    <thead>
+    </thead>
+    <tbody>
+      <% tags.each do |tag| %>
+        <tr>
+          <td>
+            <%= link_to tag.name, tag_path(tag.name), data: { turbolinks: false }, class: "category-link link-purple" %>
+            <% if tag.notes_amount > 0 %>
+              <span class="category-amount">(<%= tag.notes_amount %>)</span>
+            <% end %>
+          </td>
+          <td></td>
+          <td class="text-center">
+          </td>
+          <td class="text-right">
+            <%= link_to 'EDIT'.html_safe,
+                      "#",
+                      class: "text-bold text-warning ml-2",
+                      data: { toggle: "modal", target: "#edit-#{tag.name}".html_safe, turbolinks: false }
+                      %>
+            <%= link_to 'DELETE'.html_safe,
+                      "#",
+                      class: "text-bold text-danger ml-2",
+                      data: { toggle: "modal", target: "#delete-#{tag.name}".html_safe, turbolinks: false }
+                      %>
+            <%= render partial: 'add_modal' %>
+            <%= render partial: 'edit_modal', locals: {tag: tag} %>
+            <%= render partial: 'delete_modal', locals: {tag: tag} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

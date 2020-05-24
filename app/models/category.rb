@@ -18,14 +18,14 @@ class Category < ApplicationRecord
 
   before_update  :protect_unchangeables
   # before_destroy :protect_unchangeables
-  before_create  :set_slug
+  before_validation  :set_slug
 
   has_many :subcategories, class_name: 'Category', foreign_key: "parent_id", dependent: :destroy
   has_many :notes, class_name: 'Note'
   belongs_to :parent, class_name: 'Category', optional: true
   belongs_to :user
 
-  validates :title, presence: true, allow_blank: false
+  validates :title, presence: true, allow_blank: false, uniqueness: true
   validates :parent, presence: true, allow_blank: true
 
   scope :ordered_by_title, -> { order('title ASC') }
@@ -64,10 +64,10 @@ class Category < ApplicationRecord
   private
 
   def set_slug
-    loop do
-      self.slug = self.title.parameterize
-      break unless Category.where(slug: slug, user: user).exists?
-    end
+    # loop do
+      self.slug = title.parameterize
+      # break unless Category.where(slug: slug, user: user).exists?
+    # end
   end
 
   def protect_unchangeables
