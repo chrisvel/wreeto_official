@@ -7,11 +7,11 @@
         <% elsif message_type == 'error' %>
           <%= content_tag :div, msg, class: "alert alert-warning", role: :alert %>
         <% elsif message_type == 'notice' %>
-          <%= content_tag :div, msg, class: "alert alert-info", role: :alert %>
+          <%= content_tag :div, msg, class: "alert alert-info",    role: :alert %>
         <% elsif message_type == 'alert' %>
-          <%= content_tag :div, msg, class: "alert alert-danger", role: :alert %>
+          <%= content_tag :div, msg, class: "alert alert-danger",  role: :alert %>
         <% else %>
-          <%= content_tag :div, msg, class: "alert alert-danger", role: :alert %>
+          <%= content_tag :div, msg, class: "alert alert-danger",  role: :alert %>
         <% end %>
       <% end %>
     </div>

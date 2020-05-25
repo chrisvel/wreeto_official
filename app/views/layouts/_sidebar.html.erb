@@ -51,7 +51,8 @@
 
   <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
-    <%= link_to 'PROJECTS'.html_safe, category_path(current_user.categories.find_by(title: 'Projects')), class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <%# link_to 'PROJECTS'.html_safe, category_path(current_user.categories.find_by(title: 'Projects')), class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    PROJECTS
     <i class="fa fa-briefcase"></i>
   </h6>
   <% if user_signed_in? %>

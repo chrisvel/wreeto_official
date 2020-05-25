@@ -21,4 +21,4 @@ test:
 
 production:
   <<: *default
-  database: wreeto_production
+  database: ENV['POSTGRES_DB']

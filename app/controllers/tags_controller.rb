@@ -26,7 +26,7 @@ class TagsController < ApplicationController
         format.html { redirect_to tags_path, notice: 'Tag was successfully created.' }
         format.json { render :show, status: :created, location: @tag }
       else
-        format.html { render :new }
+        format.html { redirect_to tags_path, alert: @tag.errors.full_messages.to_sentence }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +39,7 @@ class TagsController < ApplicationController
         format.html { redirect_to tags_path, notice: 'Tag was successfully updated.' }
         format.json { render :show, status: :ok, location: @tag }
       else
-        format.html { render :edit }
+        format.html { redirect_to tags_path, alert: @tag.errors.full_messages.to_sentence }
         format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end

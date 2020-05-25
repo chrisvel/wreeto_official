@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  root "notes#index"
+
   post 'search', to: 'search#index'
+  get 'help', to: 'pages#help', as: 'pages_help'
 
   resources :notes, param: :guid do
     get '/make_public', to: 'notes#make_public', on: :member
@@ -21,8 +23,6 @@ Rails.application.routes.draw do
   get '/wiki', to: 'categories#wiki'
   get '/download', to: 'downloads#export_zip', as: 'download_export_zip'
 
-  root to: "notes#index"
-
   if Rails.env.development?
     require 'sidekiq/web'
     require 'sidekiq-status/web'
@@ -30,6 +30,14 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
+  # Direct URLs
+  direct :official_homepage_repo do
+    "https://wreeto.com"
+  end
+  direct :official_github_repo do
+    "https://github.com/chrisvel/wreeto_official"
   end
 
   get '*unmatched_route', to: 'application#not_found'
