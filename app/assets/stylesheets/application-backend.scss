@@ -102,6 +102,10 @@ input:focus, input.form-control:focus, button:focus{
   }
 }
 
+.table, table {
+  margin-bottom: 0px;
+}
+
 .table > thead > tr:first-child > td,
 .table > tbody > tr:first-child > td {
     border: none;

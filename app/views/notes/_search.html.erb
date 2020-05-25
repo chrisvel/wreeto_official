@@ -1,0 +1,19 @@
+<%= form_tag notes_path, method: "get", class: ""  do %>
+    <%# text_field_tag :search,
+        params[:search],
+        placeholder: "Search #{@total_notes} inventory notes stored in the DB",
+        type: "text",
+        class: 'form-control' %>
+    <div class="input-group">
+      <input type="text"
+             name="search"
+             id="search"
+             placeholder="Search <%= current_user.notes.size %> inventory notes stored in the DB"
+             class="form-control">
+      <div class="input-group-append">
+        <button class="btn btn-sm btn-light" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,20 @@
+<%= form_for(tag, html: { class: "form "} ) do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control form-control-lg' %>
+  </div>
+
+  <div class="actions">
+    <div class="row">
+      <div class="col-5">
+       
+      </div>
+      <div class="col-7 text-right">
+        <%= link_to 'BACK', tags_path, class: "btn btn-sm btn-secondary" %>
+        <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+      </div>
+    </div>
+  </div>
+<% end %>

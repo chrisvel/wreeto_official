@@ -35,7 +35,7 @@ var ready = function(){
                 $('ul.search_results').append(
                   '<li class="list-group-item pl-0">'+
                     //'<i class="fa fa-circle mr-2"></i> '+ 
-                    '<a href="/inventory/notes/'+ result.guid +'" class="link-purple search-result-link mr-2">'+ result.title + '</a>'+
+                    '<a href="/notes/'+ result.guid +'" class="link-purple search-result-link mr-2">'+ result.title + '</a>'+
                     '<a href="/categories/'+ result.category.id +'" class="badge badge-purple-outline">'+ result.category.title +'</a>'+
                   '</li>');
               });

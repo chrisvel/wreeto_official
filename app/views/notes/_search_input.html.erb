@@ -1,0 +1,6 @@
+<%= form_tag notes_path, method: "get", class: "ui form"  do %>
+  <div class="ui inverted transparent fluid icon input">
+    <%= text_field_tag :search, params[:search], placeholder: "Search Notes", type: "text" %>
+    <i class="search link icon"></i>
+  </div>
+<% end %>

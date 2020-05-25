@@ -1,0 +1,31 @@
+<div class="modal fade text-left" id="edit-<%= tag.name %>" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Edit a tag</button>
+      </div>
+      <div class="modal-body">
+        <%= form_for(tag, url: tag_path(tag.name), html: { class: "form "} ) do |f| %>
+          <%= render 'layouts/error_messages', object: f.object %>
+
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control form-control-lg' %>
+          </div>
+          <hr/>
+          <div class="actions">
+            <div class="row">
+              <div class="col-5">
+              </div>
+              <div class="col-7 text-right">
+                <a href="#" data-dismiss="modal" class="btn btn-sm btn-secondary">Cancel</a>
+                <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

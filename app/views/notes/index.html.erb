@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-4 col-md-8">
+    <% if @filter == 'tag' %>
+      <div>
+        <h3 class='d-inline-block'>Notes</h3>
+        <h6 class='d-inline-block ml-2'>tagged with <span class='badge badge-dark text-white'>#<%= @tag_name %></span></h6>
+      </div>
+    <% else %>
+      <h3>Notes</h3>
+      <% end %>
+  </div>
+  <div class="col-8 col-md-4 text-right">
+    <%= add_note_button %>
+  </div>
+</div>
+<hr/>
+<%# render partial: 'filter_search_widget' %>
+<% if @notes&.any? %>
+  <%= render partial: 'notes_list', locals: {notes: @notes, notes_list: true} %>
+<% else %>
+  <% if params[:search].present? %>
+    <%= no_results_slate %>
+  <% else %>
+    <%= blank_slate(:notes) %>
+  <% end %>
+<% end %>
+<%= paginate @notes if @notes&.any? %>

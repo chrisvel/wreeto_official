@@ -9,12 +9,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # stored_location_for(resource) ||
-  	inventory_notes_path
+  	notes_path
   end
 
   def not_found
     flash[:alert] = "Error 404: Page not found"
-    redirect_to inventory_notes_path
+    redirect_to notes_path
   end
 
   protected

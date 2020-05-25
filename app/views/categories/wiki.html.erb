@@ -20,11 +20,11 @@
             <% unless category.description.blank? %>
               <span class="ml-2" style="color: #cccccc;"><%= category.description %></span>
             <% end %>
-            <% if category.inventory_notes.any? %>
+            <% if category.notes.any? %>
               <br/>
               <div class="ml-4 mt-2">
-                <%= render partial: 'inventory/notes/notes_list_wiki',
-                  locals: {inventory_notes: category.inventory_notes.order(favorite: :desc, title: :asc), notes_list: false, small: true} %>
+                <%= render partial: 'notes/notes_list_wiki',
+                  locals: {notes: category.notes.order(favorite: :desc, title: :asc), notes_list: false, small: true} %>
               </div>
             <% end %>
             <% if category.subcategories.size > 0 %>
@@ -32,11 +32,11 @@
                 <% category.subcategories.ordered_by_title.each do |cat| %>
                   <div class="subcategory-item">
                     <%= link_to cat.title, cat, data: { turbolinks: false }, class: 'subcategory-link text-emphasis link-purple' %>
-                    <% if cat.inventory_notes.any? %>
+                    <% if cat.notes.any? %>
                       <br/>
                       <div class="ml-4">
-                        <%= render partial: 'inventory/notes/notes_list_wiki',
-                          locals: {inventory_notes: cat.inventory_notes.order(favorite: :desc, title: :asc), notes_list: false} %>
+                        <%= render partial: 'notes/notes_list_wiki',
+                          locals: {notes: cat.notes.order(favorite: :desc, title: :asc), notes_list: false} %>
                       </div>
                     <% end %>
                   </div>

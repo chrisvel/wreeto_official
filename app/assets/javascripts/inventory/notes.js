@@ -7,18 +7,23 @@ $.urlParam = function(name){
 }
 
 var ready = function(){
+  $('.tag-picker').select2(
+    {
+      tags: true,
+      multiple: true
+    });
+  
   let category = $.urlParam('category');
 
   if (category == null){
     $('#notes-category-select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-      window.location.href = '/inventory/notes?category=' + e.target.value;
+      window.location.href = '/notes?category=' + e.target.value;
     });
   }
   else{
-    console.log(category);
     $('#notes-category-select').selectpicker('val', category);
     $('#notes-category-select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-      window.location.href = '/inventory/notes?category=' + e.target.value;
+      window.location.href = '/notes?category=' + e.target.value;
     });
   }
 
@@ -35,7 +40,6 @@ var ready = function(){
       showIcons: ["code", "table"],
       status: false
     });
-
 };
 
 $(document).ready(ready);

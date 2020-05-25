@@ -48,7 +48,7 @@ class DataExporterService
     end
     FileUtils.mkdir_p dir_name unless Dir.exists? dir_name
     Dir.chdir dir_name do
-      category.inventory_notes.each do |note|
+      category.notes.each do |note|
         filename = note.title.parameterize.underscore
         File.open("./#{filename}.md", 'w'){|f| f.puts note.content }
       end

@@ -1,5 +1,4 @@
 module FormsHelper
-
   def blank_slate(entity)
     content_tag :div,
     "<i class=\"fa fas fa-sticky-note fa-5x \"></i><br><br> \
@@ -20,19 +19,14 @@ module FormsHelper
     case entity
     when :notes
       link_to text,
-      new_inventory_note_path,
+      new_note_path,
       class: 'link-purple',
       data: { turbolinks: false }
-    when :ideas
+    when :tags
       link_to text,
-      new_inventory_idea_path,
+      "#",
       class: 'link-purple',
-      data: { turbolinks: false }
-    when :thoughts
-      link_to text,
-      new_inventory_thought_path,
-      class: 'link-purple',
-      data: { turbolinks: false }
+      data: { toggle: "modal", target: "#add-tag".html_safe, turbolinks: false }
     else
       entity
     end
