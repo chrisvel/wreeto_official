@@ -1,4 +1,4 @@
-module Downloads
+module FileManagement
   class ZipImporterJob < ApplicationJob
     queue_as :cleanup
 

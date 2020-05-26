@@ -6,11 +6,15 @@ class ImportsController < ApplicationController
   end
 
   def import_zip
-    byebug
-    exporter = Downloads::ZipExporterJob.perform_now(current_user.id)
-    send_file(exporter.zip_path, type: 'application/zip', disposition: 'attachment')
-    Downloads::DeleteExportedZipJob.set(wait: 20.seconds).perform_later(exporter.fullpath)
+    # importer = FileManagement::ZipImporterJob.perform_now(current_user.id)
+    redirect_to import_show_url
   end
+
+  def show
+
+  end
+
+  private
 
   def upload_params
     params.require('zip_file')
