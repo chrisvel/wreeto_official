@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/wiki', to: 'categories#wiki'
   get '/download', to: 'downloads#export_zip', as: 'download_export_zip'
+  get '/import', to: 'imports#wizard', as: 'import_wizard'
+  post '/import', to: 'imports#import_zip', as: 'import_zip'
 
   if Rails.env.development?
     require 'sidekiq/web'
