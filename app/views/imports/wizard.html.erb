@@ -10,11 +10,11 @@
 <br>
 
 <div class="card shadow-sm bordered p-4">
-  <%= form_with(url: import_zip_path, multipart: true, html: {class: "form"}) do |form| %>
+  <%= form_with(model: @importer, url: import_zip_path, multipart: true, html: {class: "form"}) do |form| %>
     <div class="form-group">
       <div class="input-group">
         <div class="custom-file">
-          <%= form.file_field 'zip_file', class: "custom-file-input", accept: 'application/zip' %>
+          <%= form.file_field 'zip_file', class: "custom-file-input", id: "import-zip-input", accept: 'application/zip' %>
           <%= form.label '', nil, class: "custom-file-label" %>
         </div>
         <div class="input-group-append">

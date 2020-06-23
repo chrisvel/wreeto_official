@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # Imports
   get '/import', to: 'imports#wizard', as: 'import_wizard'
   post '/import', to: 'imports#import_zip', as: 'import_zip'
-  post '/show', to: 'imports#show', as: 'import_show'
+  get '/show', to: 'imports#show', as: 'import_show'
 
   if Rails.env.development?
     require 'sidekiq/web'

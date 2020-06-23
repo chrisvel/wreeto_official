@@ -1,8 +1,9 @@
 class DataImporterService
   attr_reader :fullpath
 
-  def initialize(user)
+  def initialize(user, zip_file)
     @user = user
+    @zip_file = zip_file
   end
 
   def run
@@ -11,7 +12,7 @@ class DataImporterService
     validate!
     persist_data
   rescue => e
-    raise StandardError, "#{e.msg}"
+    raise StandardError, "#{e.message}"
   end
 
   def zip_path
@@ -20,57 +21,90 @@ class DataImporterService
 
   private
 
-  # def categories
-  #   @categories ||= @user.categories
-  # end
+  def categories
+    @categories ||= @user.categories
+  end
 
-  # def securehash
-  #   @securehash ||= SecureRandom.hex(4)
-  # end
+  def notes
+    @notes ||= @user.notes
+  end
+
+  def securehash
+    @securehash ||= SecureRandom.hex(4)
+  end
 
   def create_dir
     @fullpath = "/tmp/wreeto_import_#{securehash}"
     Dir.mkdir @fullpath
   end
 
-  # def zip_filename
-  #   @zip_filename ||= "wreeto_export_#{securehash}.zip"
-  # end
-
-  def save_notes(category)
-    dir_name = ''
-    if category.parent_id.nil?
-      category_name = category.title.parameterize.underscore
-      dir_name = "#{@fullpath}/#{category_name}"
-    else
-      category_name = category.parent.title.parameterize.underscore
-      subcategory_name = category.title.parameterize.underscore
-      dir_name = "#{@fullpath}/#{category_name}/#{subcategory_name}"
-    end
-    FileUtils.mkdir_p dir_name unless Dir.exists? dir_name
-    Dir.chdir dir_name do
-      category.notes.each do |note|
-        filename = note.title.parameterize.underscore
-        File.open("./#{filename}.md", 'w'){|f| f.puts note.content }
-      end
-    end
+  def import_zip 
+    `unzip #{@zip_file.path} -d #{@fullpath}`
   end
 
-  def export_notes
-    categories.parents_ordered_by_title.each do |category|
-      save_notes(category)
-      if category.subcategories.any?
-        category.subcategories.ordered_by_title.each do |subcategory|
-            save_notes(subcategory)
+  def validate! 
+    Dir.chdir @fullpath do 
+      dir_names = Dir.glob('*').select {|f| File.directory? f}
+      dir_names.each do |dir| 
+        #categories.where(title: dir_names.first).exists?
+        Dir.chdir dir do 
+          return false if Dir.glob('*').any?{|f| File.file?(f) && !File.open(f).read.is_a?(String)}
         end
       end
     end
+    true
   end
 
-  def create_zip
-    Dir.chdir @fullpath do
-      dir_names = Dir.glob('*').select {|f| File.directory? f}
-      `zip -r #{zip_filename} #{dir_names.join(' ')}`
+  def find_or_create_category(dir)
+    category = categories.find_by(title: dir.humanize)
+    category = @categories.create!(title: dir.humanize) if category.nil?
+    category
+  end
+
+  def find_directories 
+    Dir.glob('*').select {|f| File.directory?(f)}
+  end
+
+  def find_files
+    Dir.glob('*').select{|f| File.file?(f)}
+  end
+
+  def persist_data
+    ActiveRecord::Base.transaction do
+      Dir.chdir @fullpath do 
+        dir_names = find_directories
+        dir_names.each do |dir| 
+          category = find_or_create_category(dir)
+          # filenames = find_files
+          # filenames.each do |filename|
+          #   title = Pathname(filename).sub_ext('').to_s.humanize
+          #   next if category.notes.where(title: title).exists?
+          #   notes.create!(title: title, content: File.open(filename).read, category: category)
+          # end
+
+          Dir.chdir dir do 
+            filenames = find_files
+            filenames.each do |filename|
+              title = Pathname(filename).sub_ext('').to_s.humanize
+              next if category.notes.where(title: title).exists?
+              notes.create!(title: title, content: File.open(filename).read, category: category)
+            end
+            subdir_names = find_directories
+            subdir_names.each do |subdir| 
+              Dir.chdir subdir do 
+                subcategory = categories.find_by(title: subdir.humanize)
+                subcategory = @categories.create!(title: subdir.humanize, parent: category) if subcategory.nil?
+                sub_filenames = find_files
+                sub_filenames.each do |sub_filename|
+                  title = Pathname(sub_filename).sub_ext('').to_s.humanize
+                  next if subcategory.notes.where(title: title).exists?
+                  notes.create!(title: title, content: File.open(sub_filename).read, category: subcategory)
+                end
+              end
+            end
+          end
+        end
+      end
     end
   end
 end
