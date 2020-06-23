@@ -75,13 +75,6 @@ class DataImporterService
         dir_names = find_directories
         dir_names.each do |dir| 
           category = find_or_create_category(dir)
-          # filenames = find_files
-          # filenames.each do |filename|
-          #   title = Pathname(filename).sub_ext('').to_s.humanize
-          #   next if category.notes.where(title: title).exists?
-          #   notes.create!(title: title, content: File.open(filename).read, category: category)
-          # end
-
           Dir.chdir dir do 
             filenames = find_files
             filenames.each do |filename|
