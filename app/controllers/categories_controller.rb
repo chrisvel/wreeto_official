@@ -57,7 +57,11 @@ class CategoriesController < ApplicationController
   def destroy
     respond_to do |format|
       if @category.deletable
-        @category.destroy
+        ActiveRecord::Base.transaction do
+          @category.notes.each{|nt| nt.taggings.destroy_all}
+          @category.notes.destroy_all
+          @category.destroy
+        end
         format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
         format.json { head :no_content }
       else
