@@ -1,15 +1,31 @@
 <div class="ui grid">
-  <div class="eight wide column">
+  <div class="twelve wide column">
     <h3>Import Wizard</h3>
-  </div>
-  <div class="right aligned eight wide column">
-
   </div>
 </div>
 <hr/>
-<br>
 
-<div class="card shadow-sm bordered p-4">
+<div class="card bg-warning text-dark mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Important information</h5>
+    <hr/>
+    <p class="card-text">
+      This is a simple notes importer service built in the application. 
+      Some rules to take into consideration: 
+      <ul>
+        <li>The only format that is accepted is <strong>.zip</strong></li>
+        <li>Only files with plain text content are allowed (e.g. .txt, .md)</li>
+        <li>As in the application, the directories will become the categories. This also happens for sub-directories and sub-categories</li>
+        <li>The name for the file will be the title of the note, for example <strong>this_is_something_to_remember.md</strong> will become <strong>This is something to remember</strong></li>
+        <li>Titles for categories, sub-categories and notes will be converted to downcase and first letter upcase (titleized)</li>
+        <li>Underscores will become spaces</li>
+        <li>Notes with duplicate titles will be ignored</li>
+      </ul>
+    </p>
+  </div>
+</div>
+
+<div class="card shadow-sm bordered px-4 pt-4 pb-2 mt-3">
   <%= form_with(model: @importer, url: import_zip_path, multipart: true, html: {class: "form"}) do |form| %>
     <div class="form-group">
       <div class="input-group">
@@ -24,9 +40,8 @@
 
       </div>
       <div id="emailHelp" class="form-text text-muted text-center">
-        <em>Import your zip file and add your notes to wreeto.</em>
+        <em>.zip files with two-level directories and text-only notes will be imported</em>
       </div>
-
     </div>
   <% end %>
 

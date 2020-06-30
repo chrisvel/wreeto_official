@@ -25,10 +25,10 @@
             <%= current_user.email %>
             <i class="dropdown icon"></i>
           </a>
-          <div class="dropdown-menu shadow nav-item pt-3 pb-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu shadow nav-item pt-3 pb-2 mr-3 text-center text-lg-left" aria-labelledby="navbarDropdown">
             <%= link_to 'Profile Settings', edit_user_registration_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
-            <%= link_to 'Import notes', import_zip_path,
+            <%= link_to 'Import notes (beta)', import_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Export notes', download_export_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>

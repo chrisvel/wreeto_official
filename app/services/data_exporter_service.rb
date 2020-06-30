@@ -1,4 +1,6 @@
 class DataExporterService
+  require 'open3'
+
   attr_reader :fullpath
 
   def initialize(user)
@@ -10,7 +12,7 @@ class DataExporterService
     export_notes
     create_zip
   rescue => e
-    raise StandardError, "#{e.msg}"
+    raise StandardError, "#{e.message}"
   end
 
   def zip_path
@@ -28,6 +30,7 @@ class DataExporterService
   end
 
   def create_dir
+    securehash = SecureRandom.hex(4)
     @fullpath = "/tmp/wreeto_export_#{securehash}"
     Dir.mkdir @fullpath
   end
@@ -69,7 +72,9 @@ class DataExporterService
   def create_zip
     Dir.chdir @fullpath do
       dir_names = Dir.glob('*').select {|f| File.directory? f}
-      `zip -r #{zip_filename} #{dir_names.join(' ')}`
+      command = ['/usr/bin/zip', '-r', zip_filename, dir_names.join(' ')].join(' ')
+      stdout, stderr, status = Open3.capture3(command, chdir: @fullpath)
+      raise StandardError, "Cannot create zip" unless status.success?
     end
   end
 end

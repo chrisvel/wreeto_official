@@ -99,6 +99,7 @@ input:focus, input.form-control:focus, button:focus{
     border-top: 1px solid #eee;
     border-radius: 0;
     right: 0;
+    min-width: 12rem !important;
   }
 }
 
