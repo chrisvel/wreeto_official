@@ -73,9 +73,9 @@ class DataImporterService
   end
 
   def is_not_a_note?(filename)
-    command = ['/usr/bin/file', '-Ib', filename].join(' ')
+    command = ['/usr/bin/file', '-ib', filename].join(' ')
     stdout, stderr, status = Open3.capture3(command, chdir: @fullpath)
-    return true if stdout.match(/text\/plain/).nil?
+    return true if stdout.match(/text\/plain|regular\sfile/).nil?
   end
 
   def find_or_create_category(dir)
