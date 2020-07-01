@@ -1,4 +1,6 @@
 class DataImporterService
+  require 'open3'
+  
   attr_reader :fullpath
 
   def initialize(user, zip_file)
