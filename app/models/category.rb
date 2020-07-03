@@ -25,7 +25,7 @@ class Category < ApplicationRecord
   belongs_to :parent, class_name: 'Category', optional: true
   belongs_to :user
 
-  validates :title, presence: true, allow_blank: false, uniqueness: true
+  validates :title, presence: true, allow_blank: false, uniqueness: {scope: :user_id}
   validates :parent, presence: true, allow_blank: true
 
   scope :ordered_by_title, -> { order('title ASC') }
