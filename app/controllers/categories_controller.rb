@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    category_notes = @category.notes
+    category_notes = @category.notes.favorites_order
     subcategories_notes = @category.subcategories_notes
     @all_notes = category_notes + subcategories_notes
   end

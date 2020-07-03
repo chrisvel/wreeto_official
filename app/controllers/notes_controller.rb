@@ -11,18 +11,18 @@ class NotesController < ApplicationController
     @total_notes = current_user.notes.count
 
     if params[:search].present?
-      @notes = current_user.notes.search(params[:search]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      @notes = current_user.notes.search(params[:search]).favorites_order.page params[:page]
       @filter = 'search'
     elsif params[:category].present?
-      @notes = current_user.notes.for_category(params[:category]).order(favorite: :desc, updated_at: :desc).page params[:page]
+      @notes = current_user.notes.for_category(params[:category]).favorites_order.page params[:page]
       @filter = 'category'
     elsif params[:tag].present?
       notes = current_user.notes.tagged_with(params[:tag], current_user.id)
-      @notes = notes.order(favorite: :desc, updated_at: :desc).page params[:page] if notes.any? 
+      @notes = notes.favorites_order.page params[:page] if notes.any? 
       @filter = 'tag'
       @tag_name = params[:tag]
     else 
-      @notes = current_user.notes.order(favorite: :desc, updated_at: :desc).page params[:page]
+      @notes = current_user.notes.favorites_order.page params[:page]
     end
   end
 

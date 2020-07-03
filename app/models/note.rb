@@ -25,6 +25,7 @@ class Note < ApplicationRecord
     where("lower(title) LIKE ?", "%#{sanitize_sql_like(query.downcase)}%") 
   end
   scope :favorites, -> { where(favorite: true) }
+  scope :favorites_order, -> { order('(case when favorite then 1 else 0 end) DESC, updated_at DESC') }
 
   def self.search(query)
     where("title like ? or content like ?", "%#{query}%", "%#{query}%")
