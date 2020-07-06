@@ -8,7 +8,7 @@ Wreeto is an open source note-taking, knowledge management and wiki system built
 
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
-### Current version: _v2.2.7_
+### Current version: _v2.3.1_
 
 ## Table of Contents 
 1. [Features](#features)
@@ -82,7 +82,7 @@ OAUTH_GOOGLE_SECRET=
 POSTGRES_HOST=postgres
 POSTGRES_USER=wreeto_admin
 POSTGRES_PASSWORD=wreeto_password
-POSTGRES_DB=wreeto_dev
+POSTGRES_DB=wreeto_db
 POSTGRES_PORT=5432
 RACK_ENV=development
 RAILS_ENV=development

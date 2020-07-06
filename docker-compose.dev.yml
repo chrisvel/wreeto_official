@@ -19,7 +19,5 @@ services:
       - postgres
       - redis
     env_file: .env
-    environment:
-      RAILS_ENV: 'development'
   redis:
     image: redis:5.0.7
