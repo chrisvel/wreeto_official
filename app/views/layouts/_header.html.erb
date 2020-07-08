@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg navbar-light fixed-top static-top bg-white p-2 wt-navbar">
+<header class="navbar navbar-expand-lg navbar-light fixed-top static-top bg-white p-2 wt-navbar text-center">
   <div class="navbar-brand col-2 text-lg-center logo-item">
     <%= link_to 'wreeto', base_url, class: "logo text-dark", data: { turbolinks: false } %>
   </div>
@@ -19,13 +19,13 @@
         <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
           <%= link_to "Wiki", wiki_path, class: "nav-link text-center", data: { turbolinks: false } %>
         </li>
-        <li class="nav-item dropdown py-1 py-md-0">
-          <a class="nav-link dropdown-toggle text-center text-lg-left pl-sm-2 mt-sm-2" href="#" id="navbarDropdown"
+        <li class="dropdown py-1 py-md-0">
+          <a class="nav-link dropdown-toggle pl-sm-2 mt-sm-2 mr-3" href="#" id="navbarDropdown"
               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <%= current_user.email %>
             <i class="dropdown icon"></i>
           </a>
-          <div class="dropdown-menu shadow nav-item pt-3 pb-2 mr-3 text-center text-lg-left" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu dropdown-menu-right shadow-sm pt-3 pb-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
             <%= link_to 'Profile Settings', edit_user_registration_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Import notes (beta)', import_zip_path,
