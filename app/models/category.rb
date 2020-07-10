@@ -58,7 +58,15 @@ class Category < ApplicationRecord
   end
 
   def is_a_project?
-    self.parent_id.present? && parent.title == 'Projects'
+    self.parent_id.present? && parent.slug == 'projects' && parent.title == 'Projects'
+  end
+
+  def projects? 
+    slug == 'projects' && title == 'Projects'
+  end
+
+  def to_param
+    self.slug
   end
 
   private

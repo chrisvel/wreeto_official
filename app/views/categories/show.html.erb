@@ -5,13 +5,13 @@
   </div>
   <div class="d-block d-md-none col-12 col-md-6 text-center mt-3">
     <%= link_to '<i class="fa far fa-sticky-note"></i>'.html_safe,
-          new_note_path(params: {category_id: @category.id}),
+          new_note_path(params: {category_slug: @category.slug}),
           class: "btn btn-sm btn-purple",
           data: { turbolinks: false }
           %>
     <% if @category.parent_id.nil? %>
       <%= link_to '<i class="fa fa-folder"></i>'.html_safe,
-              new_category_path(params: {parent_id: @category.id}),
+              new_category_path(params: {parent_slug: @category.slug}),
               class: "btn btn-sm btn-outline-purple",
               data: { turbolinks: false }
               %>
@@ -22,18 +22,18 @@
   </div>
   <div class="d-none d-md-block col-12 col-md-6 text-right">
     <%= link_to 'Create Note',
-          new_note_path(params: {category_id: @category.id}),
+          new_note_path(params: {category_slug: @category.slug}),
           class: "btn btn-sm btn-purple",
           data: { turbolinks: false }
           %>
     <% if @category.parent_id.nil? %>
       <%= link_to 'Create Subcategory',
-              new_category_path(params: {parent_id: @category.id}),
+              new_category_path(params: {parent_slug: @category.slug}),
               class: "btn btn-sm btn-outline-purple",
               data: { turbolinks: false }
               %>
     <% end %>
-    <%= link_to 'EDIT', edit_category_path(@category),
+    <%= link_to 'EDIT', edit_category_path(@category.slug),
       class: "btn btn-sm btn-warning", data: { turbolinks: false } %>
     <%= link_to 'BACK', :back, class: "btn btn-sm btn-secondary"  %>
   </div>
@@ -44,7 +44,7 @@
 <% if @category.subcategories.any? %>
   <div class="mb-3">
     <% @category.subcategories.sort_by(&:title).each do |subcategory| %>
-      <%= link_to subcategory.title, subcategory, class: "badge badge-purple-outline mb-1", data: { turbolinks: false } %>
+      <%= link_to subcategory.title, category_path(subcategory.slug), class: "badge badge-purple-outline mb-1", data: { turbolinks: false } %>
     <% end %>
   </div>
 <% end %>

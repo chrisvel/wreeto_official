@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     passwords: "passwords",
     omniauth_callbacks: "omniauth_callbacks" }
 
-  resources :categories
+  resources :categories, param: :slug
   resources :tags, param: :name
 
   get '/wiki', to: 'categories#wiki'

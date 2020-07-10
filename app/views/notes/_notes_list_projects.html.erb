@@ -1,0 +1,41 @@
+<div class="card rounded-lg pr-4 py-0 mb-2 <%= project.active? ? 'border-left-active' : 'border-left-inactive' %>">
+  <div class="card-body">
+    <h5 class="card-title"><%= link_to project.title, category_path(project.slug), class: "link-purple", data: { turbolinks: false } %></h5>
+    <h6 class="card-subtitle mb-0 text-muted"><small><%= project.description %></small></h6>
+    <hr/>
+    <table id="notes-table" class="ui very basic table mb-0 ml-3">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% notes.each do |item| %>
+          <tr>
+            <td class="px-0 py-1">
+              <% if item.favorite %>
+                <i class="fa fa-star text-warning fa-fw mr-1" style="margin-left: -26px;"></i>
+              <% else %>
+              <% end %>
+              <%= link_to item.title,
+                    note_path(item.guid),
+                    class: 'note-item link-purple mr-3',
+                    data: { turbolinks: false }
+                    %>
+              <div class="col-md-12 pl-0 ml-0">
+                <% if item.is_public? %>
+                  <span class='badge badge-success prl-2'><i class="fa fa-globe text-white fa-fw"></i> Public</span>
+                <% end %>
+                <%= tag_links(item) %>
+              </div>
+            </td>
+            <td class="text-right py-1">
+              <%= "#{distance_of_time_in_words(Time.now, item.updated_at)}" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
+  </div>
+</div>

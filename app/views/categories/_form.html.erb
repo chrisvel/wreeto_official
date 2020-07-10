@@ -1,4 +1,4 @@
-<%= form_for(@category, html: { class: "form "} ) do |f| %>
+<%= form_with(model: @category, html: { class: "form", novalidate: true} ) do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="form-group">
@@ -15,19 +15,21 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :parent_id %>
-    <%= f.collection_select :parent_id,
-        @parent_categories,
-        :id,
-        :title,
-        {include_blank: 'None'},
-        {
-          id: "form-parent-select",
-          class: 'form-control selectpicker show-tick',
-          data: {live_search: "true", width: '100%'}
-        } %>
-  </div>
+  <% unless @category.parent.projects? %>
+    <div class="form-group">
+      <%= f.label :parent_id %>
+      <%= f.collection_select :parent_id,
+          @parent_categories,
+          :id,
+          :title,
+          {include_blank: 'None'},
+          {
+            id: "form-parent-select",
+            class: 'form-control selectpicker show-tick',
+            data: {live_search: "true", width: '100%'}
+          } %>
+    </div>
+    <% end %>
 
   <div class="form-group">
     <%= f.label :description %>
