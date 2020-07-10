@@ -6,7 +6,7 @@
     <%= f.text_field :title, class: 'form-control form-control-lg' %>
   </div>
 
-  <% if @category.is_a_project? %>
+  <% if @category.id && @category.is_a_project? %>
     <div class="form-group">
       <div class="ui checkbox">
         <%= f.check_box :active %>
@@ -15,7 +15,7 @@
     </div>
   <% end %>
 
-  <% unless @category.parent.projects? %>
+  <% unless @category.parent && @category.parent.projects? %>
     <div class="form-group">
       <%= f.label :parent_id %>
       <%= f.collection_select :parent_id,
