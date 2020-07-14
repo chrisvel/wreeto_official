@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col-5">
         <% if @category.id %>
-          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+          <%= link_to 'DELETE',
                       "#",
                       class: "btn btn-sm btn-danger",
                       data: { toggle: "modal", target: "#delete-#{@category.id}", turbolinks: false }

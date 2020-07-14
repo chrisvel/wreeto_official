@@ -36,12 +36,15 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    
     @category = current_user.categories.new(category_params)
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        if @category.parent.projects?
+          format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully created.' }
+        else 
+          format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -53,7 +56,11 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to category_path(@category.slug), notice: 'Category was successfully updated.' }
+        if @category.parent.projects?
+          format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully updated.' }
+        else 
+          format.html { redirect_to category_path(@category.slug), notice: 'Category was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -70,7 +77,11 @@ class CategoriesController < ApplicationController
           @category.notes.destroy_all
           @category.destroy
         end
-        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+        if @category.parent.projects?
+          format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully destroyed.' }
+        else 
+          format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+        end
         format.json { head :no_content }
       else
         format.html { redirect_to @category, status: 422 }

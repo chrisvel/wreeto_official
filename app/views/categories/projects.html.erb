@@ -17,14 +17,12 @@
     <% if @category.parent_id.nil? %>
       <%= link_to 'Create a new project',
               new_category_path(params: {parent_slug: @category.slug}),
-              class: "btn btn-sm btn-outline-purple",
+              class: "btn btn-sm btn-purple",
               data: { turbolinks: false }
               %>
     <% end %>
-    <%= link_to 'BACK', :back, class: "btn btn-sm btn-secondary"  %>
   </div>
 </div>
-
 <hr/>
 
 <% if @category.subcategories.any? %>
