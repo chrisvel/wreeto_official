@@ -6,11 +6,9 @@
     <%= add_category_button %>
   </div>
 </div>
-
 <hr/>
-<br>
 
-<div class="card border rounded-lg shadow-sm p-5">
+<div class="card border rounded-lg shadow-sm px-5 py-4">
   <table class="table">
     <thead>
     </thead>
@@ -18,7 +16,7 @@
       <% @categories.each do |category| %>
         <tr>
           <td>
-              <%= link_to category.full_title, category, data: { turbolinks: false }, class: "category-link link-purple" %>
+              <%= link_to category.full_title, category_path(category.slug), data: { turbolinks: false }, class: "category-link link-purple" %>
               <% if category.items_amount > 0 %>
                 <span class="category-amount">(<%= category.items_amount %>)</span>
               <% end %>
@@ -34,7 +32,7 @@
                       <% else %>
                         <i class="fa fa-folder fa-fw text-purple"></i>
                       <% end %>
-                      <%= link_to cat.title, cat, data: { turbolinks: false }, class: 'subcategory-link link-purple' %>
+                      <%= link_to cat.title, category_path(cat.slug), data: { turbolinks: false }, class: 'subcategory-link link-purple' %>
                       <% if cat.items_amount > 0 %>
                         <span class="category-amount">(<%= cat.items_amount %>)</span>
                       <% end %>

@@ -30,8 +30,10 @@ class NotesController < ApplicationController
   end
 
   def new
-    if params[:category_id]
-      @note = current_user.notes.new(category_id: params[:category_id])
+    if params[:category_slug]
+      category_slug = params[:category_slug]
+      category = current_user.categories.find_by_slug(category_slug)
+      @note = current_user.notes.new(category_id: category.id)
     else
       @note = current_user.notes.new(category_id: current_user.categories.find_by(title: 'Uncategorized').id)
     end
@@ -143,7 +145,6 @@ class NotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_note
       @note = current_user.notes.find_by_guid(params[:guid])
     end
@@ -160,7 +161,6 @@ class NotesController < ApplicationController
       @tags = current_user.tags.order(:name)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
       params.fetch(:note, {})
             .permit(

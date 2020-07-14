@@ -29,10 +29,12 @@
               <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
             </div>
 
-            <%= flash[:recaptcha_error] %>
-            <div class="form-group">
-              <%= recaptcha_tags %>
-            </div>
+            <% if ENV['RECAPTCHA_ENABLED'] == 'yes' %>
+              <%= flash[:recaptcha_error] %>
+              <div class="form-group">
+                <%= recaptcha_tags %>
+              </div>
+            <% end %>
 
             <div class="actions text-center">
               <%= f.button "SIGNUP WITH A WREETO ACCOUNT", type: 'submit', class: "btn btn-sm btn-purple" %>

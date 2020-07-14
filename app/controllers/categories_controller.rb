@@ -13,19 +13,26 @@ class CategoriesController < ApplicationController
 
   def show
     category_notes = @category.notes.favorites_order
-    subcategories_notes = @category.subcategories_notes
-    @all_notes = category_notes + subcategories_notes
+      subcategories_notes = @category.subcategories_notes
+      @all_notes = category_notes + subcategories_notes
+    if @category.projects? 
+      respond_to {|format| format.html { render :projects }}
+    else 
+      respond_to {|format| format.html { render :show }}
+    end
   end
 
   def new
-    if params[:parent_id]
-      @category = current_user.categories.new(parent_id: params[:parent_id])
+    if params[:parent_slug]
+      parent_id = current_user.categories.find_by_slug(params[:parent_slug]).id
+      @category = current_user.categories.new(parent_id: parent_id)
     else
       @category = current_user.categories.new
     end
   end
 
   def edit
+    raise StandardError if @category.projects? 
   end
 
   def create
@@ -45,7 +52,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { redirect_to category_path(@category.slug), notice: 'Category was successfully updated.' }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -73,7 +80,7 @@ class CategoriesController < ApplicationController
 
   private
     def set_category
-      @category = current_user.categories.find(params[:id])
+      @category = current_user.categories.find_by_slug(params[:slug])
     end
 
     def set_parent_categories

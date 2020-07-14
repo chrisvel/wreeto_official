@@ -23,7 +23,7 @@
               <% end %>
               <% if notes_list || @category != item.category %>
                 <%= link_to "<span class='badge badge-light'>#{item.category.title}</span>".html_safe,
-                    item.category,
+                    category_path(item.category.slug),
                     data: { turbolinks: false }
                     %>
               <% end %>

@@ -1,3 +1,5 @@
+@import 'colors';
+
 a.category-link{
   font-size: 1.2rem;
 }
@@ -20,4 +22,12 @@ a.category-link{
       line-height: 1.8rem;
     }
   }
+}
+
+.border-left-active{
+  border-left: 2px solid $purple-dark !important;
+}
+
+.border-left-inactive{
+  border-left: 2px solid #aaaaaa !important;
 }
