@@ -30,11 +30,7 @@
 <% if @category.subcategories.any? %>
   <div class="mb-2">
     <% @category.subcategories.ordered_by_active.ordered_by_title.each do |subcategory| %>
-      <% if subcategory.notes.any? %>
-        <%= render partial: 'notes/notes_list_projects', locals: {project: subcategory, notes: subcategory.notes} %>
-      <% else %>
-        <%= blank_slate(:notes) %>
-      <% end %>
+      <%= render partial: 'notes/notes_list_projects', locals: {project: subcategory, notes: subcategory.notes} %>
     <% end %>
   </div>
 <% end %>

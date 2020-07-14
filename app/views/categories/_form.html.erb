@@ -15,7 +15,9 @@
     </div>
   <% end %>
 
-  <% unless @category.parent && @category.parent.projects? %>
+  <% if @category.parent && @category.parent.projects? %>
+    <%= f.hidden_field :parent_id, value: @category.parent.id %>
+  <% else %>
     <div class="form-group">
       <%= f.label :parent_id %>
       <%= f.collection_select :parent_id,

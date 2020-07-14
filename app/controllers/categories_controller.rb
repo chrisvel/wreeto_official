@@ -36,6 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
+    
     @category = current_user.categories.new(category_params)
 
     respond_to do |format|
