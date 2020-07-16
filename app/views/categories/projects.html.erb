@@ -15,7 +15,7 @@
   </div>
   <div class="d-none d-md-block col-12 col-md-6 text-right">
     <% if @category.parent_id.nil? %>
-      <%= link_to 'Create a new project',
+      <%= link_to 'Create new project',
               new_category_path(params: {parent_slug: @category.slug}),
               class: "btn btn-sm btn-purple",
               data: { turbolinks: false }

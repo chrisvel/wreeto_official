@@ -6,14 +6,12 @@
     <%= f.text_field :title, class: 'form-control form-control-lg' %>
   </div>
 
-  <% if @category.id && @category.is_a_project? %>
-    <div class="form-group">
-      <div class="ui checkbox">
-        <%= f.check_box :active %>
-        <%= f.label :active %>
-      </div>
+  <div class="form-group">
+    <div class="ui checkbox">
+      <%= f.check_box :active %>
+      <%= f.label :active %>
     </div>
-  <% end %>
+  </div>
 
   <% if @category.parent && @category.parent.projects? %>
     <%= f.hidden_field :parent_id, value: @category.parent.id %>
@@ -35,7 +33,7 @@
 
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control relaxed' %>
+    <%= f.text_area :description, class: 'form-control relaxed textarea-category' %>
   </div>
 
   <div class="actions">
@@ -51,7 +49,7 @@
         <% end %>
       </div>
       <div class="col-7 text-right">
-        <%= link_to 'BACK', categories_path, class: "btn btn-sm btn-secondary" %>
+        <%# link_to 'BACK', categories_path, class: "btn btn-sm btn-secondary" %>
         <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
       </div>
     </div>
