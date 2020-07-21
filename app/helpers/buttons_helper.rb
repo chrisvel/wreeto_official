@@ -1,11 +1,4 @@
 module ButtonsHelper
-  def back_button
-    link_to 'BACK',
-      :back,
-      class: "btn btn-sm btn-light",
-      data: { turbolinks: false }
-  end
-
   def add_note_button
     link_to 'ADD A NEW NOTE',
     new_note_path,
