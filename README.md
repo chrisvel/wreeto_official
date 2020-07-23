@@ -16,9 +16,10 @@ Initially this was built because I didn't like the note-taking apps out there an
 3. [Requirements](#requirements)
 4. [Installation](#installation)
 5. [Usage](#usage) 
-6. [Screenshots](#screenshots) 
-7. [License](#license) 
-8. [Professional edition](#professional-edition)
+6. [How can you help](#how-can-you-help)
+7. [Screenshots](#screenshots) 
+8. [License](#license) 
+9. [Professional edition](#professional-edition)
 
 ## <a name="features"></a> 1. Features 
 
@@ -26,6 +27,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Create unlimited notes with Markdown format
 - Unlimited Categories
 - Unlimited Tags (**new!**)
+- Unlimited Projects (**new!**)
 - List notes by Category or SubCategory
 - Favorite notes appear on the top of the notes list and sidebar
 - Authentication, authorization 
@@ -47,6 +49,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Different Levels of security access for users
 - User access control
 - Dark mode
+- Quick notes that auto-expire 
 - Export notes to PDF format
 - Cloud backups
 - Version tracking
@@ -147,7 +150,16 @@ To access the web application with default settings (hostname/port) please go to
 http://localhost:8383
 ```
 
-## <a name="screenshots"></a> 6. Screenshots
+## <a name="how-can-you-help"></a> 6. How can you help
+
+There are several ways you can help with wreeto:  
+
+1. Try **wreeto** and send your feedback, comments or suggestions.
+2. Clone the repo, develo and create a _Pull Request_
+3. Spread the word about **wreeto** to your friends and your community. This is the way the project breaths and grows.  
+4. Sponsor my through Github sponsors or donate to **Paypal:** [paypal.me/wreeto](https://paypal.me/wreeto)
+
+## <a name="screenshots"></a> 7. Screenshots
 
 #### Login
 ![Screenshot Running Command](/public/screenshots/scr_1.png?raw=true)
@@ -176,10 +188,10 @@ http://localhost:8383
 #### Search
 ![Screenshot Running Command](/public/screenshots/scr_9.png?raw=true)
 
-## <a name="license"></a> 7. License
+## <a name="license"></a> 8. License
 
 AGPLv3 License for the community version 
 
-## <a name="professional-edition"></a> 8. Professional edition 
+## <a name="professional-edition"></a> 9. Professional edition 
 
 There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com for more details (currently updating).
