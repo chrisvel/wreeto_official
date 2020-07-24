@@ -38,13 +38,11 @@ class User < ApplicationRecord
          :trackable,
          :validatable,
          :confirmable,
-         :database_authenticatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :database_authenticatable
 
   after_create :setup_default_categories
   after_create :send_email_to_admin
 
-  # has_many :items, dependent: :destroy
   has_many :notes, class_name: "Note", dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :tags, dependent: :destroy
@@ -61,50 +59,7 @@ class User < ApplicationRecord
     SignUpNotifyMailer.with(user: self).user_signed_up.deliver_later
   end
 
-  def send_thank_you_sign_up_mail
-    SocialLoginMailer.with(user: self).thank_you_sign_up.deliver_later
-  end
-
-  def signed_up_type
-    if self.token.blank?
-      'wreeto'
-    else
-      'google'
-    end
-  end
-
-  def thoughts_category
-    self.categories.find_by(slug: 'thoughts')
-  end
-
-  def ideas_category
-    self.categories.find_by(slug: 'ideas')
-  end
-
   def owner_of?(resource)
     self == resource.user
-  end
-
-  def is_admin?
-    self.email == 'chrisveleris@gmail.com'
-  end
-
-  def self.from_omniauth(access_token)
-    data = access_token.info
-    user = User.where(email: data['email']).first
-    unless user
-      user = User.new(
-        email: data['email'],
-        password: Devise.friendly_token[0,20],
-        token: access_token.credentials.token,
-        expires: access_token.credentials.expires,
-        expires_at: access_token.credentials.expires_at,
-        refresh_token: access_token.credentials.refresh_token
-      )
-      user.skip_confirmation!
-      user.save!
-      user.send_thank_you_sign_up_mail
-    end
-    user
   end
 end
