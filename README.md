@@ -157,7 +157,7 @@ There are several ways you can help with wreeto:
 1. Try **wreeto** and send your feedback, comments or suggestions.
 2. Clone the repo, develo and create a _Pull Request_
 3. Spread the word about **wreeto** to your friends and your community. This is the way the project breaths and grows.  
-4. Sponsor my through Github sponsors or donate to **Paypal:** [paypal.me/wreeto](https://paypal.me/wreeto)
+4. Sponsor me through Github sponsors or donate to **Paypal:** [paypal.me/wreeto](https://paypal.me/wreeto)
 
 ## <a name="screenshots"></a> 7. Screenshots
 
