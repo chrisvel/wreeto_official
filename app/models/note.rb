@@ -11,6 +11,7 @@ class Note < ApplicationRecord
   belongs_to :category   
   has_many :taggings 
   has_many :tags, through: :taggings, validate: false
+  has_many_attached :attachments
   belongs_to :user
 
   # Validations
