@@ -8,7 +8,7 @@ Wreeto is an open source note-taking, knowledge management and wiki system built
 
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
-### Current version: _v2.4.4_
+### Current version: _v2.5.1_
 
 ## Table of Contents 
 1. [Features](#features)
@@ -130,14 +130,14 @@ Do not forget to create the `.env` file.
 
 ### 5.1 Default account 
 
-The default credentials are: username `user@email.com` and password `password`.
+The default credentials are: username `admin` and password `password`.
 
 ### 5.2 Create a new account (rails console)
 
 You can create another account from the Rails console by running `bundle exec rails console` or `docker-compose run app bundle exec rails console` and then
 
 ```
-User.create!({firstname: 'John', lastname: 'Murdock', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
+User.create!({username: 'admin', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
 ```
 
 by changing the values as you wish, then `exit`. 

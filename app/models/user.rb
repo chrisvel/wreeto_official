@@ -47,6 +47,9 @@ class User < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :tags, dependent: :destroy
 
+  validates :email, uniqueness: true
+  validates :username, uniqueness: true
+
   def setup_default_categories
     Category.create!(title: 'Personal',      deletable: true,  user_id: self.id)
     Category.create!(title: 'Projects',      deletable: false, user_id: self.id)
