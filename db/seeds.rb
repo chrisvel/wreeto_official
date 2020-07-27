@@ -1,3 +1,2 @@
-# Basic test stuff
-puts "=> Creating default user [user@email.com:password]"
-User.create!({firstname: 'John', lastname: "Johnnson", email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})
+puts "=> Creating default user [admin:password]"
+User.create!({username: 'admin', email: 'user@email.com', password: 'password', confirmed_at: DateTime.now})

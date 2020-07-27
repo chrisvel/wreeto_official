@@ -72,10 +72,7 @@ class Category < ApplicationRecord
   private
 
   def set_slug
-    # loop do
-      self.slug = title.parameterize
-      # break unless Category.where(slug: slug, user: user).exists?
-    # end
+    self.slug = title.parameterize
   end
 
   def protect_unchangeables

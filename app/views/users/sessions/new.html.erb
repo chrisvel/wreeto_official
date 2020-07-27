@@ -11,12 +11,9 @@
 
       <div class="card bordered shadow-sm">
         <div class="card-body">
-          <h5 class="text-center">Log in with wreeto</h5>
-          <br>
-
           <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            <%= f.label :username %><br />
+            <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
           </div>
 
           <div class="form-group">
@@ -34,23 +31,8 @@
           <% end %>
 
           <div class="text-center">
-            <%= f.button "CONTINUE", type: 'submit', class: "btn btn-sm btn-dark mb-2" %>
+            <%= f.button "LOG IN", type: 'submit', class: "btn btn-block btn-dark mb-2" %>
           </div>
-
-          <div class="text-center text-secondary py-4">OR</div>
-
-          <div class="text-center pb-2">
-            <%= link_to '<i class="fa fa-2x fa-fw fa-google align-middle"></i> Sign In with Google'.html_safe,
-                  user_google_oauth2_omniauth_authorize_path,
-                  class: 'btn btn-sm btn-primary text-center align-middle' %>
-          </div>
-
-          <hr/>
-
-          <div class="text-right">
-            <%= link_to 'Sign Up for an account', new_user_registration_path, class: "ml-1 stext-right" %>
-          </div>
-
         </div>
       </div>
     <% end %>
