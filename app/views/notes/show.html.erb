@@ -58,12 +58,30 @@
   </div>
 </div>
 
-<div class="mt-2 p-4">
-  <% @note.attachments.each do |att| %>
-    <%# link_to 'A', url_for(att), target: "_blank" %>
-    <%= link_to att.filename.to_s, url_for(att), target: "_blank" %><br>
-  <% end %>
-</div>
+<% if @note.attachments.any? %>
+  <div class="mt-2">
+    <div class="row">
+      <% @note.attachments.each do |att| %>
+        <div class="col-md-12">
+          <div class="card bordered rounded-lg shadow-sm bg-white mt-2 mr-0 px-3 py-3">
+            <div>
+              <div class="text-soft d-inline-block" style="width: 30px;">
+                <%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
+              </div>
+              <%= link_to att.filename.to_s, url_for(att), target: "_blank", class: 'link-purple ml-2' %>
+              <%# image_tag att.preview(resize_to_limit: [100, 100]) if att.previewable? %>
+              <div class="float-right">
+                <%= link_to "<i class='fa fas fa-download ml-2' style='font-size: 18px;'></i>".html_safe,
+                  rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <hr />
+<% end %>
 
 <div class="note-content border rounded-lg shadow-sm bg-white mt-2 p-4">
   <%= markdown(@note.content) %>

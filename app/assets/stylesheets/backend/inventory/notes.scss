@@ -77,6 +77,10 @@ textarea.relaxed{
   z-index: 1009 !important;
 }
 
+.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-focused{
+  border: 1px solid $purple-dark;
+}
+
 .editor-toolbar {
   border-color: #ddd;
 }
@@ -84,4 +88,16 @@ textarea.relaxed{
 // Select2
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background-color: $purple !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border: 1px solid #ced4da !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+  border: 1px solid $purple-dark !important;
+}
+
+.select2-dropdown{
+  border: 1px solid $purple-dark !important;
 }

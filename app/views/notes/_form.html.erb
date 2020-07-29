@@ -1,70 +1,97 @@
 <%= form_with(model: @note, html: { class: 'form', novalidate: true }) do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
-  <div class="form-group mb-4">
-    <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Untitled note' %>
-  </div>
+  <div class="card shadow-sm bordered p-4">
+    <div class="form-group mb-4">
+      <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Untitled note' %>
+    </div>
 
-  <div class="form-group mb-4">
-    <%= f.collection_select :tag_list, @tags, :id, :name, {selected: @note.tag_list.ids},
-          {
-            id: "form-category-select",
-            class: 'form-control tag-picker',
-            multiple: true
-          } %>
-  </div>
+    <div class="form-group mb-4">
+      <%= f.collection_select :tag_list, @tags, :id, :name, {selected: @note.tag_list.ids},
+            {
+              id: "form-category-select",
+              class: 'form-control tag-picker',
+              multiple: true
+            } %>
+    </div>
 
-  <div class="form-group mb-4">
-    <%= f.text_area :content, size: "30x20", id: 'note-content' %>
-  </div>
+    <div class="form-group mb-4">
+      <%= f.text_area :content, size: "30x20", id: 'note-content' %>
+    </div>
 
-  <div class="form-group mb-4">
-    <div class="pretty p-icon p-default p-round p-smooth p-fill">
-      <%= f.check_box :favorite %>
-      <div class="state p-warning">
-        <i class="icon fa fa-check"></i>
-        <%= f.label :favorite %>
+    <div class="form-group mb-4">
+      <div class="pretty p-icon p-default p-round p-smooth p-fill">
+        <%= f.check_box :favorite %>
+        <div class="state p-warning">
+          <i class="icon fa fa-check"></i>
+          <%= f.label :favorite %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-row mb-4">
-    <div class="col-12 col-lg-6">
-      <div class="form-group">
-        <%= f.label :category_id %>
-        <%= f.collection_select :category_id, @categories, :id, :full_title, {},
-          {
-            id: "form-category-select",
-            class: 'form-control selectpicker show-tick',
-            data: {live_search: "true", width: '100%'}
-          } %>
+    <div class="form-row">
+      <div class="col-12 col-lg-6">
+        <div class="form-group">
+          <%= f.label :category_id %>
+          <%= f.collection_select :category_id, @categories, :id, :title, {},
+            {
+              id: "form-category-select",
+              class: 'form-control selectpicker show-tick',
+              data: {live_search: "true", width: '100%'}
+            } %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="form-row mb-4">
-    <div class="col-12 col-lg-6">
-      <div class="form-group">
-        <%= f.label :attachments %>
-        <%= f.file_field :attachments, multiple: true %>
-      </div>
-    </div>
-  </div>
-
-  <div class="actions">
-    <div class="row">
-      <div class="col-5">
-        <% if @note.id %>
-          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
-                      "#",
-                      class: "btn btn-sm btn-danger",
-                      data: { toggle: "modal", target: "#delete-#{@note.id}", turbolinks: false }
-                      %>
-          <%= render partial: 'delete_modal' %>
+    <% if @note.attachments.any? %>
+    <hr />
+      <h6 class="mt-2 text-bold">ATTACHMENTS</h6>
+      <div class="form-row mb-4">
+        <% @note.attachments.each do |att| %>
+          <div class="col-md-12">
+            <div class="card bordered rounded-lg bg-white mt-2 mr-0 px-3 py-3">
+              <div>
+                <div class="text-soft d-inline-block" style="width: 30px;">
+                  <%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
+                </div>
+                <%= link_to att.filename.to_s, url_for(att), target: "_blank", class: 'link-purple ml-2' %>
+                <%# image_tag att.preview(resize_to_limit: [100, 100]) if att.previewable? %>
+                <div class="float-right">
+                  <%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
+                    rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2' %>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
-      <div class="col-7 text-right">
-        <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+      <div class="form-row">
+        <div class="col-12 col-lg-6">
+          <div class="form-group">
+            <%# f.label :attachments %>
+            Add one or multiple attachments:  <br/><br/>
+            <%= f.file_field :attachments, multiple: true %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <hr />
+    <div class="actions">
+      <div class="row">
+        <div class="col-5">
+          <% if @note.id %>
+            <%= link_to 'DELETE NOTE',
+                        "#",
+                        class: "btn btn-sm btn-outline-danger",
+                        data: { toggle: "modal", target: "#delete-#{@note.id}", turbolinks: false }
+                        %>
+            <%= render partial: 'delete_modal' %>
+          <% end %>
+        </div>
+        <div class="col-7 text-right">
+          <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+        </div>
       </div>
     </div>
   </div>
