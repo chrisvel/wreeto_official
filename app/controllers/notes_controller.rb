@@ -171,7 +171,8 @@ class NotesController < ApplicationController
               :category_id, 
               :guid, 
               :tag_list, 
-              tag_list: [])
+              tag_list: [],
+              attachments: [])
     end
 
     def public_note_params

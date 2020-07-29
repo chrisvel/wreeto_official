@@ -58,6 +58,13 @@
   </div>
 </div>
 
+<div class="mt-2 p-4">
+  <% @note.attachments.each do |att| %>
+    <%# link_to 'A', url_for(att), target: "_blank" %>
+    <%= link_to att.filename.to_s, url_for(att), target: "_blank" %><br>
+  <% end %>
+</div>
+
 <div class="note-content border rounded-lg shadow-sm bg-white mt-2 p-4">
   <%= markdown(@note.content) %>
 </div>

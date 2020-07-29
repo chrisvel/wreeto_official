@@ -13,8 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    flash[:alert] = "Error 404: Page not found"
-    redirect_to notes_path
+    raise ActionController::RoutingError.new('Not Found')
+  rescue
+    render_404
+  end
+
+  def render_404
+    render file: "#{Rails.root}/public/404", status: :not_found
   end
 
   protected
