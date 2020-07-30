@@ -1,3 +1,0 @@
-$(function(){
-    $("#items-table").tablesorter();
-});

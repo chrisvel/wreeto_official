@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :notes, param: :guid do
     get '/make_public', to: 'notes#make_public', on: :member
     get '/make_private', to: 'notes#make_private', on: :member
+    delete '/attachment/:id', to: 'notes#delete_attachment', on: :member, as: :delete_attachment
   end
 
   get '/public/:guid', to: 'notes#public', params: :guid, as: :public_note
