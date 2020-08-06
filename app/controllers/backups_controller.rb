@@ -9,7 +9,10 @@ class BackupsController < ApplicationController
 	def start 
 		service = BackupService.new(current_user)
 		service.run
-		render :plain => service.data_json, status: 200, content_type: 'application/json'
+		# render :plain => service.data_json, status: 200, content_type: 'application/json'
+		respond_to do |format|
+			format.html { redirect_to backups_path, notice: 'Backup job was successfully started.' }
+		end
 	end
 
 	def destroy 

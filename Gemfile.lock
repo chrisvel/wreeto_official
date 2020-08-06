@@ -84,6 +84,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     e2mmap (0.1.0)
     erubi (1.9.0)
     et-orbi (1.2.4)
@@ -281,6 +285,7 @@ DEPENDENCIES
   coderay_bash (= 1.0.7)
   coffee-rails
   devise (= 4.7.1)
+  dotenv-rails (~> 2.7, >= 2.7.6)
   font-awesome-rails (= 4.7.0.5)
   foreman (~> 0.87.1)
   jbuilder (= 2.10.0)

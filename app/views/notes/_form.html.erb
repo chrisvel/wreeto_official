@@ -54,8 +54,26 @@
                 <div class="text-soft d-inline-block" style="width: 35px;">
                   <%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
                 </div>
+                <% if att.previewable? %>
+                <%= image_tag att.preview(combine_options: {
+                                              auto_orient: true,
+                                              gravity: "center",
+                                              resize: "24x24^",
+                                              crop: "24x24+0+0"
+                                              }), class: 'ml-2' %>
+              <% elsif att.variable? %>
+                <%= image_tag att.variant(combine_options: {
+                                              auto_orient: true,
+                                              gravity: "center",
+                                              resize: "24x24^",
+                                              crop: "24x24+0+0"
+                                              }), class: 'ml-2' %>
+              <% else %>
+                <div class="ml-2 text-soft d-inline-block middle-align text-center" style="width: 24px; height: 24px;">
+                  <i class="fa fa-paperclip"></i>
+                </div>
+              <% end %>
                 <%= link_to att.filename.to_s, url_for(att), target: "_blank", class: 'link-purple ml-2' %>
-                <%# image_tag att.preview(resize_to_limit: [100, 100]) if att.previewable? %>
                 <div class="float-right">
                   <%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
                     "#",
@@ -73,7 +91,13 @@
         <div class="col-12 col-lg-6">
           <div class="form-group">
             Add one or multiple attachments:  <br/><br/>
-            <%= f.file_field :attachments, multiple: true, direct_upload: true %>
+            <label class="btn btn-sm btn-outline-purple">
+              BROWSE FILES
+              <span style="display:none;">
+                <%= f.file_field :attachments, multiple: true, direct_upload: true %>
+              </span>
+            </label>
+            
           </div>
         </div>
       </div>

@@ -25,6 +25,9 @@
 # Ignore local storage
 /storage/*
 
+# Ignore local backups
+/backups/*
+
 # Ignore local database
 /database/*
 /database_bck/*

@@ -18,13 +18,13 @@
       <% @backups.each do |item| %>
         <tr>
           <td class="px-0">
-           
+            Backup created
           </td>
           <td>
-            
+            <%= item.updated_at %>
           </td>
           <td class="text-right text-soft pr-0">
-            <%= "#{distance_of_time_in_words(Time.now, item.updated_at)}" %>
+            <%= "#{distance_of_time_in_words(Time.now, item.updated_at)} ago" %>
           </td>
         </tr>
       <% end %>

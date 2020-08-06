@@ -17,8 +17,8 @@ module ButtonsHelper
     link_to 'BACKUP NOW',
     start_backups_path,
     class: "btn btn-sm btn-purple",
-    data: { turbolinks: false },
-    remote: true
+    data: { turbolinks: false }
+    # remote: true
   end
 
   def add_tag_button

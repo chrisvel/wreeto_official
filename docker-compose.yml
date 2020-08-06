@@ -11,6 +11,8 @@ services:
     volumes:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets
+      - ./storage:/app/storage
+      - ./backup:/app/backup
     ports:
       - 8383:8383
     depends_on:

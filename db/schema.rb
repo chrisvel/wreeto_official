@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2020_08_04_090417) do
   end
 
   create_table "backups", force: :cascade do |t|
+    t.string "fullpath"
+    t.integer "state"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
