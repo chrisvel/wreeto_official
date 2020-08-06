@@ -1,0 +1,15 @@
+<div class="modal fade" id="preview-<%= attachment.id %>" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Preview</button>
+      </div>
+      <div class="modal-body">
+        <%= image_tag url_for(attachment) %>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn btn-sm btn-light">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

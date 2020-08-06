@@ -2,7 +2,7 @@ version: '3.7'
 services:
   postgres:
     image: postgres:11
-    env_file: .env
+    env_file: .env.development.local
     volumes:
     - ~/.volume-data/wreeto/postgres-data:/var/lib/postgresql/data
   app:
@@ -13,11 +13,12 @@ services:
     volumes:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets
+      - ./storage:/app/storage
     ports:
       - 8383:8383
     depends_on:
       - postgres
       - redis
-    env_file: .env
+    env_file: .env.development.local
   redis:
     image: redis:5.0.7

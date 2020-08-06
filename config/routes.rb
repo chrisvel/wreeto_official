@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   post 'search', to: 'search#index'
   get 'help', to: 'pages#help', as: 'pages_help'
 
+  resources :backups, only: [:index, :start] do 
+    get '/index', to: 'backups#index'
+    get '/start', to: 'backups#start', on: :collection, as: :start
+  end
+
   resources :notes, param: :guid do
     get '/make_public', to: 'notes#make_public', on: :member
     get '/make_private', to: 'notes#make_private', on: :member
