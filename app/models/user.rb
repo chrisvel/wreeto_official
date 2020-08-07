@@ -41,7 +41,6 @@ class User < ApplicationRecord
          :database_authenticatable
 
   after_create :setup_default_categories
-  after_create :send_email_to_admin
 
   has_many :notes, class_name: "Note", dependent: :destroy
   has_many :categories, dependent: :destroy
@@ -56,10 +55,6 @@ class User < ApplicationRecord
     Category.create!(title: 'Uncategorized', deletable: false, user_id: self.id)
     Category.create!(title: 'Ideas',         deletable: true,  user_id: self.id)
     Category.create!(title: 'Thoughts',      deletable: true,  user_id: self.id)
-  end
-
-  def send_email_to_admin
-    SignUpNotifyMailer.with(user: self).user_signed_up.deliver_later
   end
 
   def owner_of?(resource)

@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        if @category.parent.projects?
+        if @category.parent.present? && @category.parent.projects?
           format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully created.' }
         else 
           format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
@@ -56,7 +56,7 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        if @category.parent.projects?
+        if @category.parent.present? && @category.parent.projects?
           format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully updated.' }
         else 
           format.html { redirect_to category_path(@category.slug), notice: 'Category was successfully updated.' }
@@ -72,12 +72,13 @@ class CategoriesController < ApplicationController
   def destroy
     respond_to do |format|
       if @category.deletable
+        is_a_project = (@category.parent.present? && @category.parent.projects?)
         ActiveRecord::Base.transaction do
           @category.notes.each{|nt| nt.taggings.destroy_all}
           @category.notes.destroy_all
           @category.destroy
         end
-        if @category.parent.projects?
+        if is_a_project
           format.html { redirect_to category_path(current_user.categories.find_by(slug: 'projects')), notice: 'Project was successfully destroyed.' }
         else 
           format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }

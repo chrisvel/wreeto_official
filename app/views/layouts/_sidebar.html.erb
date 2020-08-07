@@ -67,7 +67,7 @@
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
           <span class="nav-link text-secondary">No projects yet - <%= link_to 'Create one?',
-                                                                              new_category_path(params: {parent_id: current_user.categories.find_by(title: 'Projects', deletable: false).id}),
+                                                                              new_category_path(params: {parent_slug: current_user.categories.find_by(slug: 'projects', deletable: false).slug}),
                                                                               class: 'link-purple-white',
                                                                               data: { turbolinks: false }%></span>
         </li>
