@@ -28,7 +28,11 @@
 								<i class="fa fa-paperclip"></i>
 							</div>
 						<% end %>
-						<%= link_to att.filename.to_s, url_for(att), target: "_blank", class: 'link-purple middle-align ml-2' %>                                      
+						<%= link_to att.filename.to_s, "#", 
+							target: "_blank", 
+							class: 'link-purple middle-align ml-2',
+							data: { toggle: "modal", target: "#preview-#{att.id}".html_safe, turbolinks: false } %>      
+						<%= render partial: 'preview_modal', locals: {att: att} %>                                
 						<div class="float-right middle-align">
 							<%= link_to "<i class='fa fas fa-download ml-2' style='font-size: 18px;'></i>".html_safe,
 								rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2' %>
