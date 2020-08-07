@@ -27,6 +27,7 @@ class Category < ApplicationRecord
 
   validates :title, presence: true, allow_blank: false, uniqueness: {scope: :user_id}
   validates :parent, presence: true, allow_blank: true
+  validate  :slug_is_unique
 
   scope :ordered_by_title, -> { order('title ASC') }
   scope :ordered_by_active, -> { order('active = true DESC') }
@@ -36,7 +37,8 @@ class Category < ApplicationRecord
 
   def full_title
     return self.title if self.parent.nil?
-    "#{self.parent.title} :: #{self.title}"
+    # "#{self.parent.title} :: #{self.title}"
+    "#{self.title} (#{self.parent.title})"
   end
 
   def active?
@@ -67,6 +69,13 @@ class Category < ApplicationRecord
 
   def to_param
     self.slug
+  end
+
+  def slug_is_unique
+    slugged = user.categories.find_by(slug: slug)
+    unless slugged.nil?
+      errors.add(:title, "translates to a url slug <strong>#{slugged.slug}</strong> that is being used in another category. Please remove extra spaces and symbols and try again")
+    end
   end
 
   private

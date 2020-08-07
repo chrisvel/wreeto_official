@@ -32,7 +32,7 @@
     <div class="col-12 col-lg-6">
       <div class="form-group">
         <%= f.label :category_id %>
-        <%= f.collection_select :category_id, @categories, :id, :title, {},
+        <%= f.collection_select :category_id, @categories, :id, :full_title, {},
           {
             id: "form-category-select",
             class: 'form-control selectpicker show-tick',
