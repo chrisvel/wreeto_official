@@ -91,12 +91,12 @@
         <div class="col-12 col-lg-6">
           <div class="form-group">
             Add one or multiple attachments:  <br/><br/>
-            <label class="btn btn-sm btn-outline-purple">
+            <%# <label class="btn btn-sm btn-dark">
               BROWSE FILES
-              <span style="display:none;">
+              <span style="display:none;"> %>
                 <%= f.file_field :attachments, multiple: true, direct_upload: true %>
-              </span>
-            </label>
+              <%# </span>
+            </label> %>
             
           </div>
         </div>
