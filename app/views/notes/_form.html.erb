@@ -42,52 +42,12 @@
         </div>
       </div>
     </div>
-
     <hr />
+
     <h6 class="mt-2 text-bold">ATTACHMENTS</h6>
-    <% if @note.attachments.any? %>
-      <div class="form-row mb-4">
-        <% @note.attachments.each do |att| %>
-          <div class="col-md-12 attachment-item-<%= att.id %>">
-            <div class="card bordered rounded-lg bg-white mt-2 mr-0 px-3 py-3">
-              <div>
-                <div class="text-soft d-inline-block" style="width: 35px;">
-                  <%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
-                </div>
-                <% if att.previewable? %>
-                <%= image_tag att.preview(combine_options: {
-                                              auto_orient: true,
-                                              gravity: "center",
-                                              resize: "24x24^",
-                                              crop: "24x24+0+0"
-                                              }), class: 'ml-2' %>
-              <% elsif att.variable? %>
-                <%= image_tag att.variant(combine_options: {
-                                              auto_orient: true,
-                                              gravity: "center",
-                                              resize: "24x24^",
-                                              crop: "24x24+0+0"
-                                              }), class: 'ml-2' %>
-              <% else %>
-                <div class="ml-2 text-soft d-inline-block middle-align text-center" style="width: 24px; height: 24px;">
-                  <i class="fa fa-paperclip"></i>
-                </div>
-              <% end %>
-                <%= link_to att.filename.to_s, url_for(att), target: "_blank", class: 'link-purple ml-2' %>
-                <div class="float-right">
-                  <%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
-                    "#",
-                    id: "js-att-id-#{att.id}",
-                    class: "link-purple ml-2 js-delete-attachment",
-                    data: { turbolinks: false } %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <div class="form-row">
+    <%= render partial: 'attachments_list', locals: {note: @note, intent: :edit} %>
+
+    <div class="form-row mt-4">
         <div class="col-12 col-lg-6">
           <div class="form-group">
             Add one or multiple attachments:  <br/><br/>

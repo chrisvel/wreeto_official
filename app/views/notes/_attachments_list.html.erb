@@ -1,9 +1,7 @@
-<hr />
-<h6 class="text-bold mt-4 mx-4">ATTACHMENTS</h6>
 <div class="mt-2 px-5">
 	<div class="row">
 		<% note.attachments.each do |att| %>
-			<div class="col-md-12">
+			<div class="col-md-12 attachment-item-<%= att.id %>">
 				<div class="card bordered bg-very-light mt-2 mr-0 px-3 py-3">
 					<div>
 						<div class="text-soft d-inline-block middle-align" style="width: 35px;">
@@ -34,8 +32,16 @@
 							data: { toggle: "modal", target: "#preview-#{att.id}".html_safe, turbolinks: false } %>      
 						<%= render partial: 'preview_modal', locals: {att: att} %>                                
 						<div class="float-right middle-align">
-							<%= link_to "<i class='fa fas fa-download ml-2' style='font-size: 18px;'></i>".html_safe,
-								rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2' %>
+							<% if intent == :show %>
+								<%= link_to "<i class='fa fas fa-download ml-2' style='font-size: 18px;'></i>".html_safe,
+									rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2' %>
+							<% elsif intent == :edit %>
+								<%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
+									"#",
+									id: "js-att-id-#{att.id}",
+									class: "link-purple ml-2 js-delete-attachment",
+									data: { turbolinks: false } %>
+							<% end %>
 						</div>
 					</div>
 				</div>

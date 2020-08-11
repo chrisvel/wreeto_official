@@ -63,5 +63,7 @@
 </div>
 
 <% if @note.attachments.any? %>
-  <%= render partial: 'attachments_list', locals: {note: @note} %>
+  <hr />
+  <h6 class="text-bold mt-4 mx-4">ATTACHMENTS</h6>
+  <%= render partial: 'attachments_list', locals: {note: @note, intent: :show} %>
 <% end %>
