@@ -17,6 +17,7 @@ class BackupService
     create_wrt
     cleanup_files
     update_db
+    remove_old_backups
     # data_json
   rescue => e
     raise StandardError, "#{e.message}"
@@ -107,5 +108,10 @@ class BackupService
       fullpath: wrt_path,
       state: Backup.states[:done]
     )
+  end
+
+  def remove_old_backups
+    last_backup_ids = @user.backups.unscoped.order(created_at: :asc).last(5).pluck(:id)
+    @user.backups.where.not(id: last_backup_ids).destroy_all
   end
 end

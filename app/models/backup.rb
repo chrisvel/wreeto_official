@@ -1,4 +1,6 @@
 class Backup < ApplicationRecord
+  after_destroy :remove_file
+
   belongs_to :user
 
   enum states: {
@@ -9,4 +11,9 @@ class Backup < ApplicationRecord
   }
 
   default_scope { order(created_at: :desc) }
+
+  private 
+  def remove_file
+    File.delete fullpath if File.file? fullpath
+  end
 end

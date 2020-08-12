@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-2">
+    <h3>Addons</h3>
+  </div>
+  <div class="col-10 text-right">
+  </div>
+</div>
+<hr/>
+
+<div class="card border rounded-lg shadow-sm px-5 pt-5 pb-4">
+	<%= form_with(model: @account, html: { class: "form", novalidate: true} ) do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <div class="ui checkbox">
+      <div class="pretty p-icon p-smooth p-fill">
+        <%= f.check_box :wiki_enabled %>
+        <div class="state">
+          <i class="icon fa fa-check"></i>
+          <%= f.label :wiki_enabled %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="ui checkbox">
+      <div class="pretty p-icon p-smooth p-fill">
+        <%= f.check_box :attachments_enabled %>
+        <div class="state">
+          <i class="icon fa fa-check"></i>
+          <%= f.label :attachments_enabled %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="row">
+      <div class="col-5">
+      </div>
+      <div class="col-7 text-right">
+        <%= link_to 'CANCEL', :back, class: "btn btn-sm btn-secondary" %>
+        <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+</div>

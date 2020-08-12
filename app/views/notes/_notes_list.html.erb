@@ -17,7 +17,7 @@
                   class: 'note-item link-purple mr-2',
                   data: { turbolinks: false }
                   %>
-            <% if item.attachments.any? %>
+            <% if current_user.account.attachments_enabled && item.attachments.any? %>
               <i class="fa fa-paperclip text-soft"></i>
             <% end %>
             <div class="col-md-12 pl-0 ml-0">

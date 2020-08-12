@@ -11,7 +11,7 @@
         <% if att.previewable? %>
           <iframe src="<%= url_for(att) %>" class="w-100" style="width:1170px; height:800px;"></iframe>
         <% elsif att.variable? %>
-          <%= image_tag url_for(att), class: "img-fluid h-100" %>
+          <%= image_tag url_for(att), class: "img-fluid mh-100" %>
         <% end %>
       </div>
     </div>

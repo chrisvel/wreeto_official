@@ -15,6 +15,10 @@ a.note-item{
   }
 }
 
+.pretty {
+  font-size: 16px;
+}
+
 pre, code, .editor-preview pre {
   font-size: 0.9rem;
 }
@@ -57,7 +61,7 @@ textarea.relaxed{
 .note-content {
   font-weight: 300;
   font-size: 1.0rem;
-  line-height: 2rem;
+  line-height: 1.7rem;
   padding: 20px 20px 10px;
   width: 100%;
   overflow-x: auto;

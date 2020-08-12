@@ -58,12 +58,13 @@
   </div>
 </div>
 
-<div class="note-content border rounded-lg shadow-sm bg-white mt-2 p-4">
+<div class="note-content border rounded-lg shadow-sm bg-white mt-2 px-4 pt-4 pb-2">
   <%= markdown(@note.content) %>
 </div>
 
-<% if @note.attachments.any? %>
-  <hr />
-  <h6 class="text-bold mt-4 mx-4">ATTACHMENTS</h6>
-  <%= render partial: 'attachments_list', locals: {note: @note, intent: :show} %>
+<% if current_user.account.attachments_enabled %>
+  <% if @note.attachments.any? %>
+    <h6 class="text-bold mt-4 mx-4">ATTACHMENTS</h6>
+    <%= render partial: 'attachments_list', locals: {note: @note, intent: :show} %>
+  <% end %>
 <% end %>

@@ -1,6 +1,6 @@
-# frozen_string_literal: true
-
-# The base controller for all ActiveStorage controllers.
+#
+# https://github.com/rails/rails/blob/5-2-stable/activestorage/app/controllers/active_storage/base_controller.rb
+#
 class ActiveStorage::BaseController < ActionController::Base
   before_action :authenticate_user!
   protect_from_forgery with: :exception

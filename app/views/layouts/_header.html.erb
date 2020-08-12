@@ -28,6 +28,9 @@
           <div class="dropdown-menu dropdown-menu-right shadow-sm pt-3 pb-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
             <%= link_to 'Profile Settings', edit_user_registration_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
+            <%= link_to 'Addons', account_path,
+              class: 'dropdown-item', data: { turbolinks: false } %>
+            <hr class="my-2" />
             <%= link_to 'Backup & restore', backups_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Import notes (beta)', import_zip_path,

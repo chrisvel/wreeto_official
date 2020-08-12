@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post 'search', to: 'search#index'
   get 'help', to: 'pages#help', as: 'pages_help'
 
+  resource :account, only: [:show, :update]
+
   resources :backups, only: [:index, :start] do 
     get '/index', to: 'backups#index'
     get '/start', to: 'backups#start', on: :collection, as: :start
