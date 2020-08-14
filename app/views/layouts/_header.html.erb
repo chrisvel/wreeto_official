@@ -28,12 +28,12 @@
           <div class="dropdown-menu dropdown-menu-right shadow-sm pt-3 pb-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
             <%= link_to 'Profile Settings', edit_user_registration_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
-            <%= link_to 'Addons', account_path,
+            <%= link_to "Addons #{beta_badge}".html_safe, account_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <hr class="my-2" />
-            <%= link_to 'Backup & restore', backups_path,
+            <%= link_to "Backup & restore #{beta_badge}".html_safe, backups_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
-            <%= link_to 'Import notes (beta)', import_zip_path,
+            <%= link_to "Import notes #{beta_badge}".html_safe, import_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Export notes', download_export_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
