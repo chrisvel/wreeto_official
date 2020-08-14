@@ -27,7 +27,9 @@ RUN apk add --update --no-cache \
       python2 \
       tzdata \
       yarn \
-      zip 
+      zip \
+      imagemagick \
+      poppler-utils
 
 RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
 RUN gem install bundler -v 2.0.2
