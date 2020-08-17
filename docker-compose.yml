@@ -12,7 +12,7 @@ services:
       - .:/app/wreeto
       - ./public/assets:/app/wreeto/public/assets
       - ./storage:/app/storage
-      - ./backup:/app/backup
+      - ./backups:/app/backups
     ports:
       - 8383:8383
     depends_on:
