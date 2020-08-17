@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-5">
+    <h3>Backup & restore</h3>
+  </div>
+  <div class="col-7 text-right">
+    <%= create_backup_button %>
+  </div>
+</div>
+<hr/>
+
+<div class="card border rounded-lg shadow-sm px-5 py-4">
+  <table id="backups-table" class="ui very basic table mb-0">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <% @backups.each do |item| %>
+        <tr>
+          <td class="px-0">
+            Backup created
+          </td>
+          <td>
+            <%= item.updated_at %>
+          </td>
+          <td class="text-right text-soft pr-0">
+            <%= "#{distance_of_time_in_words(Time.now, item.updated_at)} ago" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

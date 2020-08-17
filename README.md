@@ -8,7 +8,8 @@ Wreeto is an open source note-taking, knowledge management and wiki system built
 
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
-### Current version: _v2.5.4_
+### Current stable version: _v2.5.4_
+### Latest version: _master_
 
 ## Table of Contents 
 1. [Features](#features)
@@ -25,9 +26,10 @@ Initially this was built because I didn't like the note-taking apps out there an
 
 - Simple, minimal UI - _less is more_
 - Create unlimited notes with Markdown format
-- Unlimited Categories
-- Unlimited Tags (**new!**)
-- Unlimited Projects (**new!**)
+- Categories
+- Tags (**new!**)
+- Projects (**new!**)
+- Attachments (**new!**)
 - List notes by Category or SubCategory
 - Favorite notes appear on the top of the notes list and sidebar
 - Authentication, authorization 
@@ -44,7 +46,6 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Improve UI inconsistencies
 - Upgrade to Rails v6
 - Note Templates
-- Ability to attach files (e.g. Documents)
 - Encryption
 - Different Levels of security access for users
 - User access control
@@ -102,6 +103,8 @@ WREETO_PORT=8383
 ### 4.2 Use docker
 
 The easiest way to get started *now* is to use `docker-compose` and simply execute:
+
+For running the latest version (might be unstable) use `image: chrisvel/wreeto:master`. Instead use the latest stable version as (example) `image: chrisvel/wreeto:version-`.
 
 ```
 docker-compose up

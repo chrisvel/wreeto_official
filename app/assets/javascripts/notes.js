@@ -40,6 +40,30 @@ var ready = function(){
       showIcons: ["code", "table"],
       status: false
     });
+  
+  // Direct Uploads 
+  $('.js-delete-attachment').click(function(e){
+    e.preventDefault();
+    var guid = $('#current_guid').val();
+    var id = $(this).attr('id').split("-").pop();
+    console.log(".attachment-item-" + id);
+    
+    if (confirm('Are you sure you want to delete this file?')) {
+      $.ajax({
+        url: "/notes/" + guid + "/attachment/" + id,
+        type: "DELETE",
+        success: function() {
+        },
+        error: function() {
+          console.log("Error in attachment deletion");
+        },
+        complete: function(d) {
+          console.log("Success");
+          $(".attachment-item-" + id).remove();
+        }
+      });
+    };
+  });
 };
 
 $(document).ready(ready);

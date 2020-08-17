@@ -6,7 +6,9 @@ $white: #FFFFFF;
 $black: #000000;
 
 $light-grey: #F4F4F4;
+$soft-grey: #bbbbbb;
 $dark-grey: #222222;
+$very-light-grey: #f8f8f8;
 
 .bg-light {
   background-color: #eeeeee !important;
@@ -18,6 +20,14 @@ $dark-grey: #222222;
 
 .text-red, .text-danger{
   color: #DB2828 !important;
+}
+
+.text-soft{
+  color: $soft-grey;
+}
+
+.bg-very-light{
+  background-color: $very-light-grey;
 }
 
 .text-purple{

@@ -1,0 +1,51 @@
+<div class="mt-2 px-5">
+	<div class="row">
+		<% note.attachments.each do |att| %>
+			<div class="col-md-12 attachment-item-<%= att.id %>">
+				<div class="card bordered bg-very-light mt-2 mr-0 px-3 py-3">
+					<div>
+						<div class="text-soft d-inline-block align-middle" style="width: 35px;">
+							<%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
+						</div>
+						<% if att.previewable? %>
+							<%= image_tag att.preview(combine_options: {
+																						auto_orient: true,
+																						gravity: "center",
+																						resize: "24x24^",
+																						crop: "24x24+0+0"
+																						}), class: 'ml-2 align-middle' %>
+						<% elsif att.variable? %>
+							<%= image_tag att.variant(combine_options: {
+																						auto_orient: true,
+																						gravity: "center",
+																						resize: "24x24^",
+																						crop: "24x24+0+0"
+																						}), class: 'ml-2 align-middle' %>
+						<% else %>
+							<div class="ml-2 text-soft d-inline-block align-middle text-center" style="width: 24px; height: 24px;">
+								<i class="fa fa-paperclip"></i>
+							</div>
+						<% end %>
+						<%= link_to att.filename.to_s, "#", 
+							target: "_blank", 
+							class: 'link-purple middle-align ml-2',
+							data: { toggle: "modal", target: "#preview-#{att.id}".html_safe, turbolinks: false } %>      
+						<%= render partial: 'preview_modal', locals: {att: att} %>                                
+						<div class="float-right align-middle">
+							<% if intent == :show %>
+								<%= link_to "<i class='fa fas fa-download ml-2' style='font-size: 18px;'></i>".html_safe,
+									rails_blob_path(att, disposition: "attachment"), class: 'link-purple ml-2 align-middle' %>
+							<% elsif intent == :edit %>
+								<%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
+									"#",
+									id: "js-att-id-#{att.id}",
+									class: "link-purple ml-2 js-delete-attachment align-middle",
+									data: { turbolinks: false } %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>

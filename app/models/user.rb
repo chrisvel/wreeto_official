@@ -42,9 +42,11 @@ class User < ApplicationRecord
 
   after_create :setup_default_categories
 
+  belongs_to :account
   has_many :notes, class_name: "Note", dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :backups, dependent: :destroy
 
   validates :email, uniqueness: true
   validates :username, uniqueness: true

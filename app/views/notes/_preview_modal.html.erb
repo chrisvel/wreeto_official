@@ -1,0 +1,19 @@
+<div class="modal fade" id="preview-<%= att.id %>" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= att.filename.to_s %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class='fa fa-times'></i>
+        </button>
+      </div>
+      <div class="modal-body text-center" style="max-height: calc(100vh - 120px);  overflow-y: auto;">
+        <% if att.previewable? %>
+          <iframe src="<%= url_for(att) %>" class="w-100" style="width:1170px; height:800px;"></iframe>
+        <% elsif att.variable? %>
+          <%= image_tag url_for(att), class: "img-fluid mh-100" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -38,6 +38,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem "minitest"
   gem "minitest-reporters"
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 end
 
 group :development do

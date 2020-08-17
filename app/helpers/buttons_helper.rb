@@ -13,6 +13,14 @@ module ButtonsHelper
     data: { turbolinks: false }
   end
 
+  def create_backup_button
+    link_to 'BACKUP NOW',
+    start_backups_path,
+    class: "btn btn-sm btn-purple",
+    data: { turbolinks: false }
+    # remote: true
+  end
+
   def add_tag_button
     link_to 'ADD A NEW TAG',
     '#',

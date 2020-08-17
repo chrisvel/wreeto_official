@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_152659) do
+ActiveRecord::Schema.define(version: 2020_08_12_134437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.boolean "wiki_enabled"
+    t.boolean "attachments_enabled"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,6 +39,15 @@ ActiveRecord::Schema.define(version: 2020_07_24_152659) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "backups", force: :cascade do |t|
+    t.string "fullpath"
+    t.integer "state"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_backups_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -112,12 +126,15 @@ ActiveRecord::Schema.define(version: 2020_07_24_152659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.bigint "account_id"
+    t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "backups", "users"
   add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "categories", "users"
   add_foreign_key "notes", "categories"
@@ -125,4 +142,5 @@ ActiveRecord::Schema.define(version: 2020_07_24_152659) do
   add_foreign_key "taggings", "notes"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "users"
+  add_foreign_key "users", "accounts"
 end

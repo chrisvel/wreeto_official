@@ -5,9 +5,17 @@ Rails.application.routes.draw do
   post 'search', to: 'search#index'
   get 'help', to: 'pages#help', as: 'pages_help'
 
+  resource :account, only: [:show, :update]
+
+  resources :backups, only: [:index, :start] do 
+    get '/index', to: 'backups#index'
+    get '/start', to: 'backups#start', on: :collection, as: :start
+  end
+
   resources :notes, param: :guid do
     get '/make_public', to: 'notes#make_public', on: :member
     get '/make_private', to: 'notes#make_private', on: :member
+    delete '/attachment/:id', to: 'notes#delete_attachment', on: :member, as: :delete_attachment
   end
 
   get '/public/:guid', to: 'notes#public', params: :guid, as: :public_note
@@ -44,5 +52,8 @@ Rails.application.routes.draw do
     "https://github.com/chrisvel/wreeto_official"
   end
 
-  get '*unmatched_route', to: 'application#not_found'
+  # ActiveStorage hack 
+  get '*all', to: 'application#not_found', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

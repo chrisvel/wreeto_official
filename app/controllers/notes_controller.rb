@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   layout 'public_note', only: :public
   before_action :authenticate_user!, :except => [:public]
-  before_action :set_note, only: [:show, :edit, :update, :destroy, :make_public, :make_private]
+  before_action :set_note, only: [:show, :edit, :update, :destroy, :make_public, :make_private, :delete_attachment]
   before_action :set_categories, only: [:index, :show, :new, :create, :edit, :update]
   before_action :set_parent_categories, only: [:index, :show, :new, :edit, :update]
   before_action :set_tags, only: [:show, :new, :create, :edit, :update]
@@ -144,6 +144,15 @@ class NotesController < ApplicationController
     end
   end
 
+  def delete_attachment
+    attachment = @note.attachments.find(params[:id])
+    if attachment.purge 
+      flash.now.notice = 'Attachment deleted successfully'
+    else 
+
+    end
+  end
+
   private
     def set_note
       @note = current_user.notes.find_by_guid(params[:guid])
@@ -171,7 +180,8 @@ class NotesController < ApplicationController
               :category_id, 
               :guid, 
               :tag_list, 
-              tag_list: [])
+              tag_list: [],
+              attachments: [])
     end
 
     def public_note_params

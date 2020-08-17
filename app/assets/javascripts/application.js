@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require clipboard
 //= require bootstrap-select
+//= require activestorage
 //= require_tree .
 
 var alertTimeout;
