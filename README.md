@@ -30,6 +30,7 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Tags (**new!**)
 - Projects (**new!**)
 - Attachments (**new!**)
+- Encrypted backups
 - List notes by Category or SubCategory
 - Favorite notes appear on the top of the notes list and sidebar
 - Authentication, authorization 

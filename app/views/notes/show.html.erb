@@ -59,7 +59,11 @@
 </div>
 
 <div class="note-content border rounded-lg shadow-sm bg-white mt-2 px-4 pt-4 pb-2">
-  <%= markdown(@note.content) %>
+  <% if @note.content.blank? %> 
+    <div class="text-center mb-3">This item has no content</div>
+  <% else %> 
+    <%= markdown(@note.content) %>
+  <% end %>
 </div>
 
 <% if current_user.account.attachments_enabled %>

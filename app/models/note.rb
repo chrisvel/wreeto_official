@@ -17,7 +17,7 @@ class Note < ApplicationRecord
   # Validations
   validates :title, presence: true, allow_blank: false
   validates :category, presence: true, allow_blank: false
-  validates :content, presence: true, allow_blank: false
+  validates :content, presence: true, allow_blank: true
   validates_associated :tags , message: 'are invalid. Only numbers, letters, _ and - characters allowed.'
 
   # Scopes
