@@ -3,7 +3,15 @@ module ApplicationHelper
   
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      language.nil? ? CodeRay.scan(code, "text").div : CodeRay.scan(code, language).div
+      valid_language?(language) ? CodeRay.scan(code, language).div : CodeRay.scan(code, "text").div
+    end
+
+    private 
+
+    def valid_language?(lang)
+      return false if lang.blank?
+      valid_languages = CodeRay::Scanners.list
+      valid_languages.include? lang.to_sym
     end
   end
 
