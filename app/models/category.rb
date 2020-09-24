@@ -27,7 +27,7 @@ class Category < ApplicationRecord
 
   validates :title, presence: true, allow_blank: false, uniqueness: {scope: :user_id}
   validates :parent, presence: true, allow_blank: true
-  validate  :slug_is_unique
+  validate  :slug_is_unique, if: :slug_changed?
 
   scope :ordered_by_title, -> { order('title ASC') }
   scope :ordered_by_active, -> { order('active = true DESC') }
