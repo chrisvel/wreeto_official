@@ -31,6 +31,10 @@
    // font-weight: 400;
  }
 
+ ul li ul{
+  padding-left: 16px;
+}
+
 input:focus, input.form-control:focus, button:focus{
   outline: none !important;
   outline-width: 0 !important;
