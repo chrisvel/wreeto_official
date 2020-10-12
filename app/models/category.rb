@@ -25,7 +25,7 @@ class Category < ApplicationRecord
   belongs_to :parent, class_name: 'Category', optional: true
   belongs_to :user
 
-  validates :title, presence: true, allow_blank: false, uniqueness: {scope: :user_id}
+  validates :title, presence: true, allow_blank: false, uniqueness: {scope: [:user_id, :parent_id]}
   validates :parent, presence: true, allow_blank: true
   validate  :slug_is_unique, if: :slug_changed?
 
@@ -74,14 +74,18 @@ class Category < ApplicationRecord
   def slug_is_unique
     slugged = user.categories.find_by(slug: slug)
     unless slugged.nil?
-      errors.add(:title, "translates to a url slug <strong>#{slugged.slug}</strong> that is being used in another category. Please remove extra spaces and symbols and try again")
+      errors.add(:title, "translates to a url slug <strong>#{slugged.slug}</strong> that is being used in this category. Please remove extra spaces and symbols and try again")
     end
   end
 
   private
 
   def set_slug
-    self.slug = title.parameterize
+    if parent.present?
+      self.slug = parent.title.parameterize + '_' + title.parameterize
+    else 
+      self.slug = title.parameterize
+    end
   end
 
   def protect_unchangeables
