@@ -10,7 +10,8 @@ var ready = function(){
   $('.tag-picker').select2(
     {
       tags: true,
-      multiple: true
+      multiple: true, 
+      width: '100%'
     });
   
   let category = $.urlParam('category');
