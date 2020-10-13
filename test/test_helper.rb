@@ -4,6 +4,8 @@ require 'rails/test_help'
 require 'integration_test_helper'
 require 'minitest/reporters'
 
+Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new(:color => true)]
+
 class ActiveSupport::TestCase
   fixtures :all
 end

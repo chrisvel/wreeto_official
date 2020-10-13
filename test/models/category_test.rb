@@ -29,7 +29,7 @@ class CategoryTest < ActiveSupport::TestCase
 
     category = @jack_sparrow.categories.create!(title: "Projects for life")
     subcategory = @jack_sparrow.categories.create!(title: "To be", parent: category)
-    assert_equal "Projects for life :: To be", subcategory.full_title
+    assert_equal "To be (Projects for life)", subcategory.full_title
   end
 
   test "active or inactive" do
@@ -40,15 +40,15 @@ class CategoryTest < ActiveSupport::TestCase
     refute @ideas_category.active?
   end
 
-  test "items_amount" do
+  test "notes amount" do
     a = @jack_sparrow.categories.create!(title: "A")
-    @jack_sparrow.inventory_items.create!(category: a, type: "Inventory::Note", title: "Something", content: "This is content")
-    @jack_sparrow.inventory_items.create!(category: a, type: "Inventory::Note", title: "Something #2", content: "This is content")
+    @jack_sparrow.notes.create!(category: a, title: "Something", content: "This is content")
+    @jack_sparrow.notes.create!(category: a, title: "Something #2", content: "This is content")
     @jack_sparrow.categories.create!(title: "C", parent: a)
     d = @jack_sparrow.categories.create!(title: "D", parent: a)
     @jack_sparrow.categories.create!(title: "E", parent: a)
-    @jack_sparrow.inventory_items.create!(category: d, type: "Inventory::Note", title: "Something #3", content: "This is content")
-    assert_equal 3, a.items_amount
+    @jack_sparrow.notes.create!(category: d, title: "Something #3", content: "This is content")
+    assert_equal 3, a.notes.size
   end
 
   test "is_a_project?" do
@@ -59,10 +59,10 @@ class CategoryTest < ActiveSupport::TestCase
 
   test "set_slug" do
     a = @jack_sparrow.categories.create!(title: "aBcDeF gh IJK lmn", parent: @projects_category)
-    assert_equal "abcdef-gh-ijk-lmn", a.slug
+    assert_equal "projects_abcdef-gh-ijk-lmn", a.slug
 
     b = @jack_sparrow.categories.create!(title: "aBcDeF %%;'^' IJK lmn", parent: @projects_category)
-    assert_equal "abcdef-ijk-lmn", b.slug
+    assert_equal "projects_abcdef-ijk-lmn", b.slug
   end
 
   test "protect_unchangeables" do
