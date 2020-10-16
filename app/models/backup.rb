@@ -11,6 +11,7 @@ class Backup < ApplicationRecord
   }
 
   default_scope { order(created_at: :desc) }
+  scope :in_progress, -> { where(state: [Backup.states[:started], Backup.states[:working]]) }
 
   private 
   def remove_file

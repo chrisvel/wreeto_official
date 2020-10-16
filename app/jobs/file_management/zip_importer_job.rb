@@ -1,6 +1,6 @@
 module FileManagement
   class ZipImporterJob < ApplicationJob
-    queue_as :cleanup
+    queue_as :services
 
     def perform(user_id, zip_file)
       user = User.find(user_id)

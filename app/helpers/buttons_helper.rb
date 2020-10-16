@@ -13,12 +13,18 @@ module ButtonsHelper
     data: { turbolinks: false }
   end
 
-  def create_backup_button
-    link_to 'BACKUP NOW',
-    start_backups_path,
-    class: "btn btn-sm btn-purple",
-    data: { turbolinks: false }
-    # remote: true
+  def create_backup_button(user)
+    if user.backups.in_progress.any?
+      link_to 'BACKUP RUNNING...',
+      start_backups_path,
+      class: "btn btn-sm btn-secondary disabled",
+      data: { turbolinks: false }
+    else
+      link_to 'BACKUP NOW',
+      start_backups_path,
+      class: "btn btn-sm btn-purple",
+      data: { turbolinks: false }
+    end
   end
 
   def add_tag_button

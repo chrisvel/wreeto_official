@@ -3,8 +3,9 @@ class BackupService
 
   attr_reader :fullpath, :data_json
 
-  def initialize(user)
+  def initialize(user, backup)
     @user = user
+    @backup = backup
     @data_json = ""
   end
 
@@ -104,7 +105,7 @@ class BackupService
   end
 
   def update_db 
-    @user.backups.create!(
+    @backup.update!(
       fullpath: wrt_path,
       state: Backup.states[:done]
     )

@@ -1,6 +1,6 @@
 module Downloads
   class ZipExporterJob < ApplicationJob
-    queue_as :cleanup
+    queue_as :services
 
     def perform(user_id)
       user = User.find(user_id)

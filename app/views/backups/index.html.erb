@@ -3,7 +3,7 @@
     <h3>Backup & restore</h3>
   </div>
   <div class="col-7 text-right">
-    <%= create_backup_button %>
+    <%= create_backup_button(current_user) %>
   </div>
 </div>
 <hr/>
@@ -18,7 +18,7 @@
       <% @backups.each do |item| %>
         <tr>
           <td class="px-0">
-            Backup created
+            Backup <%= Backup.states.keys[item.state] %>
           </td>
           <td>
             <%= item.updated_at %>
