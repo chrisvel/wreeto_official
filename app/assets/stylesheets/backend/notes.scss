@@ -105,3 +105,7 @@ textarea.relaxed{
 .select2-dropdown{
   border: 1px solid $purple-dark !important;
 }
+
+.select2-container--default .select2-search--inline .select2-search__field{
+  padding-left: 12px !important;
+}

@@ -11,7 +11,8 @@ var ready = function(){
     {
       tags: true,
       multiple: true, 
-      width: '100%'
+      width: '100%',
+      placeholder: 'Add a tag'
     });
   
   let category = $.urlParam('category');
