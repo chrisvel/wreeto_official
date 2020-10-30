@@ -6,15 +6,17 @@
     <%= f.text_field :title, class: 'form-control form-control-lg' %>
   </div>
 
-  <div class="form-group">
-    <div class="pretty p-icon p-fill">
-      <%= f.check_box :active %>
-      <div class="state p-primary">
-        <i class="icon fa fa-check"></i>
-        <%= f.label :active %>
+  <% if @category.is_a_project? %>
+    <div class="form-group">
+      <div class="pretty p-icon p-fill">
+        <%= f.check_box :active %>
+        <div class="state p-primary">
+          <i class="icon fa fa-check"></i>
+          <%= f.label :active %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
   <% if @category.parent && @category.parent.projects? %>
     <%= f.hidden_field :parent_id, value: @category.parent.id %>
