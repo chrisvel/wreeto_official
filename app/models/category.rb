@@ -37,7 +37,6 @@ class Category < ApplicationRecord
 
   def full_title
     return self.title if self.parent.nil?
-    # "#{self.parent.title} :: #{self.title}"
     "#{self.title} (#{self.parent.title})"
   end
 
@@ -50,7 +49,7 @@ class Category < ApplicationRecord
   end
 
   def subcategories_notes
-    self.subcategories.map{|a| a.notes}.flatten
+    self.subcategories.includes([:notes]).map{|a| a.notes}.flatten
   end
 
   def items_amount
