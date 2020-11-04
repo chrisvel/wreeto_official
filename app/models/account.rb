@@ -4,7 +4,7 @@ class Account < ApplicationRecord
   before_create :set_defaults
 
   # Associations
-  has_many :users
+  belongs_to :user
 
   private 
   

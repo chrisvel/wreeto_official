@@ -40,9 +40,10 @@ class User < ApplicationRecord
          :confirmable,
          :database_authenticatable
 
+  after_create :setup_account
   after_create :setup_default_categories
 
-  belongs_to :account
+  has_one  :account
   has_many :notes, class_name: "Note", dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :tags, dependent: :destroy
@@ -61,5 +62,11 @@ class User < ApplicationRecord
 
   def owner_of?(resource)
     self == resource.user
+  end
+
+  private 
+
+  def setup_account
+    Account.create!(user_id: self.id)
   end
 end
