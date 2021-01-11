@@ -203,7 +203,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     redis (4.2.5)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -304,7 +304,7 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rails (~> 5.2.4.4)
-  redcarpet (= 3.5.0)
+  redcarpet (= 3.5.1)
   sass-rails
   sidekiq (= 6.0.7)
   sidekiq-scheduler (= 3.0.1)
