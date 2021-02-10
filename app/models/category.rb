@@ -17,7 +17,6 @@
 class Category < ApplicationRecord
 
   before_update  :protect_unchangeables
-  # before_destroy :protect_unchangeables
   before_validation  :set_slug
 
   has_many :subcategories, class_name: 'Category', foreign_key: "parent_id", dependent: :destroy
