@@ -1,5 +1,5 @@
-<div class="ui grid">
-  <div class="eight wide column">
+<div class="mb-3">
+  <div class="">
     <% if @category.is_a_project? %>
       <h3>New Project</h3>
     <% else %>
@@ -7,8 +7,5 @@
     <% end %>
   </div>
 </div>
-<hr/>
 
-<div class="card shadow-sm bordered p-4">
-  <%= render 'form', item: @item %>
-</div>
+<%= render 'form', item: @item %>

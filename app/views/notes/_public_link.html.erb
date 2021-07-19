@@ -1,0 +1,21 @@
+<% if @note.is_private? %>
+  <div class="ml-1">
+    Public link has not been activated
+  </div>
+<% else %>
+  <div class="ml-1 w-50">
+    <div class="input-group input-group-sm middle-aligned mr-2 mb-2 mb-lg-0">
+      <input type="text"
+            id="public_share_url"
+            class="form-control public-input"
+            value="<%= @note.public_url %>">
+      <div class="input-group-append">
+        <button class="btn btn-light copy-to-clipboard"
+                data-clipboard-action="copy"
+                data-clipboard-target="#public_share_url">
+          <i class="fa fa-copy"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+<% end %>

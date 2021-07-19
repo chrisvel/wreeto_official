@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'info@mydefaultemail.com'
+  default from: 'info@wreeto.com'
   layout 'mailer'
 end

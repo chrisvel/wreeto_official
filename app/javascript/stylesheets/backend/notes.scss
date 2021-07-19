@@ -1,0 +1,182 @@
+@import './colors';
+
+.inline {
+  display: inline-block;
+}
+
+.ui.transparent.inverted.input input{
+  color: #fff;
+}
+
+a.list-item{
+  font-size: 1.0rem;
+  &.small-item{
+    font-size: 1rem;
+  }
+}
+
+.pretty {
+  font-size: 16px;
+}
+
+pre, code, .editor-preview pre {
+  font-size: 0.9rem;
+}
+
+code {
+  color: #222;
+}
+
+.CodeRay code, .CodeRay pre, .editor-preview pre{
+  background: #eee !important;
+  padding: 1em 1.5em !important;
+  border-radius: 0.3rem !important;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  // color: #eee;
+  margin: 10px 0;
+}
+
+input textarea:focus,
+form textarea:focus,
+form input:focus{
+  border-color: #B413EC !important;
+}
+
+.input-group-sm .form-control.public-input {
+  height: 35px;
+}
+
+.public-btn {
+  margin-top: -4px;
+}
+
+textarea.relaxed{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.note-content {
+  font-weight: 500;
+  font-size: 1.0rem;
+  line-height: 1.7rem;
+  padding: 12px 20px 10px;
+  width: 100%;
+  overflow-x: auto;
+  table {
+    line-height: 1.5rem;
+  }
+  img{
+    max-width:100%;
+    max-height:100%;
+  }
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+  }
+}
+
+.editor-toolbar.fullscreen, .CodeMirror-fullscreen {
+  z-index: 1009 !important;
+}
+
+.CodeMirror.cm-s-easymde.CodeMirror-wrap{
+  font-size: 1.0rem;
+}
+
+.CodeMirror.cm-s-easymde.CodeMirror-wrap.CodeMirror-focused{
+  // border: 1px solid $purple-dark;
+}
+
+.CodeMirror pre.CodeMirror-line, .CodeMirror pre.CodeMirror-line-like{
+  padding-left: 0;
+}
+
+.editor-toolbar {
+  border-color: #ddd;
+}
+
+// Select2
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: $purple !important;
+  border-radius: 8px;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border: 1px solid #ced4da !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple{
+  border: none;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field{
+  padding-left: 10px !important;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.select2-container--default .select2-selection--multiple{
+  border: none !important;
+  background: transparent;
+}
+
+.select2-search__field{
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+.EasyMDEContainer {
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 9px;
+}
+
+.EasyMDEContainer .CodeMirror{
+  border: none;
+  background-color: #fff;
+  padding: 0 0;
+}
+
+.editor-toolbar{
+  background: #fff;
+  border: none;
+  display: none;
+}
+
+.note-input-header{
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.settings-card {
+  display: none;
+}
+
+.select2-container--default .select2-selection--single{
+  border: none;
+  background-color: #ddd;
+  color: #555;
+}
+
+.select2-dropdown{
+  border-radius: 9px !important;
+  border: 1px solid #bbb !important;
+  background: #f4f4f4;
+}
+
+.select2-container--default .select2-results > .select2-results__options{
+  border-radius: 8px !important;
+}
+
+.select2-dropdown.select2-dropdown--below, .select2-dropdown.select2-dropdown--below{
+  width: 350px !important;
+}
+
+.badge.note-show-badge{
+  background-color: #ddd;
+  padding: 6px 10px !important;
+  font-size: 1.0em !important;
+  font-weight: 500 !important;
+}
+
+.bootstrap-select > .dropdown-toggle{
+  padding: 1px 10px;
+}

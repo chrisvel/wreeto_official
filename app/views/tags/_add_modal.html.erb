@@ -1,10 +1,10 @@
 <div class="modal fade text-left" id="add-tag" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Add a tag</button>
+      <div class="modal-header d-block">
+        <button type="button" class="close float-left px-2" data-dismiss="modal">Add a new tag</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body bg-light p-4">
         <%= form_for(@tag, html: { class: "form "} ) do |f| %>
           <%= render 'layouts/error_messages', object: f.object %>
 
@@ -12,7 +12,6 @@
             <%= f.label :name %>
             <%= f.text_field :name, class: 'form-control form-control-lg' %>
           </div>
-          <hr/>
           <div class="actions">
             <div class="row">
               <div class="col-5">

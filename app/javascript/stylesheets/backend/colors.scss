@@ -1,0 +1,79 @@
+
+$red: #DB2828;
+$purple: #B413EC;
+$purple-dark: #9627ba;
+$white: #FFFFFF;
+$black: #000000;
+
+$light-grey: #F4F4F4;
+$soft-grey: #bbbbbb;
+$dark-grey: #222222;
+$very-light-grey: #f8f8f8;
+
+.bg-light {
+  background-color: #f1f1f1 !important;
+}
+
+.bg-red, .bg-danger{
+  background-color: #FFE8E6 !important;
+}
+
+.text-red, .text-danger{
+  color: #DB2828 !important;
+}
+
+.text-soft{
+  color: $soft-grey;
+}
+
+.bg-very-light{
+  background-color: $very-light-grey;
+}
+
+.text-purple{
+  color: $purple !important;
+}
+
+.border-red{
+  border: 1px solid #DB2828 !important;
+}
+
+a.link-purple-white {
+  color: $white;
+  &:hover{
+    color: $purple;
+    text-decoration: none;
+  }
+}
+
+a.link-purple {
+  color: #444444;
+  &:hover{
+    color: $purple;
+    text-decoration: none;
+  }
+}
+
+a.link-purple-soft {
+  color: #999999;
+  &:hover{
+    color: $purple;
+    text-decoration: none;
+  }
+}
+
+a.link-purple-light {
+  color: #bbbbbb;
+  &:hover{
+    color: $purple;
+    text-decoration: none;
+  }
+}
+
+a.link-purple-icon {
+  color: $purple;
+  &:hover{
+    color: $purple-dark;
+    text-decoration: none;
+  }
+}

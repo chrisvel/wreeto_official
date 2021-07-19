@@ -1,7 +1,7 @@
-<div class="card rounded-lg pr-4 py-0 mb-2 <%= project.active? ? 'border-left-active' : 'border-left-inactive' %>">
-  <div class="card-body">
+<div class="mb-4 <%= project.active? ? 'border-left-active' : 'border-left-inactive' %>">
+  <div class="card-body py-1">
     <h5 class="card-title">
-      <%= link_to project.title, category_path(project.slug), class: "link-purple", data: { turbolinks: false } %>
+      <%= link_to project.title, project_path(project.slug), class: "link-purple", data: { turbolinks: false } %>
       <!--<span class="float-right"><i class="fa fa-ellipsis-h text-muted"></i></span>-->
     </h5>
     <h6 class="card-subtitle mb-0 text-muted"><small><%= project.description %></small></h6>
@@ -23,7 +23,7 @@
                   <% end %>
                   <%= link_to item.title,
                         note_path(item.guid),
-                        class: 'note-item link-purple mr-3',
+                        class: 'list-item link-purple mr-3',
                         data: { turbolinks: false }
                         %>
                   <div class="col-md-12 pl-0 ml-0">

@@ -1,0 +1,76 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree ./landing_page
+ *= require ./backend/messages
+ *= require ./backend/easymde.min
+ */
+
+ $red            : #B03060;
+ $orange         : #FE9A76;
+ $yellow         : #FFD700;
+ $olive          : #32CD32;
+ $green          : #016936;
+ $teal           : #008080;
+ $blue           : #0E6EB8;
+ $violet         : #EE82EE;
+ $purple         : #B413EC;
+ $pink           : #FF1493;
+ $brown          : #A52A2A;
+ $grey           : #A0A0A0;
+ $black          : #000000;
+
+ body{
+   font-family: 'Titillium Web', sans-serif;
+   font-size: 1.2rem;
+   font-weight: 400;
+ }
+
+.landing-logo{
+  font-family: 'Beth Ellen', cursive;
+  display: block;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-decoration: none !important;
+  color: #ffffff;
+  a {
+    text-decoration: none;
+  }
+  &:hover{
+    text-decoration: none;
+    color: #dddddd;
+  }
+}
+
+.landing-footer-logo{
+  font-family: 'Beth Ellen', cursive;
+  display: block;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-decoration: none !important;
+  a {
+    text-decoration: none;
+  }
+  &:hover{
+    text-decoration: none;
+    color: #dddddd;
+  }
+}
+
+input, textarea {
+  border-color: #eee;
+}
+
+*:focus {
+  outline: none;
+}

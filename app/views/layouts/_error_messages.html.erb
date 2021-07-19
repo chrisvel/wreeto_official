@@ -1,10 +1,10 @@
 <% if object.errors.any? %>
   <div id="error_explanation" class="card bg-red text-red border-red p-3 mb-3">
     <div class="row">
-      <div class="col-2 text-center align-middle">
+      <div class="col-2 col-md-1 text-center align-middle">
         <i class="fa fa-4x fa-stackable fa-exclamation" style="opacity: 0.7; line-height: 1.3em;"></i>
       </div>
-      <div class="col-10">
+      <div class="col-10 col-md-11">
         <div class="content">
           <div class="header">
             This form contains <%= pluralize(object.errors.count, 'errors') %>.

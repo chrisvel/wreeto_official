@@ -1,0 +1,20 @@
+<div class="row mb-3">
+  <div class="col-12 col-md-6">
+    <h3>Inbox</h3>
+  </div>
+  
+  <div class="d-block d-md-none col-12 col-md-6 text-center mt-3">
+    
+  </div>
+
+  <div class="d-none d-md-block col-12 col-md-6 text-right my-auto">
+    <%= add_inbox_note_button %>
+  </div>
+</div>
+
+<% if @inbox.notes.any? %>
+  <%= render partial: 'notes/notes_list',
+    locals: {notes: @inbox.notes, notes_list: false} %>
+<% else %>
+  <%= blank_slate(:inbox) %>
+<% end %>

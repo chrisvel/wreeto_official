@@ -1,0 +1,46 @@
+<%= form_with(model: anonymous_inquiry, html: { class: 'form', novalidate: true }) do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="card shadow-sm bordered p-4">
+    <div class="form-group mb-4">
+      <%= f.label :reason %>
+      <%= f.select :reason, AnonymousInquiry.reasons.map{|k,v| [k.titleize, k]}, {},
+        {
+          id: "form-reason-select",
+          class: 'form-control selectpicker',
+          data: {width: '100%'}
+        } %>
+    </div>
+
+    <div class="form-group mb-4">
+      <%= f.label :fullname, 'Your name' %>
+      <%= f.text_field :fullname, class: 'form-control' %>
+    </div>
+
+    <div class="form-group mb-4">
+      <%= f.label :email, 'Your email' %>
+      <%= f.text_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group mb-4">
+      <%= f.label :body, 'How can we help?' %>
+      <%= f.text_area :body, size: "30x10", class: 'inquiry-content' %>
+    </div>
+
+    <div class="form-group mt-4">
+      <div class="form-group">
+        <div class="text-center">
+          <%= recaptcha_tags %>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="row">
+        <div class="col-12 text-right">
+          <%= f.submit "SEND", class: "btn btn-sm btn-purple" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

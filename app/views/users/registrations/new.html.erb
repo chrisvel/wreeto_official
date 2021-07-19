@@ -6,7 +6,16 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form signup-form"}) do |f| %>
         <%= render 'layouts/error_messages', object: f.object %>
 
-        <div class="card border-light">
+        <div class="d-block bg-warning border border-dark rounded p-4 my-3">
+          <h5>Please read this!</h5>
+          <p><strong>wreeto</strong> is becoming <a href="https://github.com/chrisvel/wreeto_official" target="_blank">open source</a> 
+          and unfortunately, the cloud service will be decommissioned on 31st of July 2021.
+          No new sign-ups will be allowed past that point of time. 
+          <p>We are sorry for any inconvenience. We are looking forward to see you soon.</p>
+          <p><em>Best regards, <br/> the wreeto Team</em><p>
+        </div>
+
+        <div class="card bordered shadow-sm">
           <div class="card-body">
             <h5>Sign Up</h5>
             <br>
@@ -29,16 +38,26 @@
               <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
             </div>
 
+            <div class="form-group mt-4">
+              <div class="form-group">
+                <div class="text-center">
+                  <%= recaptcha_tags %>
+                </div>
+              </div>
+            </div>
+
+            <hr/>
             <div class="actions text-center">
-              <%= f.button "SIGNUP WITH A WREETO ACCOUNT", type: 'submit', class: "btn btn-sm btn-purple" %>
+              <%= f.button "SIGN UP WITH YOUR EMAIL", type: 'submit', class: "btn btn-sm btn-purple" %>
             </div>
 
             <div class="text-center text-secondary py-4">OR</div>
 
             <div class="text-center pb-2">
-              <%= link_to '<i class="fa fa-2x fa-fw fa-google align-middle"></i> Sign Up with your Google account'.html_safe,
+              <%= link_to '<i class="fab fa-lg fa-fw fa-google align-middle mr-2"></i> Sign Up with your Google account'.html_safe,
                     user_google_oauth2_omniauth_authorize_path,
-                    class: 'btn btn-sm btn-primary text-center align-middle' %>
+                    class: 'btn btn-sm btn-primary text-center align-middle',
+                    method: :post %>
             </div>
 
           </div>

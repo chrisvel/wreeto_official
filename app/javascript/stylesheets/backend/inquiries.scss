@@ -1,0 +1,23 @@
+.inquiry-content {
+  border: 1px solid #ccc;
+  font-weight: 300;
+  font-size: 1.0rem;
+  line-height: 1.7rem;
+  padding: 20px 20px 10px;
+  width: 100%;
+  overflow-x: auto;
+  table {
+    line-height: 1.5rem;
+  }
+  img{
+    max-width:100%;
+    max-height:100%;
+  }
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 600;
+  }
+  &:focus {
+    border: 1px solid #ccc;
+    border-color: #B413EC !important;
+  }
+}

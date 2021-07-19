@@ -1,16 +1,39 @@
-<h2>Forgot your password?</h2>
+<main class="col-12 col-sm-12 col-md-8 col-xl-4 wt-content" role="main">
+  <div class="login-box mt-md-5 pt-md-5">
+    <div class="logo text-center pb-5 ml-auto">
+      <%= link_to 'wreeto', root_path %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+    <h5 class="text-center">Forgot your password?</h5>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), 
+      html: { class: 'form login-form', method: :post }) do |f| %>
+      <%# render 'layouts/error_messages', object: f.object %>
+      <%# devise_error_messages! %>
+
+      <div class="card bordered shadow-sm">
+        <div class="card-body">
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+          </div>
+
+          <div class="form-group mt-4">
+              <div class="form-group">
+                <div class="text-center">
+                  <%= recaptcha_tags %>
+                </div>
+              </div>
+            </div>
+
+          <div class="actions">
+            <div class="text-center">
+              <%= f.button "Send me reset password instructions", type: 'submit', class: "btn btn-block btn-dark mb-2" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+</main>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>

@@ -1,0 +1,26 @@
+<div class="w-50 ml-1">
+	<div class="row">
+		<% note.descendants.each do |link| %>
+			<div class="col-md-12 link-item-<%= link.id %>">
+				<div class="card bordered bg-very-light mt-2 mr-0 px-2 py-2">
+					<%= link_to "<i class='far fa-fw mr-2 fa-arrow-alt-circle-down'></i> #{link.title}".html_safe, 
+              note_path(link), 
+							class: 'link-purple middle-align ml-2',
+							data: { turbolinks: false } %>      
+				</div>
+			</div>
+		<% end %>
+    <% if note.parent.present? %>
+      <% note.ancestors.each do |link| %>
+        <div class="col-md-12 link-item-<%= link.id %>">
+          <div class="card bordered bg-very-light mb-2 mr-0 px-2 py-2">
+            <%= link_to "<i class='far fa-fw mr-2 fa-arrow-alt-circle-up'></i> #{link.title}".html_safe, 
+                note_path(link), 
+                class: 'link-purple middle-align ml-2',
+                data: { turbolinks: false } %>      
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+	</div>
+</div>

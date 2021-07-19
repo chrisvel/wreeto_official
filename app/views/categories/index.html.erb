@@ -1,45 +1,72 @@
-<div class="row">
-  <div class="col-2">
+<div class="row mb-3">
+  <div class="col-4">
     <h3>Categories</h3>
   </div>
-  <div class="col-10 text-right">
+  <div class="col-8 text-right my-auto">
     <%= add_category_button %>
   </div>
 </div>
-<hr/>
 
-<div class="card border rounded-lg shadow-sm px-5 py-4">
+<div class="">
   <table class="table">
     <thead>
     </thead>
     <tbody>
-      <% @categories.each do |category| %>
+      <% @categories.includes(:parent).all_but_inbox.each do |category| %>
         <tr>
           <td>
-              <%= link_to category.full_title, category_path(category.slug), data: { turbolinks: false }, class: "category-link link-purple" %>
+              <%= link_to category.full_title, category_path(category.slug), 
+                  data: { turbolinks: false }, class: "category-link link-purple align-middle mr-2" %>
               <% if category.items_amount > 0 %>
                 <span class="category-amount">(<%= category.items_amount %>)</span>
               <% end %>
-              <span class="ml-4" style="color: #cccccc;"><%= category.description %></span>
-              <% if category.subcategories.size > 0 %>
+              <% if category.is_a_project? %>
+                <span class="badge badge-purple"><strong>PROJECT</strong></span>
+              <% end %>
+              <div class="row">
+                <span class="ml-3 align-middle" style="color: #cccccc;"><%= category.description %></span>
+              </div>
+              <%# SUBCATEGORIES %>
+              <% if category.subcategories.includes(:notes).where(type: nil).size > 0 %>
                 <div class="subcategories-list">
-                  <% category.subcategories.ordered_by_active.ordered_by_title.each do |cat| %>
+                  <% category.subcategories.where(type: nil).ordered_by_title.each do |subcategory| %>
                     <div class="subcategory-item">
-                      <% if cat.is_a_project? && cat.active? %>
-                        <i class="fa fa-folder fa-fw text-purple"></i>
-                      <% elsif cat.is_a_project? && cat.inactive? %>
-                        <i class="fa fa-folder fa-fw text-grey" style="color: lightgrey;"></i>
-                      <% else %>
-                        <i class="fa fa-folder fa-fw text-purple"></i>
+                      <%= link_to subcategory.title, category_path(subcategory.slug), data: { turbolinks: false }, class: 'subcategory-link link-purple ml-1' %>
+                      <% if subcategory.items_amount > 0 %>
+                        <span class="category-amount">(<%= subcategory.items_amount %>)</span>
                       <% end %>
-                      <%= link_to cat.title, category_path(cat.slug), data: { turbolinks: false }, class: 'subcategory-link link-purple' %>
-                      <% if cat.items_amount > 0 %>
-                        <span class="category-amount">(<%= cat.items_amount %>)</span>
-                      <% end %>
+                    </div>
+                    <%# PROJECTS %>
+                    <% if subcategory.projects.size > 0 %>
+                      <div class="subcategories-list">
+                        <% subcategory.projects.ordered_by_active.ordered_by_title.each do |proj| %>
+                          <div class="mb-1">
+                            <%= link_to proj.title, 
+                                  project_path(proj.slug), 
+                                  data: { turbolinks: false }, 
+                                  class: 'subcategory-link link-purple align-middle ml-1 mr-2' %>
+                            <span class="badge badge-purple"><strong>PROJECT</strong></span>
+                          </div>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <%# PROJECTS %>
+              <% if category.projects.size > 0 %>
+                <div class="subcategories-list">
+                  <% category.projects.ordered_by_active.ordered_by_title.each do |proj| %>
+                    <div class="subcategory-item">
+                      <%= link_to proj.title, project_path(proj.slug), 
+                        data: { turbolinks: false }, class: 'subcategory-link link-purple align-middle ml-1 mr-2' %>
+                      <span class="badge badge-purple"><strong>PROJECT</strong></span>
                     </div>
                   <% end %>
                 </div>
               <% end %>
+
           </td>
           <td></td>
           <td class="text-center">

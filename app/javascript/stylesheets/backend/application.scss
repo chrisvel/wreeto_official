@@ -1,0 +1,131 @@
+@import './colors';
+
+body{
+   font-family: 'Titillium Web', sans-serif;
+   font-size: 0.9rem;
+   font-weight: 400;
+   background-color: #f4f4f4;
+   color: #444444;
+ }
+
+ .menu, .form, .button,
+ h1, h2, h3, h4, h5,
+ .header, input, .dropdown, a, .label, p, table,
+ ul li{
+   font-family: 'Titillium Web', sans-serif !important;
+ }
+
+ ul li ul{
+  padding-left: 16px;
+}
+
+input:focus, input.form-control:focus, button:focus{
+  outline: none !important;
+  outline-width: 0 !important;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.form .field{
+  margin-bottom: 20px !important;
+}
+
+.wt-navbar{
+  z-index: 100;
+}
+
+.wt-content{
+  display: block;
+  margin: 0 auto;
+  padding: 40px 15px 0 15px;
+}
+
+.main-content{
+  margin-top: 110px !important;
+  margin-left: 300px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+.landing-logo{
+  font-family: 'Beth Ellen', cursive;
+  display: block;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-decoration: none !important;
+  color: #ffffff;
+  a {
+    text-decoration: none;
+  }
+  &:hover{
+    text-decoration: none;
+    color: #dddddd;
+  }
+}
+
+.navbar, .navbar.navbar-light{
+  box-shadow: 0 1px 2px 0 rgba(34,36,38,0.15);
+  .logo-item {
+    height: 48px;
+    margin: 0 auto;
+    .logo {
+      font-family: 'Beth Ellen', cursive !important;
+      display: block;
+      margin: 0 auto;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+  }
+  .dropdown-menu {
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    border-radius: 0;
+    right: 0;
+    min-width: 12rem !important;
+  }
+}
+
+.table, table {
+  margin-bottom: 0px;
+}
+
+.table > thead > tr:first-child > td,
+.table > tbody > tr:first-child > td {
+    border: none;
+}
+
+.bootstrap-select button.btn{
+  text-transform: none;
+}
+
+.tooltip {
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 10px;
+}
+
+.tooltip .tooltip-inner {
+  background-color: $purple;
+  color: #eee;
+}
+
+.bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+  border-top-color: $purple;
+}
+.bs-tooltip-auto[x-placement^=right] .arrow::before, .bs-tooltip-right .arrow::before {
+  border-right-color: $purple;
+}
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before {
+  border-bottom-color: $purple;
+}
+.bs-tooltip-auto[x-placement^=left] .arrow::before, .bs-tooltip-left .arrow::before {
+  border-left-color: $purple;
+}
+
+.js-hidden {
+  display: none;
+}

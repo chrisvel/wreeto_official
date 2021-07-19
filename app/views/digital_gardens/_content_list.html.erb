@@ -1,0 +1,8 @@
+<% notes.each do |note| %>
+  <div class="mb-5">
+    <span id="<%= note.guid %>" class="pp-anchor"></span>
+    <h5><%= note.title %></h5>
+    <p class="pl-2"><%= markdown(note.content) %></p>
+  </div>
+<% end %>
+

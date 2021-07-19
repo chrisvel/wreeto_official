@@ -12,27 +12,18 @@
   <%= render 'layouts/error_messages', object: f.object %>
 
   <div class="form-group">
-    <div class="ui checkbox">
-      <div class="pretty p-icon p-smooth p-fill">
-        <%= f.check_box :wiki_enabled %>
-        <div class="state">
-          <i class="icon fa fa-check"></i>
-          <%= f.label :wiki %>
-        </div>
-      </div>
-    </div>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control form-control-lg' %>
   </div>
 
   <div class="form-group">
-    <div class="ui checkbox">
-      <div class="pretty p-icon p-smooth p-fill">
-        <%= f.check_box :attachments_enabled %>
-        <div class="state">
-          <i class="icon fa fa-check"></i>
-          <%= f.label :attachments %>
-        </div>
-      </div>
-    </div>
+    <%= f.label :subdomain %>
+    <%= f.text_field :subdomain, class: 'form-control form-control-lg' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website_url %>
+    <%= f.text_field :website_url, class: 'form-control form-control-lg' %>
   </div>
 
   <div class="actions">

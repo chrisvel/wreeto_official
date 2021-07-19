@@ -1,25 +1,10 @@
-# == Schema Information
-#
-# Table name: categories
-#
-#  id          :bigint           not null, primary key
-#  title       :string
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
-#  parent_id   :integer
-#  active      :boolean          default(TRUE), not null
-#  deletable   :boolean          default(TRUE), not null
-#  slug        :string
-#
-
 class Category < ApplicationRecord
 
   before_update  :protect_unchangeables
   before_validation  :set_slug
 
   has_many :subcategories, class_name: 'Category', foreign_key: "parent_id", dependent: :destroy
+  has_many :projects, class_name: 'Project', foreign_key: "parent_id", dependent: :destroy
   has_many :notes, class_name: 'Note'
   belongs_to :parent, class_name: 'Category', optional: true
   belongs_to :user
@@ -29,26 +14,18 @@ class Category < ApplicationRecord
   validate  :slug_is_unique, if: :slug_changed?
 
   scope :ordered_by_title, -> { order('title ASC') }
-  scope :ordered_by_active, -> { order('active = true DESC') }
-  scope :projects, -> { where(parent: where(title: 'Projects', deletable: false)) }
-  scope :active, -> { where(active: true) }
   scope :parents_ordered_by_title, -> { where(parent: nil).order('title ASC') }
+  scope :inbox, -> { find_by(title: 'Inbox', slug: 'inbox') }
+  scope :all_but_inbox, -> { where.not(title: 'Inbox', slug: 'inbox') }
+  scope :generic, -> { where(type: nil) }
 
   def full_title
     return self.title if self.parent.nil?
-    "#{self.title} (#{self.parent.title})"
-  end
-
-  def active?
-    self.active
-  end
-
-  def inactive?
-    active? ? false : true
+    "#{self.parent.title} :: #{self.title}"
   end
 
   def subcategories_notes
-    self.subcategories.includes([:notes]).map{|a| a.notes}.flatten
+    self.subcategories.map{|a| a.notes}.flatten
   end
 
   def items_amount
@@ -57,12 +34,16 @@ class Category < ApplicationRecord
     itcat + itsub
   end
 
-  def is_a_project?
-    self.parent_id.present? && parent.slug == 'projects' && parent.title == 'Projects'
+  def is_a_category?
+    type.nil?
   end
 
-  def projects? 
-    slug == 'projects' && title == 'Projects'
+  def is_a_project? 
+    type == 'Project'
+  end
+
+  def is_inbox? 
+    title == 'Inbox' && slug == 'inbox'
   end
 
   def to_param
@@ -76,11 +57,19 @@ class Category < ApplicationRecord
     end
   end
 
+  def dg_notes
+    notes.where(dg_enabled: true).order(title: :asc)
+  end
+
   private
 
   def set_slug
     if parent.present?
-      self.slug = parent.title.parameterize + '_' + title.parameterize
+      if parent.parent.present? 
+        self.slug = parent.parent.title.parameterize + '_' + parent.title.parameterize + '_' + title.parameterize
+      else 
+        self.slug = parent.title.parameterize + '_' + title.parameterize
+      end
     else 
       self.slug = title.parameterize
     end

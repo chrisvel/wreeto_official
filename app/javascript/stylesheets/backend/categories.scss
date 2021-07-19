@@ -1,0 +1,37 @@
+@import 'colors';
+
+a.category-link{
+  font-size: 1.2rem;
+}
+
+.category-amount{
+  color: #cccccc;
+  margin-left: 5px;
+  // font-size: 0.8rem;
+  display: inline-block;
+}
+
+.subcategories-list{
+  margin: 5px 0px 0px 15px;
+
+  .subcategory-item{
+    display: block;
+
+    .subcategory-link{
+      font-size: 1rem;
+      line-height: 1.8rem;
+    }
+  }
+}
+
+.border-left-active{
+  border-left: 2px solid $purple-dark !important;
+}
+
+.border-left-inactive{
+  border-left: 2px solid #aaaaaa !important;
+}
+
+.textarea-category{
+  min-height: 120px;
+}

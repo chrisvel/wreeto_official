@@ -1,0 +1,37 @@
+<ul class="pp-list list-group list-group-flush bg-transparent">
+  <% @dg.parents.each do |category| %>
+    <li class="list-group-item bg-transparent border-0 p-0 pb-2 mb-3">
+      <%# Parent Category %>
+      <div class="d-flex justify-content-between align-items-center pl-3 py-1">
+        <%= link_to category.title.upcase, "##{category.slug}", data: { turbolinks: false }, class: "pp-category-link link-purple" %>
+        <%# <i class="fa fa-chevron-down text-secondary"></i> %>
+      </div>
+      <%# Parent Notes %>
+      <% if category.dg_notes.any? %>
+        <%= render partial: 'toc_list', locals: {category: category, notes: category.dg_notes.order(favorite: :desc, title: :asc), subcategory: false, collapse: false} %>
+      <% end %>
+
+      <%# SubCategories %>
+      <% if category.subcategories.any? %>
+        <ul class="pp-list list-group list-group-flush bg-transparent ml-3">
+          <% category.subcategories.where(id: @dg.subcategories.pluck(:id)).ordered_by_title.each do |subcat| %>
+            <li class="list-group-item p-0 ml-2 bg-transparent border-0">
+
+              <%# SubCategory Title %>
+              <div class="d-flex justify-content-between align-items-center">
+                <%= link_to subcat.title, "##{subcat.slug}", data: {turbolinks: false}, class: 'pp-subcategory-link text-emphasis link-purple py-1' %>
+                <%= link_to '<i class="fa fa-chevron-down"></i>'.html_safe, "##{subcat.slug}-collapse", data: { toggle: :collapse, turbolinks: false }, class: 'pp-subcategory-link text-emphasis link-purple ml-2' %>
+              </div>
+
+              <%# SubCategory Notes %>
+              <% if subcat.dg_notes.any? %>
+                <%= render partial: 'toc_list', locals: {category: subcat, notes: subcat.dg_notes.order(favorite: :desc, title: :asc), subcategory: true, collapse: true} %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+

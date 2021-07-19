@@ -1,0 +1,15 @@
+<ul class="list-group list-group-flush <%= collapse ? 'collapse' : '' %>" id="<%= category.slug %>-collapse">
+  <% notes.each do |note| %>
+    <% if subcategory %>
+      <li class="list-group-item py-1 pl-3 bg-transparent border-0">
+    <% else %>
+      <li class="list-group-item py-1 ml-1 bg-transparent border-0">
+    <% end %>
+        <%= link_to "#{note.title}".html_safe,
+              "##{note.guid}",
+              class: 'note-child-item link-purple',
+              data: { turbolinks: false }
+              %>
+      </li>
+  <% end %>
+</ul>

@@ -1,87 +1,133 @@
 <%= form_with(model: @note, html: { class: 'form', novalidate: true }) do |f| %>
   <%= render 'layouts/error_messages', object: f.object %>
 
-  <div class="card shadow-sm bordered p-4">
-    <div class="form-group mb-4">
-      <%= f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Untitled note' %>
-    </div>
-
-    <div class="form-group mb-4">
-      <%= f.collection_select :tag_list, @tags, :id, :name, {selected: @note.tag_list.ids},
-            {
-              id: "form-category-select",
-              class: 'form-control tag-picker',
-              multiple: true
-            } %>
-    </div>
-
-    <div class="form-group mb-4">
-      <%= f.text_area :content, size: "30x20", id: 'note-content' %>
-    </div>
-
-    <div class="form-group mb-4">
-      <div class="pretty p-icon p-fill">
-        <%= f.check_box :favorite %>
-        <div class="state p-warning">
-          <i class="icon fa fa-check"></i>
-          <%= f.label :favorite %>
+  <div class="p-0">
+    <div class="form-row mb-5">
+      <div class="form-group col-md-7 mb-4 align-middle my-auto">
+        <%= f.text_field :title, class: 'form-control form-control-lg bg-transparent border-0 pl-0 note-input-header', placeholder: 'Untitled note', autocomplete: 'off' %>
+      </div>
+      <div class="form-group col-md-5 text-right align-middle my-auto pb-2">
+        <div class="my-auto d-inline-block mr-1 align-middle pt-1">
+          <div class="pretty p-icon p-toggle p-plain m-0 mr-3" data-toggle='tooltip' title="Favorite">
+            <%= f.check_box :favorite %>
+            <div class="state p-on p-warning-o">
+              <i class="icon fa fa-star"></i>
+              <label></label>
+            </div>
+            <div class="state p-off text-muted">
+              <i class="icon far fa-star"></i>
+              <label></label>
+            </div>
+          </div>
+          <%= link_to '<i class="fas fa-indent"></i>'.html_safe,
+                      "#",
+                      class: "link-purple-soft mr-3 preview-toggle my-auto",
+                      data: { turbolinks: false, toggle: 'tooltip', title: "Preview content" }
+                      %>
+          <%= link_to '<i class="fas fa-tools"></i>'.html_safe,
+                      "#",
+                      class: "link-purple-soft mr-5 editor-toolbar-toggle",
+                      data: { turbolinks: false, toggle: 'tooltip', title: "Editor toolbar" }
+                      %>
+          <%= link_to '<i class="fas fa-cog"></i>'.html_safe,
+                        "#",
+                        class: "link-purple-soft mr-3 settings-toggle my-auto",
+                        data: { turbolinks: false, toggle: 'tooltip', title: "Settings" }
+                        %>
+          <% if @note.id %>
+            <%= link_to '<i class="fas fa-trash"></i>'.html_safe,
+                        "#",
+                        class: "link-purple-soft mr-2",
+                        data: { toggle: "modal", target: "#delete-#{@note.id}", turbolinks: false }
+                        %>
+            <%= render partial: 'delete_modal', locals: {note: @note} %>
+          <% end %>
         </div>
+        <%= button_tag type: 'submit', class: "ml-2 btn btn-sm btn-outline-primary px-2 py-1" do %>
+          <i class="fas fa-save mr-2"></i> SAVE CHANGES
+        <% end %>
+      </div>
+    </div>
+    
+    <div class="form-group d-flex flex-row justify-content-start mb-1">
+      <div class="align-middle my-auto"><i class="fa fa-folder text-secondary"></i></div>
+      <div class="ml-3">
+        <%= f.select :category_id, @categories.map{|cat| [cat.full_title, cat.id]}.sort, {},
+              {
+                id: "form-category-select",
+                class: 'form-control w-100 js-hidden',
+                data: {live_search: "true", width: '100%'}
+              } %>
+      </div>
+    </div>
+    
+    <div class="form-group mb-4 d-flex flex-row justify-content-start">
+      <div class="align-middle my-auto"><i class="fa fa-hashtag text-secondary"></i></div>
+      <div class="flex-grow-1 pl-2 ml-1">
+        <%= f.collection_select :tag_list, @tags, :name, :name, {selected: @note.tag_list},
+              {
+                id: "form-tag-select",
+                class: 'form-control tag-picker w-100 js-hidden',
+                multiple: true
+              } %>
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="col-12 col-lg-6">
-        <div class="form-group">
-          <%= f.label :category_id %>
-          <%= f.collection_select :category_id, @categories, :id, :title, {},
-            {
-              id: "form-category-select",
-              class: 'form-control selectpicker show-tick',
-              data: {live_search: "true", width: '100%'}
-            } %>
-        </div>
-      </div>
+    <div class="form-group mb-4 d-flex flex-row justify-content-start">
+      <div class="mt-3"><i class="fa fa-chevron-right text-secondary"></i></div>
+      <%= f.text_area :content, size: "30x20", id: 'note-content', class: 'flex-grow-1 js-hidden w-100' %>
     </div>
-    <hr />
+  </div>
 
-    <% if current_user.account.attachments_enabled %>
-      <h6 class="mt-2 text-bold">ATTACHMENTS</h6>
-      <%= render partial: 'attachments_list', locals: {note: @note, intent: :edit} %>
+  <div class="settings-card">
+    <% if @note.id %>
+      <hr />
+      <div class='form-group d-flex flex-row justify-content-start'>
+        <div class="align-top"><i class="fa fa-globe text-secondary"></i></div>
+        <div class="flex-grow-1 pl-2 ml-1">
+          <div class="public-link-card">
+            <%= render partial: 'notes/form/public_link', locals: {f: f} %>
+          </div>
+        </div> 
+      </div>
+    <% end %>
 
-      <div class="form-row mt-4">
-        <div class="col-12 col-lg-6">
-          <div class="form-group">
-            Add one or multiple attachments:  <br/><br/>
-            <%# <label class="btn btn-sm btn-dark">
-              BROWSE FILES
-              <span style="display:none;"> %>
-                <%= f.file_field :attachments, multiple: true, direct_upload: true %>
-              <%# </span>
-            </label> %>
+    <% if current_user.has_backlinks_addon? %>
+      <hr />
+      <div class='form-group d-flex flex-row justify-content-start'>
+        <div class="align-top"><i class="fa fa-link text-secondary"></i></div>
+        <div class="flex-grow-1 pl-2 ml-1">
+          <div class="backlinks-card">
+            <%= render partial: 'notes/form/backlinks', locals: {f: f} %>
           </div>
         </div>
       </div>
     <% end %>
 
-    <%= hidden_field_tag :current_guid, @note.guid if @note %>
-
-    <hr />
-    <div class="actions">
-      <div class="row">
-        <div class="col-5">
-          <% if @note.id %>
-            <%= link_to 'DELETE NOTE',
-                        "#",
-                        class: "btn btn-sm btn-outline-danger",
-                        data: { toggle: "modal", target: "#delete-#{@note.id}", turbolinks: false }
-                        %>
-            <%= render partial: 'delete_modal' %>
-          <% end %>
-        </div>
-        <div class="col-7 text-right">
-          <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+    <% if current_user.has_dg_addon? %>
+      <hr />
+      <div class='form-group d-flex flex-row justify-content-start'>
+        <div class="align-top"><i class="fa fa-leaf text-secondary"></i></div>
+        <div class="flex-grow-1 pl-2 ml-1">
+          <div class="digital-gardens-card">
+            <%= render partial: 'notes/form/digital_gardens', locals: {f: f} %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
+
+    <% if current_user.has_attachments_addon? %>
+      <hr />
+      <div class='form-group d-flex flex-row justify-content-start'>
+        <div class="align-top"><i class="fa fa-paperclip text-secondary"></i></div>
+        <div class="flex-grow-1 pl-2 ml-1">
+          <div class="attachments-card">
+            <%= render partial: 'notes/form/attachments', locals: {f: f} %>
+          </div>
+        </div> 
+      </div>
+    <% end %>
   </div>
+
+  <%= hidden_field_tag :current_guid, @note.guid if @note %>
 <% end %>

@@ -24,7 +24,8 @@ class AccountsController < ApplicationController
   def account_params
     params.fetch(:account, {})
           .permit(
-            :wiki_enabled,
-            :attachments_enabled)
+            :name,
+            :subdomain,
+            :website_url)
   end
 end

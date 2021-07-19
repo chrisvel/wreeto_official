@@ -14,30 +14,41 @@
           <%= link_to "Notes", notes_path, class: "nav-link text-center", data: { turbolinks: false } %>
         </li>
         <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
+          <%= link_to "Projects", category_path(slug: 'projects'), class: "nav-link text-center", data: { turbolinks: false } %>
+        </li>
+        <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
           <%= link_to "Categories", categories_path, class: "nav-link text-center", data: { turbolinks: false } %>
         </li>
         <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
           <%= link_to "Wiki", wiki_path, class: "nav-link text-center", data: { turbolinks: false } %>
         </li>
+        <li class="nav-item d-sm-block d-lg-none py-1 py-md-0">
+          <%= link_to "Digital Gardens", digital_gardens_path, class: "nav-link text-center", data: { turbolinks: false } %>
+        </li>
         <li class="dropdown py-1 py-md-0">
           <a class="nav-link dropdown-toggle pl-sm-2 mt-sm-2 mr-3" href="#" id="navbarDropdown"
               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.username %>
+            <span><%= plan_badge(current_user).html_safe %><span>
+            <span class="ml-3"><%= current_user.username %><span>
             <i class="dropdown icon"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right shadow-sm pt-3 pb-2 text-center text-lg-left" aria-labelledby="navbarDropdown">
             <%= link_to 'Profile Settings', edit_user_registration_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
-            <%= link_to "Addons #{beta_badge}".html_safe, account_path,
+            <%= link_to "Subscription", subscription_path,
+              class: 'dropdown-item', data: { turbolinks: false } %>
+            <%# link_to "Addons #{beta_badge}".html_safe, account_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <hr class="my-2" />
-            <%= link_to "Backup & restore #{beta_badge}".html_safe, backups_path,
+            <%# link_to "Backup & restore #{beta_badge}".html_safe, backups_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
-            <%= link_to "Import notes #{beta_badge}".html_safe, import_zip_path,
+            <%# link_to "Import notes #{beta_badge}".html_safe, import_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Export notes', download_export_zip_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <hr class="my-2" />
+            <%= link_to 'Contact Us', new_inquiry_path,
+              class: 'dropdown-item', data: { turbolinks: false } %>
             <%= link_to 'Help', pages_help_path,
               class: 'dropdown-item', data: { turbolinks: false } %>
             <hr class="my-2" />

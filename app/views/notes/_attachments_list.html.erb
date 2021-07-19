@@ -1,26 +1,24 @@
-<div class="mt-2 px-5">
+<div class="w-50 ml-1">
 	<div class="row">
 		<% note.attachments.each do |att| %>
 			<div class="col-md-12 attachment-item-<%= att.id %>">
-				<div class="card bordered bg-very-light mt-2 mr-0 px-3 py-3">
+				<div class="card bordered bg-very-light mb-2 mr-0 px-3 py-3">
 					<div>
 						<div class="text-soft d-inline-block align-middle" style="width: 35px;">
 							<%= File.extname(att.filename.to_s).strip.upcase[1..-1] %>
 						</div>
 						<% if att.previewable? %>
-							<%= image_tag att.preview(combine_options: {
-																						auto_orient: true,
-																						gravity: "center",
-																						resize: "24x24^",
-																						crop: "24x24+0+0"
-																						}), class: 'ml-2 align-middle' %>
+							<%= image_tag att.preview(auto_orient: true,
+                                        gravity: "center",
+                                        resize: "24x24^",
+                                        crop: "24x24+0+0"
+                                        ), class: 'ml-2 align-middle' %>
 						<% elsif att.variable? %>
-							<%= image_tag att.variant(combine_options: {
-																						auto_orient: true,
-																						gravity: "center",
-																						resize: "24x24^",
-																						crop: "24x24+0+0"
-																						}), class: 'ml-2 align-middle' %>
+							<%= image_tag att.variant(auto_orient: true,
+                                        gravity: "center",
+                                        resize: "24x24^",
+                                        crop: "24x24+0+0"
+                                        ), class: 'ml-2 align-middle' %>
 						<% else %>
 							<div class="ml-2 text-soft d-inline-block align-middle text-center" style="width: 24px; height: 24px;">
 								<i class="fa fa-paperclip"></i>
@@ -39,7 +37,7 @@
 								<%= link_to "<i class='fa fa-trash ml-2' style='font-size: 18px;'></i>".html_safe,
 									"#",
 									id: "js-att-id-#{att.id}",
-									class: "link-purple ml-2 js-delete-attachment align-middle",
+									class: "link-purple-light ml-2 js-delete-attachment align-middle",
 									data: { turbolinks: false } %>
 							<% end %>
 						</div>
