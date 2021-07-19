@@ -6,11 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Plan.create!(
-  slug: 'trial',
-  name: 'Trial'
-)
-
 user = User.first_or_create!({
   firstname: 'John', 
   lastname: "Johnnson", 

@@ -63,10 +63,8 @@ class NotesController < ApplicationController
           current_user.notes.where(id: note_params[:link_ids]).each{|s| s.update(parent: @note)}
         end
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        # format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
-        # format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -96,10 +94,8 @@ class NotesController < ApplicationController
         end
 
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
-        # format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -227,11 +223,7 @@ class NotesController < ApplicationController
     end
 
     def set_digital_gardens
-      if current_user.plan_free? 
-        @digital_gardens = [current_user.digital_gardens.order(title: :asc).first]
-      else 
-        @digital_gardens = current_user.digital_gardens.order(title: :asc)
-      end
+      @digital_gardens = current_user.digital_gardens.order(title: :asc)
     end
     
     def set_links

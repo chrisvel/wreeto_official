@@ -94,22 +94,6 @@ class User < ApplicationRecord
     has_addon?('graph')
   end
 
-  def current_plan 
-    account.subscriptions.first.plan.slug.to_sym
-  end
-
-  def plan_free?
-    current_plan == :free 
-  end
-
-  def plan_trial?
-    current_plan == :trial 
-  end
-
-  def plan_premium?
-    current_plan == :premium 
-  end
-
   def inbox
     categories.inbox
   end

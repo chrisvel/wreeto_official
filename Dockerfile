@@ -44,6 +44,7 @@ COPY . $APP_HOME/
 COPY config/database.docker.yml $APP_HOME/config/database.yml
 
 RUN bundle exec rake assets:precompile
+RUN yarn install 
 
 EXPOSE 8383
 

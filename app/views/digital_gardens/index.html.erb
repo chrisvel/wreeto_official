@@ -5,14 +5,10 @@
     </div>
   </div>
   <div class="col-8 col-md-4 text-right my-auto">
-    <% if current_user.digital_gardens.none? || current_user.plan_premium? %>
-      <%= add_dg_button %>
-    <% end %>
+    <%= add_dg_button %>
   </div>
 </div>
 
-<%= render partial: 'plan_notification' %>
-<%# render partial: 'info' %>
 <% if @digital_gardens&.any? %>
   <%= render partial: 'digital_gardens_list', locals: {digital_gardens: @digital_gardens} %>
 <% else %>

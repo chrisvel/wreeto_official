@@ -2,24 +2,24 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_30_172323) do
+ActiveRecord::Schema.define(version: 2021_07_19_092652) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.boolean "wiki_enabled"
-    t.boolean "attachments_enabled"
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_accounts_on_user_id"
+    t.string "name"
+    t.string "subdomain"
+    t.string "website_url"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -40,7 +40,24 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "anonymous_inquiries", force: :cascade do |t|
+    t.integer "reason"
+    t.text "body"
+    t.string "fullname"
+    t.string "email"
+    t.hstore "meta"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "backups", force: :cascade do |t|
@@ -62,9 +79,38 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug", "user_id"], name: "index_categories_on_slug_and_user_id", unique: true
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "digital_gardens", force: :cascade do |t|
+    t.string "slug"
+    t.string "title"
+    t.boolean "enabled", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["slug"], name: "index_digital_gardens_on_slug"
+    t.index ["user_id"], name: "index_digital_gardens_on_user_id"
+  end
+
+  create_table "digital_gardens_notes", id: false, force: :cascade do |t|
+    t.bigint "digital_garden_id", null: false
+    t.bigint "note_id", null: false
+    t.index ["digital_garden_id", "note_id"], name: "index_dgs_notes"
+    t.index ["note_id", "digital_garden_id"], name: "index_notes_dgs"
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.integer "reason"
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.hstore "meta"
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -79,6 +125,9 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.string "guid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "dg_enabled", default: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_notes_on_ancestry"
     t.index ["category_id"], name: "index_notes_on_category_id"
     t.index ["guid"], name: "index_notes_on_guid", unique: true
     t.index ["user_id"], name: "index_notes_on_user_id"
@@ -88,8 +137,8 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "note_id"
-    t.index ["note_id"], name: "index_taggings_on_note_id"
+    t.string "taggable_type"
+    t.integer "taggable_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
@@ -118,7 +167,6 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.string "unconfirmed_email"
     t.string "firstname"
     t.string "lastname"
-    t.string "users"
     t.string "provider"
     t.string "uid"
     t.string "token"
@@ -129,20 +177,22 @@ ActiveRecord::Schema.define(version: 2020_10_30_172323) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.bigint "account_id"
+    t.text "add_ons", default: [], array: true
     t.index ["account_id"], name: "index_users_on_account_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "backups", "users"
   add_foreign_key "categories", "categories", column: "parent_id"
   add_foreign_key "categories", "users"
+  add_foreign_key "digital_gardens", "users"
+  add_foreign_key "inquiries", "users"
   add_foreign_key "notes", "categories"
   add_foreign_key "notes", "users"
-  add_foreign_key "taggings", "notes"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "users"
   add_foreign_key "users", "accounts"

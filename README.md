@@ -201,6 +201,6 @@ There are several ways you can help with wreeto:
 
 AGPLv3 License for the community version 
 
-## <a name="professional-edition"></a> 9. Professional edition 
+## <a name="professional-edition"></a> 9. Premium edition 
 
-There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com for more details (currently updating).
+There is a premium version and there is a pricing plan for this edition. Please check https://wreeto.com or email to <wreeto.official and gmail as the domain provider> for more details (currently updating).

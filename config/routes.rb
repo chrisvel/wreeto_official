@@ -6,9 +6,6 @@ Rails.application.routes.draw do
     post 'premium', to: 'inquiries#premium', on: :collection
   end 
 
-  resource :subscription, only: [:show]
-  get 'plans/show'
-
   get 'errors/not_found'
   get 'errors/internal_server_error'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

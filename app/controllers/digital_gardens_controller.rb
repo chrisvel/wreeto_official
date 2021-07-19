@@ -5,16 +5,11 @@ class DigitalGardensController < ApplicationController
 
   def index 
     digital_gardens = current_user.digital_gardens
-    if current_user.plan_free? 
-      @digital_gardens = [digital_gardens.first]
-    else 
-      @digital_gardens = digital_gardens
-    end
+    @digital_gardens = digital_gardens
     authorize digital_gardens
   end
 
   def new 
-    raise ActionController::RoutingError.new('Not Found') if (current_user.digital_gardens.any? && !current_user.plan_premium?)
     @dg = current_user.digital_gardens.new
     authorize @dg
   end

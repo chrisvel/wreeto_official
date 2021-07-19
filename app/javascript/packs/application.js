@@ -61,9 +61,7 @@ import '../src/imports.js';
 import '../src/inquiries.js';
 import '../src/items.js';
 import '../src/notes.js';
-import '../src/plans.js';
 import '../src/search.js';
-import '../src/subscriptions.js';
 import '../src/graph.js';
 
 Rails.start()
