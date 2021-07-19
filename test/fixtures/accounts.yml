@@ -21,22 +21,21 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
-#  provider               :string
-#  uid                    :string
-#  token                  :string
-#  expires_at             :integer
-#  expires                :boolean
-#  refresh_token          :string
 #
 
-require 'test_helper'
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-class UserTest < ActiveSupport::TestCase
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
 
-  test 'creates a new user and all associated objects' do 
-    assert_difference 'User.count', 1 do 
-      User.create!(email: 'test@email.com', password: 'Password1!')
-    end
-    assert_equal 'test@email.com', User.last.email
-  end
-end
+big_bang_theory:
+  name: Big Bang Theory
+  subdomain: bbt
+  website_url: https://google.com
+
+rambo:
+  name: Rambo
+  subdomain: rambo
+  website_url: https://google.com

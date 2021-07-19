@@ -18,14 +18,24 @@
 
 ideas:
   title: Ideas
+  slug: ideas
   description: Ideas
-  user: jack_sparrow
+  user: sheldon_cooper
   deletable: true
   active: true
 
 projects:
   title: Projects
+  slug: projects
   description: projects
-  user: jack_sparrow
+  user: sheldon_cooper
+  deletable: false
+  active: true
+
+bbt_inbox: 
+  title: Inbox
+  slug: inbox
+  description: Inbox
+  user: sheldon_cooper
   deletable: false
   active: true

@@ -11,7 +11,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "authenticated user redirect to wiki" do
-    sign_in users(:jack_sparrow)
+    sign_in users(:sheldon_cooper)
     get '/wiki'
     assert_response :success
   end

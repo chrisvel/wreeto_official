@@ -1,7 +1,2 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-first:
-  name: 'First'
-
-second:
-  name: 'Second'
+tag_one:
+  name: tag

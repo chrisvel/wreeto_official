@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+free_plan:
+  name: Free
+  slug: free
+  description: Free plan
+  created_at: <%= 10.day.ago %>
+  updated_at: <%= 10.day.ago %>
+
+trial_plan:
+  name: Trial
+  slug: trial
+  description: Trial plan 
+  created_at: <%= 10.day.ago %>
+  updated_at: <%= 10.day.ago %>
+
+premium_plan:
+  name: Premium
+  slug: premium
+  description: Premium plan 
+  created_at: <%= 10.day.ago %>
+  updated_at: <%= 10.day.ago %>
