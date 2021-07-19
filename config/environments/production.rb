@@ -19,11 +19,11 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = Uglifier.new(harmony: true, compress: { unused: false })
+  # config.assets.js_compressor = Uglifier.new(harmony: true, compress: { unused: false })
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = true
+  config.assets.compile = false
 
   config.require_master_key = true
 
@@ -61,17 +61,17 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "wreeto_#{Rails.env}"
 
   # Production mailer setup
-  config.action_mailer.default_url_options = { :host => 'wreeto.com' }
+  config.action_mailer.default_url_options = { :host => ENV['RAILS_HOST'] }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mail.someaddress.com',
-    port:                 587,
-    domain:               'wreeto.com',
+    address:              ENV['SMTP_ADDRESSS'],
+    port:                 ENV['SMTP_PORT'],
+    domain:               ENV['SMTP_DOMAIN'],
     user_name:            ENV['SMTP_USERNAME'],
     password:             ENV['SMTP_PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto: true }
+    authentication:       ENV['SMTP_AUTHENTICATION'],
+    enable_starttls_auto: ENV['SMTP_ENABLE_TLS'] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
