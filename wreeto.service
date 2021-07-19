@@ -1,0 +1,14 @@
+[Unit]
+Description=Wreeto App
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+
+# Arch
+ExecStart=/usr/bin/docker-compose --file /home/user/projects/wreeto/docker-compose.yml up
+ExecStop=/usr/bin/docker-compose --file /home/user/projects/wreeto/docker-compose.yml stop
+
+[Install]
+WantedBy=multi-user.target

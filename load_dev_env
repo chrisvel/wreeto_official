@@ -1,4 +1,0 @@
-#! /bin/bash 
-echo '> Loading .env.development.local variables...'
-export $(xargs <.env.development.local)
-echo '> Loading complete.'
