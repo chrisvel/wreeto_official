@@ -31,20 +31,23 @@ RUN apk add --update --no-cache \
       imagemagick \
       poppler-utils
 
-RUN echo "precedence  2a04:4e42::0/32  5" >> /etc/gai.conf
 RUN gem install bundler -v 2.0.2
 
 ENV APP_HOME /app/wreeto
 WORKDIR $APP_HOME
+
 COPY Gemfile Gemfile.lock $APP_HOME/
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle check || bundle install --jobs 20 --retry 5
+
+COPY package.json package-lock.json $APP_HOME/
+RUN yarn install --force
 
 COPY . $APP_HOME/
 COPY config/database.docker.yml $APP_HOME/config/database.yml
 
 RUN bundle exec rake assets:precompile
-RUN yarn install 
+RUN bundle exec rake webpacker:compile
 
 EXPOSE 8383
 

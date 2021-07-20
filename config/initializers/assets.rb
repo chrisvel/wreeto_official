@@ -10,4 +10,4 @@
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-# Rails.application.config.assets.precompile += %w( application-backend.css application-landing-page.css )
+# Rails.application.config.assets.precompile += %w( application-backend.css )
