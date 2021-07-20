@@ -92,18 +92,6 @@
       </div>
     <% end %>
 
-    <% if current_user.has_backlinks_addon? %>
-      <hr />
-      <div class='form-group d-flex flex-row justify-content-start'>
-        <div class="align-top"><i class="fa fa-link text-secondary"></i></div>
-        <div class="flex-grow-1 pl-2 ml-1">
-          <div class="backlinks-card">
-            <%= render partial: 'notes/form/backlinks', locals: {f: f} %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
     <% if current_user.has_dg_addon? %>
       <hr />
       <div class='form-group d-flex flex-row justify-content-start'>

@@ -31,13 +31,21 @@ class Note < ApplicationRecord
   # scope :favorites_order, -> { order('(case when favorite then 1 else 0 end) DESC, updated_at DESC') }
 
   def self.search(query)
-    where("title like ? or content like ?", "%#{query}%", "%#{query}%")
+    where("title ilike ? or content ilike ?", "%#{query}%", "%#{query}%")
+  end
+
+  def self.search_title(query, count)
+    where("title ilike ?", "%#{query}%",).limit(count)
   end
 
   enum sharestate: {
     'is_private': 0,
     'is_public': 1
   }
+
+  def full_title
+    "#{title} - #{project ? project.title : category.title}"
+  end
 
   def set_defaults
     self.sharestate = 'is_private'
@@ -94,5 +102,5 @@ class Note < ApplicationRecord
   def self.tagged_with(name, user_id)
     user = User.find(user_id)
     user.tags.find_by!(name: name)&.notes
-end
+  end
 end

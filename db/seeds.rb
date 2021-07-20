@@ -11,7 +11,7 @@ user = User.first_or_create!({
   lastname: "Johnnson", 
   email: 'user@email.com', 
   password: 'password', 
-  add_ons: ["digital_gardens", "attachments", "backlinks", "graph", "wiki", "inbox"]})
+  add_ons: ["digital_gardens", "attachments", "backlinks", "graph", "wiki", "inbox", "backlinks"]})
 user.confirm
 
 category = user.categories.find_or_create_by!(title: 'Programming')
@@ -20,12 +20,12 @@ category = user.categories.find_or_create_by!(title: 'Programming')
 end
 
 category = user.categories.find_or_create_by!(title: 'Star Wars')
-100.times do 
+20.times do 
   user.notes.create!(category: category, title: Faker::Movies::StarWars.character, content: Faker::Movies::BackToTheFuture.quote)
 end
 
 category = user.categories.find_or_create_by!(title: 'Back To The Future')
-100.times do 
+20.times do 
   user.notes.create!(category: category, title: Faker::Movies::BackToTheFuture.character, content: Faker::Movies::BackToTheFuture.quote)
 end
 

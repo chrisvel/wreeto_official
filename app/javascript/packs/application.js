@@ -63,6 +63,7 @@ import '../src/items.js';
 import '../src/notes.js';
 import '../src/search.js';
 import '../src/graph.js';
+import '../src/inplace_autocomplete.js';
 
 Rails.start()
 Turbolinks.start()

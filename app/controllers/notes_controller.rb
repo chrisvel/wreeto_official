@@ -60,11 +60,19 @@ class NotesController < ApplicationController
       if @note.valid?
         ActiveRecord::Base.transaction do
           @note.save
-          current_user.notes.where(id: note_params[:link_ids]).each{|s| s.update(parent: @note)}
+
+          if current_user.has_backlinks_addon?
+            regex = /\[\[\[.*?\]\(http\:\/\/localhost\:8383\/notes\/(.*?)\)\]\]/m
+            extracted_guids = note_params[:content].scan(regex)&.flatten
+            link_ids = extracted_guids.map{|guid| current_user.notes.find_by(guid: guid).id}
+            current_user.notes.where(id: link_ids).each{|s| s.update(parent: @note)}
+          end
         end
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        # format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
+        # format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -81,7 +89,12 @@ class NotesController < ApplicationController
         ActiveRecord::Base.transaction do
           @note.save
           if current_user.has_backlinks_addon?
-            new_descendant_ids = note_params[:link_ids]&.reject(&:blank?)&.map(&:to_i)
+            
+            regex = /\[\[\[.*?\]\(http\:\/\/localhost\:8383\/notes\/(.*?)\)\]\]/m
+            extracted_guids = note_params[:content].scan(regex)&.flatten
+            link_ids = extracted_guids.map{|guid| current_user.notes.find_by(guid: guid).id}
+
+            new_descendant_ids = link_ids&.reject(&:blank?)&.map(&:to_i)
             if new_descendant_ids.any?
               current_user.notes.where(id: new_descendant_ids).each{|s| s.update(parent: @note)}
             end
@@ -94,8 +107,10 @@ class NotesController < ApplicationController
         end
 
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
+        # format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -193,6 +208,12 @@ class NotesController < ApplicationController
     end
   end
 
+  def backlink_data 
+    q = backlink_params[:query]
+    count = backlink_params[:count]
+    @all_notes = current_user.notes.search_title(params[:query], params[:count])
+  end
+
   def network_data 
     @notes = [@note.descendants.map{|d| {id: d.guid, label: d.title, group: 2}}, @note.ancestors.map{|d| {id: d.guid, label: d.title, group: 0}}].flatten
     @notes << {id: @note.guid, label: @note.title, group: 1}
@@ -246,6 +267,10 @@ class NotesController < ApplicationController
               attachments: [],
               digital_garden_ids: [],
               link_ids: [])
+    end
+
+    def backlink_params
+      params.permit(:query, :count)
     end
 
     def public_note_params

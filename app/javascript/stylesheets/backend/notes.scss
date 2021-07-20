@@ -72,6 +72,9 @@ textarea.relaxed{
   h1, h2, h3, h4, h5, h6, strong {
     font-weight: 600;
   }
+  a {
+    @extend .link-dark-purple
+  }
 }
 
 .editor-toolbar.fullscreen, .CodeMirror-fullscreen {
@@ -179,4 +182,35 @@ textarea.relaxed{
 
 .bootstrap-select > .dropdown-toggle{
   padding: 1px 10px;
+}
+
+.eac-popup {
+  width: 350px;
+  position: absolute;
+  border: 1px #d4d4d4 solid;
+  border-radius: 4px;
+  z-index: 100;
+  background-color: #ffffff;
+  
+  .eac-popup-item {
+      display: block;
+      width: 100%;
+      padding: 6px;
+
+      &.active {
+          background-color: $purple;
+          color: #ffffff;
+      }
+
+      &:not(:last-child) {
+          border-bottom: 1px #aaa solid;
+      }
+  }
+
+  .eac-popup-empty {
+      display: block;
+      width: 100%;
+      padding: 6px;
+      color: #d4d4d4;
+  }
 }

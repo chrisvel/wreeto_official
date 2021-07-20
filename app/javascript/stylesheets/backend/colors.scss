@@ -54,6 +54,14 @@ a.link-purple {
   }
 }
 
+a.link-dark-purple {
+  color: $purple-dark;
+  &:hover{
+    color: $purple;
+    text-decoration: none;
+  }
+}
+
 a.link-purple-soft {
   color: #999999;
   &:hover{

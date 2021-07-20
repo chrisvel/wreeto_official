@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/make_private', to: 'notes#make_private', on: :member
     get '/make_included_in_dg', to: 'notes#make_included_in_dg', on: :member
     delete '/attachment/:id', to: 'notes#delete_attachment', on: :member, as: :delete_attachment
+    get '/backlink_data', to: 'notes#backlink_data', on: :collection
   end
 
   get '/public/:guid', to: 'notes#public', params: :guid, as: :public_note
