@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 6.1', '>= 6.1.2.1'
 gem 'pg', '1.2.3'
-gem 'puma', '5.2.1'
+gem 'puma', '5.3.1'
 gem 'jbuilder', '~> 2.7'
 gem 'redcarpet', '3.5.1'
 gem 'coderay', '1.1.3'
