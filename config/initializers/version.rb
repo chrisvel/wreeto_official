@@ -1,5 +1,5 @@
 module Wreeto
   class Application
-    VERSION = 'v2.9.10'
+    VERSION = 'v3.0.1.beta'
   end
 end
