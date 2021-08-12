@@ -1,9 +1,8 @@
 module ApplicationHelper
   include Utils::BaseConfig
-  
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      valid_language?(language) ? CodeRay.scan(code, language).div : CodeRay.scan(code, "text").div
+      valid_language?(language) ? CodeRay.scan(code, language).div(css: :class) : CodeRay.scan(code, "text").div
     end
 
     private 
@@ -16,7 +15,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    coderayified = CodeRayify.new(:filter_html => true,
+    coderayified = CodeRayify.new(:filter_html => false,
                                   :hard_wrap => true)
     options = {
       :fenced_code_blocks => true,
@@ -25,7 +24,11 @@ module ApplicationHelper
       :strikethrough => true,
       :lax_html_blocks => true,
       :superscript => true,
-      :tables => true
+      :tables => true,
+      :highlight => true,
+      :quote => true,
+      :filter_html => false,
+      :safe_links_only => true
     }
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
     markdown_to_html.render(text).html_safe

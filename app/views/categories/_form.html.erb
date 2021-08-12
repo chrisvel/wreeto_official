@@ -18,23 +18,17 @@
     </div>
   <% end %>
 
-  <% if @category.parent && @category.parent.projects? %>
-    <%= f.hidden_field :parent_id, value: @category.parent.id %>
-  <% else %>
-    <div class="form-group">
-      <%= f.label :parent_id %>
-      <%= f.collection_select :parent_id,
-          @parent_categories,
-          :id,
-          :title,
-          {include_blank: 'None'},
-          {
-            id: "form-parent-select",
-            class: 'form-control selectpicker show-tick',
-            data: {live_search: "true", width: '100%'}
-          } %>
-    </div>
-    <% end %>
+  <div class="form-group w-50">
+    <%= f.label :parent_id %>
+    <%= f.select :parent_id,
+        @parent_categories.map{|cat| [cat.full_title, cat.id]}.sort,
+        {include_blank: 'None'},
+        {
+          id: "form-parent-select",
+          class: 'form-control selectpicker show-tick',
+          data: {live_search: "true", width: '100%'}
+        } %>
+  </div>
 
   <div class="form-group">
     <%= f.label :description %>

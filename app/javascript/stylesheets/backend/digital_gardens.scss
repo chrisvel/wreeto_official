@@ -1,0 +1,81 @@
+@import 'colors';
+
+.pp-list {
+  a.pp-category-link{
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.3rem;
+  }
+  
+  a.pp-subcategory-link{
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+  }
+
+  .list-group-item{
+    padding: 0.35rem 1.25rem;
+  }
+}
+
+.pp-anchor{
+  display: block;
+  position: relative;
+  top: -80px;
+  visibility: hidden;
+}
+
+.pp-menu-sticky{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.list-icon {
+  display: none;
+}
+
+.list-row {
+  padding: 8px 5px 0px 0px !important;
+  .list-icon {
+    display: none;
+  }
+  &:hover {
+    .list-item {
+      @extend a.link-purple:hover
+    } 
+    .list-icon {
+      display: inline-block;
+    }
+  }
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #f8f8f8;
+}
+
+.inline-badge{
+  vertical-align: middle !important;
+  margin-top: -0.2rem;
+}
+
+.dg-logo{
+  font-family: 'Beth Ellen', cursive !important;
+  display: block;
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+  text-decoration: none !important;
+  color: #777777;
+  a {
+    text-decoration: none;
+  }
+  &:hover{
+    text-decoration: none;
+    color: $purple;
+  }
+}
+
+.collapsing {
+  transition: none !important;
+}

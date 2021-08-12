@@ -1,12 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-something:
-  title: 'Something'
-  content: 'This is something'
+one: 
+  user: sheldon_cooper
   category: ideas
-  user: jack_sparrow
-  guid: <%= SecureRandom.hex(6) %>
+  title: my new idea 
+  content: hmmm
+  favorite: true
+  serial_no:
+  images: 
+  sharestate: 
+  guid: 123
+  created_at: <%= 10.day.ago %>
+  updated_at: <%= 10.day.ago %>
+  dg_enabled: true
+

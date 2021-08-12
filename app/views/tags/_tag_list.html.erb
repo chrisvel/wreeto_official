@@ -1,4 +1,4 @@
-<div class="card border rounded-lg shadow-sm p-5">
+<div class="px-5 mx-5">
   <table class="table">
     <thead>
     </thead>
@@ -15,14 +15,14 @@
           <td class="text-center">
           </td>
           <td class="text-right">
-            <%= link_to 'EDIT'.html_safe,
+            <%= link_to '<i class="fa fa-lg fa-edit"></i>'.html_safe,
                       "#",
-                      class: "text-bold text-warning ml-2",
+                      class: "link-purple-light ml-2",
                       data: { toggle: "modal", target: "#edit-#{tag.name}".html_safe, turbolinks: false }
                       %>
-            <%= link_to 'DELETE'.html_safe,
+            <%= link_to '<i class="fa fa-lg fa-trash"></i>'.html_safe,
                       "#",
-                      class: "text-bold text-danger ml-2",
+                      class: "link-purple-light ml-2",
                       data: { toggle: "modal", target: "#delete-#{tag.name}".html_safe, turbolinks: false }
                       %>
             <%= render partial: 'add_modal' %>

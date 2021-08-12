@@ -1,0 +1,12 @@
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "../backend/colors.scss";
+
+table {
+  @extend .table;
+}
+
+textarea {
+  font-family: monospace !important;
+}

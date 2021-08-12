@@ -1,34 +1,36 @@
-<div class="row">
+<div class="row mb-3">
   <div class="col-12 col-md-6">
     <h3>Projects</h3>
-    <%= @category.description %>
   </div>
   <div class="d-block d-md-none col-12 col-md-6 text-center mt-3">
-    <% if @category.parent_id.nil? %>
-      <%= link_to '<i class="fa fa-folder"></i>'.html_safe,
-              new_category_path(params: {parent_slug: @category.slug}),
-              class: "btn btn-sm btn-outline-purple",
-              data: { turbolinks: false }
-              %>
-    <% end %>
-    <%= link_to 'BACK', categories_path, class: "btn btn-sm btn-secondary"  %>
   </div>
-  <div class="d-none d-md-block col-12 col-md-6 text-right">
-    <% if @category.parent_id.nil? %>
-      <%= link_to 'Create new project',
-              new_category_path(params: {parent_slug: @category.slug}),
-              class: "btn btn-sm btn-purple",
-              data: { turbolinks: false }
-              %>
-    <% end %>
+  <div class="d-none d-md-block col-12 col-md-6 text-right my-auto">
+    <%= link_to 'Create new project',
+            new_project_path,
+            class: "btn btn-sm btn-purple",
+            data: { turbolinks: false }
+            %>
   </div>
 </div>
-<hr/>
 
-<% if @category.subcategories.any? %>
+<% if @category.any? %>
   <div class="mb-2">
-    <% @category.subcategories.ordered_by_active.ordered_by_title.each do |subcategory| %>
-      <%= render partial: 'notes/notes_list_projects', locals: {project: subcategory, notes: subcategory.notes} %>
+    <% @category.ordered_by_active.ordered_by_title.group_by{|d| d.parent}.each do |group| %>
+      <h5>
+        <% if group[0].present? %>
+          <%= link_to group[0].full_title, 
+            category_path(group[0].slug), 
+            class: "link-purple", 
+            data: { turbolinks: false } %>
+        <% end %>
+      </h5>
+      <div class="ml-2">
+        <% group[1].each do |project| %>
+          <%= render partial: 'notes/notes_list_projects', locals: {project: project, notes: project.notes} %>
+        <% end %>
+      </div>
     <% end %>
   </div>
+<% else %>
+  <%= blank_slate(:projects) %>
 <% end %>

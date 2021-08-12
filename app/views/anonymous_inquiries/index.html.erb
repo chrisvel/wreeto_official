@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Anonymous Inquiries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reason</th>
+      <th>Body</th>
+      <th>Fullname</th>
+      <th>Email</th>
+      <th>Meta</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @anonymous_inquiries.each do |anonymous_inquiry| %>
+      <tr>
+        <td><%= anonymous_inquiry.reason %></td>
+        <td><%= anonymous_inquiry.body %></td>
+        <td><%= anonymous_inquiry.fullname %></td>
+        <td><%= anonymous_inquiry.email %></td>
+        <td><%= anonymous_inquiry.meta %></td>
+        <td><%= link_to 'Show', anonymous_inquiry %></td>
+        <td><%= link_to 'Edit', edit_anonymous_inquiry_path(anonymous_inquiry) %></td>
+        <td><%= link_to 'Destroy', anonymous_inquiry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Anonymous Inquiry', new_anonymous_inquiry_path %>

@@ -1,0 +1,36 @@
+<%= form_with(model: @dg, html: { class: "form", novalidate: true}) do |f| %>
+  <%= render 'layouts/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control form-control-lg' %>
+  </div>
+
+  <div class="form-group">
+    <div class="pretty p-icon p-fill">
+      <%= f.check_box :enabled %>
+      <div class="state p-primary">
+        <i class="icon fa fa-check"></i>
+        <%= f.label :enabled %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="row">
+      <div class="col-5">
+        <% if @dg.id %>
+          <%= link_to 'DELETE',
+                      "#",
+                      class: "btn btn-sm btn-danger",
+                      data: { toggle: "modal", target: "#delete-#{@dg.id}", turbolinks: false }
+                      %>
+          <%= render partial: 'delete_modal' %>
+        <% end %>
+      </div>
+      <div class="col-7 text-right">
+        <%= f.submit "SAVE", class: "btn btn-sm btn-purple" %>
+      </div>
+    </div>
+  </div>
+<% end %>

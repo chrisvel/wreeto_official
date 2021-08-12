@@ -1,0 +1,40 @@
+<div class="">
+  <table id="notes-table" class="ui very basic table mb-0">
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <% digital_gardens.each do |dg| %>
+        <tr class="list-row">
+          <td class="">
+            <%= link_to dg.title,
+                  '#',
+                  class: 'list-item link-purple mr-2 d-inline-block',
+                  data: { turbolinks: false }
+                  %>
+            <% if dg.enabled %>
+              <span class='badge badge-success inline-badge prl-2 ml-1'><i class="fa fa-globe text-white fa-fw"></i> Public</span>
+            <% else %>
+              <span class='badge badge-dark inline-badge prl-2 ml-1'><i class="fa fa-plug text-white fa-fw"></i> Offline</span>
+            <% end %>
+          </td>
+          <td class="text-right text-soft align-middle">
+            <%= link_to '<i class="fas fa-edit"></i>'.html_safe,
+                        edit_digital_garden_path(dg.slug),
+                        class: "list-icon link-purple-light",
+                        data: { turbolinks: false }
+                        %>
+            <%= link_to '<i class="fa fas fa-leaf"></i>'.html_safe,
+                        g_path(dg.slug),
+                        class: "list-icon link-purple-light ml-1",
+                        data: { turbolinks: false }
+                        %>      
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

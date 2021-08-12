@@ -1,26 +1,29 @@
-<div class="card border rounded-lg shadow-sm px-5 py-4">
-  <table id="notes-table" class="ui very basic table mb-0">
+<div class="px-4">
+  <table id="notes-table" class="table mb-0">
     <thead>
       <tr>
       </tr>
     </thead>
     <tbody>
-      <% notes.each do |item| %>
-        <tr>
-          <td class="px-0">
+      <% items = notes_list ? notes.includes(:category, :tags, :taggings) : notes %>
+      <% items.each do |item| %>
+        <tr class="list-row">
+          <td class="">
             <% if item.favorite %>
-              <i class="fa fa-star text-warning fa-fw mr-1" style="margin-left: -26px;"></i>
-            <% else %>
+              <i class="fa fa-star text-warning fa-fw mr-3" style="margin-left: -38px;"></i>
             <% end %>
             <%= link_to item.title,
-                  note_path(item.guid),
-                  class: 'note-item link-purple mr-2',
+                  item,
+                  class: 'list-item link-purple mr-2 align-middle',
                   data: { turbolinks: false }
                   %>
-            <% if current_user.account.attachments_enabled && item.attachments.any? %>
-              <i class="fa fa-paperclip text-soft"></i>
-            <% end %>
-            <div class="col-md-12 pl-0 ml-0">
+            <div class="align-middle float-right d-inline-block ml-4">
+              <% if current_user.has_attachments_addon? && item.attachments.any? %>
+                <i class="fa fa-paperclip text-soft"></i>
+              <% end %>
+              <% if current_user.has_dg_addon? && item.dg_enabled %>
+                  <span class='mrl-2 nalign-middle'><i class="fa fa-leaf text-success fa-fw"></i></span>
+                <% end %>
               <% if item.is_public? %>
                 <span class='badge badge-success prl-2'><i class="fa fa-globe text-white fa-fw"></i> Public</span>
               <% end %>
@@ -30,18 +33,28 @@
                     data: { turbolinks: false }
                     %>
               <% end %>
-              <%= tag_links(item) %>
+              <%= note_tag_links(item, :index) %>
             </div>
           </td>
-          <td>
-            <%# link_to '<i class="fa fa-pencil"></i>'.html_safe,
-                        edit_note_path(item),
-                        class: "ui icon mini yellow button",
-                        data: { turbolinks: false }
-                        %>
-          </td>
-          <td class="text-right text-soft pr-0">
-            <%= "#{distance_of_time_in_words(Time.now, item.updated_at)}" %>
+          <td class="text-right text-soft align-middle" style="width: 102px;">
+            <div>
+              <%= link_to '<i class="fa fa-leaf"></i>'.html_safe,
+                          make_included_in_dg_note_path(item.guid),
+                          class: "text-soft link-purple-light list-icon ml-2"
+                          %>
+              <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                          edit_note_path(item.guid),
+                          class: "text-soft link-purple-light list-icon ml-2",
+                          data: { turbolinks: false }
+                          %>
+              <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                          '#',
+                          class: "text-soft link-purple-light list-icon ml-2",
+                          data: { toggle: "modal", target: "#delete-#{item.id}", turbolinks: false }
+                          %>
+            </div>
+            <%= render partial: 'delete_modal', locals: {note: item} %>
+            <%# "#{distance_of_time_in_words(Time.now, item.updated_at)}" %>
           </td>
         </tr>
       <% end %>

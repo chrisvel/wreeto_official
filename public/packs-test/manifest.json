@@ -1,0 +1,55 @@
+{
+  "application-landing-page.js": "/packs-test/js/application-landing-page-407c8e834db34d36a64a.js",
+  "application-landing-page.js.map": "/packs-test/js/application-landing-page-407c8e834db34d36a64a.js.map",
+  "application.js": "/packs-test/js/application-1bd046f57b4da9c0b5de.js",
+  "application.js.map": "/packs-test/js/application-1bd046f57b4da9c0b5de.js.map",
+  "entrypoints": {
+    "application-landing-page": {
+      "js": [
+        "/packs-test/js/application-landing-page-407c8e834db34d36a64a.js"
+      ],
+      "js.map": [
+        "/packs-test/js/application-landing-page-407c8e834db34d36a64a.js.map"
+      ]
+    },
+    "application": {
+      "js": [
+        "/packs-test/js/application-1bd046f57b4da9c0b5de.js"
+      ],
+      "js.map": [
+        "/packs-test/js/application-1bd046f57b4da9c0b5de.js.map"
+      ]
+    }
+  },
+  "media/images/categories.png": "/packs-test/media/images/categories-45a95246f17a37b392e6e5fe93e41872.png",
+  "media/images/categories_list.png": "/packs-test/media/images/categories_list-2951f8a8a13ff11b641b46553a46bce0.png",
+  "media/images/categories_list_old.png": "/packs-test/media/images/categories_list_old-bdfa7b3d02f1d38ddc73545ec4c1cdad.png",
+  "media/images/category_view.png": "/packs-test/media/images/category_view-9808a5bd0591b70f809a97ff675d78fb.png",
+  "media/images/edit_note.png": "/packs-test/media/images/edit_note-4af657af04816841e3751af2e979fa97.png",
+  "media/images/ideas.png": "/packs-test/media/images/ideas-fb80df21db45e42d23f90627ccbfb7e6.png",
+  "media/images/logo.png": "/packs-test/media/images/logo-a203504856986fabf2f4077e69ad5c85.png",
+  "media/images/logo_login.png": "/packs-test/media/images/logo_login-bbd173d7f54b838a8c4487c7cbd53d2a.png",
+  "media/images/note.png": "/packs-test/media/images/note-888711b7c7fb7fd71336610db68fb1e5.png",
+  "media/images/note_edit.png": "/packs-test/media/images/note_edit-8629e147ca9ec8d72653c2f6bf032c32.png",
+  "media/images/note_sharing.png": "/packs-test/media/images/note_sharing-04a15945b9767a957890f9c611404cda.png",
+  "media/images/notes_list.png": "/packs-test/media/images/notes_list-30a29a5af585d35a4706d4fdeba2f0de.png",
+  "media/images/notes_list_old.png": "/packs-test/media/images/notes_list_old-bbdb7194c3dc12e7a4cb5f35cd305516.png",
+  "media/images/tasks.png": "/packs-test/media/images/tasks-5c333c66a24a807622ae3a5eb47554e8.png",
+  "media/images/thoughts.png": "/packs-test/media/images/thoughts-d70b2f6f0bbd5be19c4822add5640eeb.png",
+  "media/images/wiki.png": "/packs-test/media/images/wiki-c075b2962349581212444d1e5d083cdf.png",
+  "media/webfonts/fa-brands-400.eot": "/packs-test/media/webfonts/fa-brands-400-98f20b9e.eot",
+  "media/webfonts/fa-brands-400.svg": "/packs-test/media/webfonts/fa-brands-400-991c1c76.svg",
+  "media/webfonts/fa-brands-400.ttf": "/packs-test/media/webfonts/fa-brands-400-330e879a.ttf",
+  "media/webfonts/fa-brands-400.woff": "/packs-test/media/webfonts/fa-brands-400-5f63cb7f.woff",
+  "media/webfonts/fa-brands-400.woff2": "/packs-test/media/webfonts/fa-brands-400-6e63bd22.woff2",
+  "media/webfonts/fa-regular-400.eot": "/packs-test/media/webfonts/fa-regular-400-62a07ffe.eot",
+  "media/webfonts/fa-regular-400.svg": "/packs-test/media/webfonts/fa-regular-400-f3187c74.svg",
+  "media/webfonts/fa-regular-400.ttf": "/packs-test/media/webfonts/fa-regular-400-ac236764.ttf",
+  "media/webfonts/fa-regular-400.woff": "/packs-test/media/webfonts/fa-regular-400-ea5a41ec.woff",
+  "media/webfonts/fa-regular-400.woff2": "/packs-test/media/webfonts/fa-regular-400-2c154b0f.woff2",
+  "media/webfonts/fa-solid-900.eot": "/packs-test/media/webfonts/fa-solid-900-6606667d.eot",
+  "media/webfonts/fa-solid-900.svg": "/packs-test/media/webfonts/fa-solid-900-0454203f.svg",
+  "media/webfonts/fa-solid-900.ttf": "/packs-test/media/webfonts/fa-solid-900-915a0b79.ttf",
+  "media/webfonts/fa-solid-900.woff": "/packs-test/media/webfonts/fa-solid-900-f4f93856.woff",
+  "media/webfonts/fa-solid-900.woff2": "/packs-test/media/webfonts/fa-solid-900-3eb06c70.woff2"
+}

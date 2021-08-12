@@ -1,74 +1,126 @@
-<div class="row">
+<div class="row mb-4">
   <div class="col-12 mt-3 mt-sm-0 col-lg-10">
-    <h3>
+    <h3 class="note-input-header">
       <%= @note.title %>
-      <% if @note.favorite %>
-        <i class="ui yellow star icon"></i>
-      <% end %>
     </h3>
   </div>
-  <div class="col-12 col-lg-2 text-right">
-    <%= link_to 'EDIT',
-      edit_note_path(@note.guid),
-      class: "btn btn-sm btn-warning text-white",
-      data: { turbolinks: false } %>
+  <div class="col-12 col-lg-2 text-right align-middle my-auto">
+    <span class="mr-4">
+      <% if @note.favorite %>
+        <i class="fa fa-star text-warning mr-2"></i>
+      <% end %>
+      <% if @note.dg_enabled %>
+        <i class="fa fa-leaf text-success mr-2"></i>
+      <% end %>
+      <% if @note.is_public? %>
+        <i class="fa fa-globe text-success mr-2"></i>
+      <% end %>
+      <% if @note.is_private? %>
+        <i class="fa fa-globe text-secondary mr-2"></i>
+      <% end %>
+    </span>
+    <%= link_to '<i class="fas fa-pencil-alt"></i>'.html_safe,
+                    edit_note_path(@note.guid),
+                    class: "link-purple-soft mr-3 my-auto",
+                    data: { turbolinks: false, toggle: 'tooltip', title: "Edit note" }
+                    %>
   </div>
 </div>
-<hr/>
+
+<div class="row mt-1 mb-2">
+  <div class="col-12">
+    <div class="d-flex flex-row justify-content-start mb-1">
+      <div class="align-middle my-auto"><i class="fa fa-folder text-secondary"></i></div>
+      <div class="ml-3">
+        <% if @note.category.is_a_project? %>
+          <%= link_to @note.category.title, project_path(@note.category.slug),
+              class: "badge badge-light note-show-badge", data: { turbolinks: false } %>
+        <% else %>
+          <%= link_to @note.category.title, category_path(@note.category.slug),
+              class: "badge badge-light note-show-badge", data: { turbolinks: false } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex flex-row justify-content-start mb-1">
+      <div class="align-middle my-auto"><i class="fa fa-hashtag text-secondary"></i></div>
+      <div class="ml-3">
+        <%= note_tag_links(@note, :show) %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row">
-  <div class="d-none d-md-block col-md-6">
-    <h5>
-      <%= link_to @note.category.title, category_path(@note.category.slug),
-          class: "badge badge-purple-outline", data: { turbolinks: false } %>
-      <%= tag_links(@note) %>
-    </h5>
+  <div class="col-12">
+    <div class="mt-3 mb-4 d-flex flex-row justify-content-start">
+      <div class="mt-3"><i class="fa fa-chevron-right text-secondary"></i></div>
+      <div class="note-content">
+        <% if @note.content.blank? %> 
+          <div class="text-left mb-3">This item has no content</div>
+        <% else %> 
+          <%= markdown(@note.content) %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6 text-right">
-    <% if @note.is_private? %>
-      <%= link_to "SHARE TO PUBLIC", make_public_note_path(@note.guid),
-                          class: "btn btn-sm btn-purple",
-                          data: { turbolinks: false } %>
-    <% else %>
-      <div class="d-inline-block">
-        <div class="input-group input-group-sm middle-aligned mr-2 mb-2 mb-lg-0">
-          <input type="text"
-                id="public_share_url"
-                class="form-control public-input"
-                value="<%= @note.public_url %>">
-          <div class="input-group-append">
-            <button class="btn btn-light copy-to-clipboard"
-                    data-clipboard-action="copy"
-                    data-clipboard-target="#public_share_url">
-              <i class="fa fa-copy"></i>
-            </button>
-            <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
-                        @note.public_url,
-                        class: "btn btn-light",
-                        data: { turbolinks: false } %>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <hr />
+    <div class='d-flex flex-row justify-content-start'>
+      <div class="align-top"><i class="fa fa-globe text-secondary"></i></div>
+      <div class="flex-grow-1 pl-2 ml-1">
+        <%= render partial: 'public_link', locals: {note: @note} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if current_user.has_backlinks_addon? && (@note.descendants.any? || @note.ancestors.any?) %>
+  <div class="row">
+    <div class="col-12">
+      <hr />
+      <div class='d-flex flex-row justify-content-start'>
+        <div class="align-middle my-auto"><i class="fa fa-link text-secondary"></i></div>
+        <div class="flex-grow-1 pl-2 ml-1">
+          <%= render partial: 'links_list', locals: {note: @note} %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if current_user.has_attachments_addon? %>
+  <% if @note.attachments.any? %>
+    <div class="row">
+      <div class="col-12">
+        <hr />
+        <div class='d-flex flex-row justify-content-start'>
+          <div class="align-top"><i class="fa fa-paperclip text-secondary"></i></div>
+          <div class="flex-grow-1 pl-2 ml-1">
+            <%= render partial: 'attachments_list', locals: {note: @note, intent: :show} %>
           </div>
         </div>
       </div>
-      <div class="d-inline-block">
-        <%= link_to "SHARED TO PUBLIC", make_private_note_path(@note.guid),
-                            class: "btn btn-sm btn-success public-btn",
-                            data: { turbolinks: false } %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if current_user.has_graph_addon? && (@note.descendants.any? || @note.ancestors.any?) %>
+  <div class="row">
+    <div class="col-12">
+      <hr />
+      <div class='d-flex flex-row justify-content-start'>
+        <div class="align-top"><i class="fas fa-project-diagram text-secondary"></i></div>
+        <div class="flex-grow-1 card" id="note-graph" style="margin-left: 11px;">
+          <svg width="960" height="600"></svg>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
-
-<div class="note-content border rounded-lg shadow-sm bg-white mt-2 px-4 pt-4 pb-2">
-  <% if @note.content.blank? %> 
-    <div class="text-center mb-3">This item has no content</div>
-  <% else %> 
-    <%= markdown(@note.content) %>
-  <% end %>
-</div>
-
-<% if current_user.account.attachments_enabled %>
-  <% if @note.attachments.any? %>
-    <h6 class="text-bold mt-4 mx-4">ATTACHMENTS</h6>
-    <%= render partial: 'attachments_list', locals: {note: @note, intent: :show} %>
-  <% end %>
 <% end %>

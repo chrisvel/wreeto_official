@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:jack_sparrow)
+    sign_in users(:sheldon_cooper)
     @projects_category = categories(:projects)
     @ideas_category = categories(:ideas)
   end
@@ -26,25 +26,25 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show category" do
-    get category_url(@projects_category)
+    get category_url(@ideas_category.slug)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_category_url(@projects_category)
+    get edit_category_url(@ideas_category.slug)
     assert_response :success
   end
 
   test "should not update projects category" do
     assert_raises ActiveRecord::ReadOnlyRecord do
-      patch category_url(@projects_category), params: { category: { description: @projects_category.description, title: @projects_category.title } }
+      patch category_url(@projects_category.slug), params: { category: { description: @projects_category.description, title: @projects_category.title } }
       assert_redirected_to category_path(@projects_category)
     end
   end
 
   test "should destroy deletable category" do
     assert_difference('Category.count', -1) do
-      delete category_url(@ideas_category)
+      delete category_url(@ideas_category.slug)
     end
 
     assert_redirected_to categories_path

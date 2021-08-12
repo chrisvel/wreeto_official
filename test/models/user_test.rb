@@ -32,7 +32,11 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test 'creates a new user and all associated objects' do 
+    assert_difference 'User.count', 1 do 
+      User.create!(email: 'test@email.com', password: 'Password1!')
+    end
+    assert_equal 'test@email.com', User.last.email
+  end
 end

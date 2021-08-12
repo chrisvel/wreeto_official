@@ -1,0 +1,26 @@
+<h6 class="pb-4 text-bold">DIGITAL GARDENS</h6>
+<div class="form-row">
+  <div class="col-12 col-lg-6">
+    <% if @digital_gardens.any? %>
+      <div class="form-group mb-4">
+        <div class="pretty p-fill">
+          <%= f.check_box :dg_enabled %>
+          <div class="state p-success">
+            <%= f.label :dg_enabled, 'Enable' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="form-dg-select">Digital Gardens</label>
+        <%= f.collection_select :digital_garden_ids, @digital_gardens, :id, :title, {},
+            {
+              id: "form-dg-select",
+              class: 'form-control selectpicker show-tick',
+              multiple: true
+            } %>
+      </div>
+    <% else %>
+      In order to enable note in Digital Gardens you will need to create one first
+    <% end %>
+  </div>
+</div>

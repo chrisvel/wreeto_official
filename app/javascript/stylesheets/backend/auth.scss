@@ -1,0 +1,23 @@
+.login-box, .signup-box {
+  // margin-top: 200px;
+
+  .logo a{
+    font-family: 'Beth Ellen', cursive !important;
+    display: block;
+    font-size: 2.5rem;
+    text-decoration: none;
+    color: #222222;
+  }
+
+  .login-form {
+    margin-top: 20px;
+  }
+}
+
+.signup-box {
+  margin-top: 50px;
+}
+
+.g-recaptcha {
+  display: inline-block;
+}

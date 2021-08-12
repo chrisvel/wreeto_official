@@ -2,6 +2,10 @@
 
 ### {{ [twitter](https://twitter.com/wreeto_official) ~ [reddit](https://www.reddit.com/r/wreeto/) }}
 
+## WARNING! 
+_v3 is not compatible with v2, you will have to export your notes in v2 and import them in v3._
+_This happens because v3 is almost a re-write of v2._
+
 ## Introduction
 
 Wreeto is an open source note-taking, knowledge management and wiki system built on top of Ruby on Rails framework.  
@@ -9,7 +13,7 @@ Wreeto is an open source note-taking, knowledge management and wiki system built
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
 ### Current stable version: _v2.6.8_
-### Latest version: _master_
+### Latest version: _master_ or _v3.0.1_
 
 ## Table of Contents 
 1. [Features](#features)
@@ -27,9 +31,11 @@ Initially this was built because I didn't like the note-taking apps out there an
 - Simple, minimal UI - _less is more_
 - Create unlimited notes with Markdown format
 - Categories
-- Tags (**new!**)
-- Projects (**new!**)
-- Attachments (**new!**)
+- Tags 
+- Projects 
+- Attachments 
+- Backlinks (**new!**)
+- Graph view (**new!**)
 - Encrypted backups
 - List notes by Category or SubCategory
 - Favorite notes appear on the top of the notes list and sidebar
@@ -44,8 +50,6 @@ Initially this was built because I didn't like the note-taking apps out there an
 ## <a name="roadmap"></a> 2. Roadmap 
 
 - Test everything, everywhere. More testing..
-- Improve UI inconsistencies
-- Upgrade to Rails v6
 - Note Templates
 - Encryption
 - Different Levels of security access for users
@@ -197,6 +201,6 @@ There are several ways you can help with wreeto:
 
 AGPLv3 License for the community version 
 
-## <a name="professional-edition"></a> 9. Professional edition 
+## <a name="professional-edition"></a> 9. Premium edition 
 
-There is a professional version and there is a pricing plan for this edition. Please check https://wreeto.com for more details (currently updating).
+There is a premium version and there is a pricing plan for this edition. Please check https://wreeto.com or email to <wreeto.official and gmail as the domain provider> for more details (currently updating).

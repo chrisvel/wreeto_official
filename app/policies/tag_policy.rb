@@ -1,4 +1,10 @@
 class TagPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope.where(user_id: user.id)
+    end
+  end
+  
   attr_reader :user, :tag
 
   def initialize(user, tag)

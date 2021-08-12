@@ -1,14 +1,14 @@
-<div class="modal fade" id="delete-<%= @note.id %>" role="dialog">
+<div class="modal fade text-dark" id="delete-<%= note.id %>" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">Note deletion confirmation</button>
+        <h5><strong>Note deletion confirmation</strong></h5>
       </div>
-      <div class="modal-body">
-        <p>Are you sure to delete this note?</p>
+      <div class="modal-body text-left">
+        <p>Are you sure to delete <strong><%= note.title %></strong> ?</p>
       </div>
       <div class="modal-footer">
-        <%= link_to 'Delete', note_path(@note), method: :delete, :class => 'btn btn-sm btn-danger' %>
+        <%= link_to 'Delete', note_path(note), method: :delete, :class => 'btn btn-sm btn-danger' %>
         <a href="#" data-dismiss="modal" class="btn btn-sm btn-light">Cancel</a>
       </div>
     </div>

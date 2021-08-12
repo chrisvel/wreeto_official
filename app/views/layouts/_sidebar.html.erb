@@ -1,18 +1,32 @@
 
 <div class="sidebar-sticky">
-  <div class="top-item-menu-height">
-  </div>
-
-  <ul class="nav flex-column mt-3 mb-4 mx-3">
+  <ul class="nav flex-column mt-4 mb-5 mx-3">
     <% if policy(Note.new).display_sidebar_item? %>
-      <li class="nav-item">
-        <button type="button" class="btn btn-outline-purple-transparent btn-block btn-sm" data-toggle="modal" data-target="#searchModal">
-          <i class="fa mr-1 fa-search"></i> QUICK SEARCH
-        </button>
-      </li>
+      <div class="row">
+        <div class="col-10">
+          <li class="nav-item">
+            <%= link_to 'ADD NOTE'.html_safe, 
+                new_note_path, 
+                class: 'btn btn-purple btn-block btn-sm', 
+                data: { turbolinks: false } %>
+          </li>
+        </div>
+        <div class="col-2 ml-0 pl-0">
+          <%= link_to '<i class="fa mr-1 fa-search"></i>'.html_safe, 
+                      '#', 
+                      class:"btn btn-outline-purple-transparent btn-block btn-sm px-2", 
+                      data: {toggle: "modal", target: "#searchModal"} %>
+        </div>
+      </div>
     <% end %>
   </ul>
 
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= active_link_to 'INBOX'.html_safe, inbox_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fas fa-inbox"></i>
+  </h6>
+
+  <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
     <span>FAVORITES</span>
     <i class="fa fa-star text-warning"></i>
@@ -21,7 +35,7 @@
     <ul class="nav flex-column mb-2">
       <% current_user.notes.favorites.each do |item| %>
         <li class="nav-item">
-          <%= link_to "#{truncate(item.title, length: 33)} <span class='badge badge-purple pull-right'>#{item.category.title}</span>".html_safe, item, class: 'nav-link link-purple', data: { turbolinks: false } %>
+          <%= active_link_to "#{truncate(item.title, length: 33)} <span class='badge badge-purple float-right ml-2'>#{item.category.title}</span>".html_safe, item, class: 'nav-link link-purple', data: { turbolinks: false } %>
         </li>
       <% end %>
     </ul>
@@ -35,21 +49,27 @@
 
   <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
-    <%= link_to 'NOTES'.html_safe, notes_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
-    <i class="fa fa-pencil"></i>
+    <%= active_link_to 'NOTES'.html_safe, notes_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fas fa-pencil-alt"></i>
   </h6>
 
   <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
-    <%= link_to 'PROJECTS'.html_safe, category_path(current_user.categories.find_by(slug: 'projects')), class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
-    <i class="fa fa-briefcase"></i>
+    <%= active_link_to 'CATEGORIES'.html_safe, categories_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <i class="fa fa-folder"></i>
+  </h6>
+
+  <hr class="sidebar-hr"/>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+    <%= active_link_to 'PROJECTS'.html_safe, projects_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <%= link_to '<i class="fa fa-briefcase"></i>'.html_safe, '#projects', class: 'link-purple-white', data: { toggle: :collapse, turbolinks: false } %>
   </h6>
   <% if user_signed_in? %>
-    <% if current_user.categories.projects.any? %>
-      <ul class="nav flex-column mb-2">
-        <% current_user.categories.projects.active.ordered_by_title.each do |category| %>
-          <li class="nav-item">
-            <%= link_to "#{truncate(category.title, length: 30)}".html_safe, category_path(category.slug), class: 'nav-link link-purple', data: { turbolinks: false } %>
+    <% if current_user.projects.any? %>
+      <ul class="nav mb-2 collapse" id="projects">
+        <% current_user.projects.active.ordered_by_title.each do |category| %>
+          <li class="nav-item w-100">
+            <%= active_link_to "#{truncate(category.title, length: 30)}".html_safe, category_path(category.slug), class: 'nav-link link-purple', data: { turbolinks: false } %>
           </li>
         <% end %>
       </ul>
@@ -57,7 +77,7 @@
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
           <span class="nav-link text-secondary">No projects yet - <%= link_to 'Create one?',
-                                                                              new_category_path(params: {parent_slug: current_user.categories.find_by(slug: 'projects', deletable: false).slug}),
+                                                                              new_project_path,
                                                                               class: 'link-purple-white',
                                                                               data: { turbolinks: false }%></span>
         </li>
@@ -67,20 +87,22 @@
 
   <hr class="sidebar-hr"/>
   <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
-    <%= link_to 'CATEGORIES'.html_safe, categories_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
-    <i class="fa fa-folder"></i>
-  </h6>
-
-  <hr class="sidebar-hr"/>
-  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
-    <%= link_to 'TAGS'.html_safe, tags_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <%= active_link_to 'TAGS'.html_safe, tags_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
     <i class="fa fa-tag"></i>
   </h6>
 
-  <% if current_user.account.wiki_enabled %>
+  <% if current_user.has_wiki_addon? %>
     <hr class="sidebar-hr"/>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 pb-3">
-      <%= link_to 'WIKI', wiki_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+      <%= active_link_to 'WIKI', wiki_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
       <i class="fa fa-book"></i>
+    </h6>
+  <% end %>
+
+  <% if current_user.has_dg_addon? %>
+    <hr class="sidebar-hr"/>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3">
+      <%= active_link_to 'DIGITAL GARDENS', digital_gardens_path, class: 'd-flex align-items-center link-purple-white', data: { turbolinks: false } %>
+      <i class="fa fas fa-leaf"></i>
     </h6>
   <% end %>

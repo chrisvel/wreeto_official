@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row mb-3">
   <div class="col-2">
     <h3>Tags</h3>
   </div>
-  <div class="col-10 text-right">
+  <div class="col-10 text-right my-auto">
     <%# add_tag_button %>
      <%= link_to 'ADD NEW TAG'.html_safe,
                       "#",
@@ -12,7 +12,6 @@
   </div>
 </div>
 
-<hr/>
 <% if @tags.any? %>
   <%= render partial: 'tag_list', locals: {tags: @tags} %>
 <% else %>

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mb-3">
   <div class="col-2">
     <h3>Wiki</h3>
   </div>
@@ -6,14 +6,11 @@
   </div>
 </div>
 
-<hr/>
-<br>
-
-<table class="table card border rounded-lg shadow-sm px-5 py-4">
+<table class="table">
   <thead>
   </thead>
   <tbody>
-    <% @categories.includes([:parent, :notes]).each do |category| %>
+    <% @categories.each do |category| %>
       <tr>
         <td class="pl-0 pb-0 border-0">
             <%= link_to category.full_title, category, data: { turbolinks: false }, class: "category-link text-bold link-purple" %>
@@ -29,7 +26,7 @@
             <% end %>
             <% if category.subcategories.size > 0 %>
               <div class="ml-4">
-                <% category.subcategories.includes([:notes]).ordered_by_title.each do |cat| %>
+                <% category.subcategories.ordered_by_title.each do |cat| %>
                   <div class="subcategory-item">
                     <%= link_to cat.title, cat, data: { turbolinks: false }, class: 'subcategory-link text-emphasis link-purple' %>
                     <% if cat.notes.any? %>

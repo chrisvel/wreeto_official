@@ -1,0 +1,2 @@
+module AnonymousInquiriesHelper
+end

@@ -1,24 +1,25 @@
 class Note < ApplicationRecord
+  include Taggable
   include Utils::BaseConfig
+  has_ancestry
 
-  attr_accessor :new_category_id
+  attr_accessor :new_category_id, :link_ids
 
   # Callbacks
   before_validation :set_defaults, if: :new_record?
   before_validation :set_guid, if: :new_record?
   
   # Associations
-  belongs_to :category   
-  has_many :taggings 
-  has_many :tags, through: :taggings, validate: false
+  belongs_to :category
+  belongs_to :project, optional: true
   has_many_attached :attachments
   belongs_to :user
+  has_and_belongs_to_many :digital_gardens
 
   # Validations
   validates :title, presence: true, allow_blank: false
   validates :category, presence: true, allow_blank: false
   validates :content, presence: true, allow_blank: true
-  validates_associated :tags , message: 'are invalid. Only numbers, letters, _ and - characters allowed.'
 
   # Scopes
   scope :for_category, ->(slug) { eager_load(:category).where({categories: {slug: slug}}) }
@@ -26,10 +27,15 @@ class Note < ApplicationRecord
     where("lower(title) LIKE ?", "%#{sanitize_sql_like(query.downcase)}%") 
   end
   scope :favorites, -> { where(favorite: true) }
-  scope :favorites_order, -> { order('(case when favorite then 1 else 0 end) DESC, updated_at DESC') }
+  scope :favorites_order, -> { order('favorite DESC, updated_at DESC') }
+  # scope :favorites_order, -> { order('(case when favorite then 1 else 0 end) DESC, updated_at DESC') }
 
   def self.search(query)
-    where("title like ? or content like ?", "%#{query}%", "%#{query}%")
+    where("title ilike ? or content ilike ?", "%#{query}%", "%#{query}%")
+  end
+
+  def self.search_title(query, count)
+    where("title ilike ?", "%#{query}%",).limit(count)
   end
 
   enum sharestate: {
@@ -37,8 +43,15 @@ class Note < ApplicationRecord
     'is_public': 1
   }
 
+  def full_title
+    "#{title} - #{project ? project.title : category.title}"
+  end
+
   def set_defaults
     self.sharestate = 'is_private'
+    if category.nil? && project.nil? 
+      self.category = user.categories.where(title: 'Inbox').where(slug: 'inbox')
+    end
   end
 
   def make_public
@@ -50,11 +63,31 @@ class Note < ApplicationRecord
     self.sharestate = 'is_private'
     self.save!
   end
+  
+  def link_ids 
+    new_record? ? [] : descendant_ids
+  end 
 
   def set_guid
     loop do
       self.guid = SecureRandom.uuid
       break unless Note.where(guid: self.guid).exists?
+    end
+  end
+
+  def public_shared
+    if sharestate == 'is_public' 
+      true 
+    elsif sharestate == 'is_private' 
+      false
+    end
+  end
+
+  def public_shared=(public_shared)
+    if public_shared == '1'
+      self.sharestate = :is_public 
+    elsif public_shared == '0'
+      self.sharestate = :is_private 
     end
   end
 
@@ -66,22 +99,8 @@ class Note < ApplicationRecord
     self.guid
   end
 
-  def tag_list
-    self.tags
-  end
-
-  def tag_list=(names)
-    ids = names.reject(&:blank?).map{|a| a.to_i}.select{|s| s > 0}
-    self.tags = Tag.where(id: ids)
-    new_tag_names = names.reject(&:blank?) - ids.map(&:to_s)
-    new_tags = new_tag_names.each do |tag_name|
-      tags.build(name: tag_name.strip, user: user)
-    end 
-  end
-
   def self.tagged_with(name, user_id)
     user = User.find(user_id)
-    tag = user.tags.find_by(name: name)
-    tag.present? ? tag.notes : []
+    user.tags.find_by!(name: name)&.notes
   end
 end

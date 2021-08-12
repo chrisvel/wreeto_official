@@ -12,8 +12,8 @@
       <div class="card bordered shadow-sm">
         <div class="card-body">
           <div class="form-group">
-            <%= f.label :username %><br />
-            <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
           </div>
 
           <div class="form-group">
@@ -33,6 +33,28 @@
           <div class="text-center">
             <%= f.button "LOG IN", type: 'submit', class: "btn btn-block btn-dark mb-2" %>
           </div>
+
+          <div class="text-center text-secondary py-4">OR</div>
+
+          <div class="text-center pb-2">
+            <%= link_to '<i class="fab fa-lg fa-fw fa-google align-middle mr-2"></i> Continue with Google'.html_safe,
+                  user_google_oauth2_omniauth_authorize_path,
+                  class: 'btn btn-sm btn-primary text-center align-middle', 
+                  method: :post %>
+          </div>
+
+          <hr/>
+
+          <div class="row">
+            <div class="text-left col-6">
+              <%= link_to "Forgot your password?", new_password_path(resource_name), class: '' %>
+            </div>
+            <div class="text-right col-6">
+            Don't have an account? <br />
+              <%= link_to 'Sign Up for free', new_user_registration_path, class: "" %>
+            </div>
+          </div>
+          
         </div>
       </div>
     <% end %>

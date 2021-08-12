@@ -6,9 +6,23 @@ module ButtonsHelper
     data: { turbolinks: false }
   end
 
+  def add_dg_button
+    link_to 'ADD A NEW DIGITAL GARDEN',
+    new_digital_garden_path,
+    class: "btn btn-sm btn-purple",
+    data: { turbolinks: false }
+  end
+
   def add_category_button
     link_to 'ADD A NEW CATEGORY',
     new_category_path,
+    class: "btn btn-sm btn-purple",
+    data: { turbolinks: false }
+  end
+
+  def add_inbox_note_button
+    link_to 'ADD A NEW NOTE',
+    new_inbox_item_path,
     class: "btn btn-sm btn-purple",
     data: { turbolinks: false }
   end

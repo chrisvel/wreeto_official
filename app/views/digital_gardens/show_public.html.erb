@@ -1,0 +1,37 @@
+<% if @dg %>
+  <div class="row">
+    <div class="col-lg-9 col-md-12">
+      <h2>
+        <%= link_to @dg.title, g_path(@dg.slug), turbolinks: false, class: 'link-purple' %>
+      </h2>
+    </div>
+    <div class="col-lg-3 col-md-12 text-lg-right text-sm-left" style="line-height: 2.93rem;">
+      <span class="text-soft">
+        <em>powered by</em>
+      </span> <%= link_to 'wreeto', root_url, class: "ml-2 d-inline-block dg-logo", turbolinks: false %>
+    </div>
+  </div>
+  <hr/>
+  <div class="row">
+    <div class="col-3 pp-menu-sticky">
+      <div class="rounded-lg mt-1 mb-4">
+        <%= render partial: 'toc' %>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="note-content border rounded-lg shadow-sm bg-white mt-1 mb-4">
+        <%= render partial: 'content' %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="public-note-not-found border rounded-lg shadow-sm text-center">
+    <div class="content">
+      <i class="fa fas fa-map-signs" style="font-size: 13rem; color: grey;"></i>
+      <br><br>
+      We couldn't find this garden :(
+      <br>
+      Please make sure the garden exists and is publicly enabled.
+    </div>
+  </div>
+<% end %>

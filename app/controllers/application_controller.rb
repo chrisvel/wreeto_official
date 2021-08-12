@@ -12,16 +12,6 @@ class ApplicationController < ActionController::Base
   	notes_path
   end
 
-  def not_found
-    raise ActionController::RoutingError.new('Not Found')
-  rescue
-    render_404
-  end
-
-  def render_404
-    render file: "#{Rails.root}/public/404", status: :not_found
-  end
-
   protected
 
   def configure_permitted_parameters
@@ -34,7 +24,9 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller?
-      if ["edit", "update"].include? action_name
+      if controller_name == 'passwords' # action_name == 'edit' &&
+        'empty'
+      elsif ["edit", "update"].include? action_name
         'application'
       else
         'empty'

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @anonymous_inquiry.reason %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @anonymous_inquiry.body %>
+</p>
+
+<p>
+  <strong>Fullname:</strong>
+  <%= @anonymous_inquiry.fullname %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @anonymous_inquiry.email %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @anonymous_inquiry.meta %>
+</p>
+
+<%= link_to 'Edit', edit_anonymous_inquiry_path(@anonymous_inquiry) %> |
+<%= link_to 'Back', anonymous_inquiries_path %>

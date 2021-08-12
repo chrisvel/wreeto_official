@@ -1,0 +1,18 @@
+<div class="modal fade" id="delete-<%= @dg.id %>" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">Digital Garden deletion confirmation</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>WARNING:</strong> By deleting this digital garden, no related notes will be deleted.
+
+        <p>Are you sure to delete this digital garden?</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Delete', digital_garden_path(@dg), method: :delete, :class => 'btn btn-sm btn-danger' %>
+        <a href="#" data-dismiss="modal" class="btn btn-sm btn-light">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>

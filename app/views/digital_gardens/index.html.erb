@@ -1,0 +1,16 @@
+<div class="row mb-3">
+  <div class="col-4 col-md-8">
+    <div>
+      <h3 class='d-inline-block'>Digital Gardens</h3>
+    </div>
+  </div>
+  <div class="col-8 col-md-4 text-right my-auto">
+    <%= add_dg_button %>
+  </div>
+</div>
+
+<% if @digital_gardens&.any? %>
+  <%= render partial: 'digital_gardens_list', locals: {digital_gardens: @digital_gardens} %>
+<% else %>
+  <%= blank_slate(:digital_gardens) %>
+<% end %>

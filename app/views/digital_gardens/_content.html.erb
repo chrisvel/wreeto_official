@@ -1,0 +1,44 @@
+<% if @dg.parents.any? %>
+  <% @dg.parents.each do |category| %>
+    <div class="col-12 my-2">
+      <span id="<%= category.slug %>" class="pp-anchor"></span>
+      <h3><%= category.title %></h3>
+      <hr />
+      <% unless category.dg_notes.any? || category.subcategories.any? %>
+        <div class="mb-5 font-italic">
+          There are not any items in this category
+        </div>
+      <% end %>
+      <% if category.dg_notes.any? %>
+        <div class="mt-2">
+          <%= render partial: 'content_list', locals: {notes: category.dg_notes.order(favorite: :desc, title: :asc)} %>
+        </div>
+      <% end %>
+      <% if category.subcategories.any? %>
+        <div class="mb-5">
+          <% category.subcategories.where(id: @dg.subcategories.pluck(:id)).ordered_by_title.each do |cat| %>
+            <div class="subcategory-item border-0">
+              <span id="<%= cat.slug %>" class="pp-anchor"></span>
+              <h4 class="mb-3"><%= cat.title %></h4>
+              <% if cat.dg_notes.any? %>
+                <div class="">
+                  <%= render partial: 'content_list', locals: {notes: cat.dg_notes.order(favorite: :desc, title: :asc)} %>
+                </div>
+              <% else %>
+                <div class="mb-5">
+                  There aren't any notes in this category
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="col-12 my-2">
+    Nothing here yet. Please add some notes first and then come back!
+    <br /><br />
+    Thank you ;-)
+  </div>
+<% end %>
