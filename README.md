@@ -13,7 +13,7 @@ Wreeto is an open source note-taking, knowledge management and wiki system built
 Initially this was built because I didn't like the note-taking apps out there and I wanted something simple, structured and straightforward, with no bells and whistles.
 
 ### Current stable version: _v2.6.8_
-### Latest version: _master_ or _v3.0.1_
+### Latest version: _master_ or _v3.0.1.beta_
 
 ## Table of Contents 
 1. [Features](#features)
