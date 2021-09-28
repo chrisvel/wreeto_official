@@ -200,7 +200,7 @@ GEM
     multipart-post (2.1.1)
     nested_form (0.3.2)
     nio4r (2.5.8)
-    nokogiri (1.12.3)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     numerizer (0.1.1)
@@ -396,7 +396,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   mocha
-  omniauth-google-oauth2 (~> 0.8.1)
+  omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (= 1.2.3)
   puma
