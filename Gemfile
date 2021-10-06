@@ -13,7 +13,7 @@ gem 'rack-attack'
 gem 'rack-cors'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-gem 'sidekiq', '6.1.3'
+gem 'sidekiq', '6.2.1'
 gem 'sidekiq-scheduler', '3.0.1'
 gem 'sidekiq-status', '1.1.4'
 gem 'foreman', '~> 0.87.2'

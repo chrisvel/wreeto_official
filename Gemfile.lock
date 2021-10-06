@@ -314,7 +314,7 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
-    sidekiq (6.1.3)
+    sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -396,7 +396,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   mocha
-  omniauth-google-oauth2 (~> 0.8.1)
+  omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (= 1.2.3)
   puma
@@ -409,7 +409,7 @@ DEPENDENCIES
   recaptcha
   redcarpet (= 3.5.1)
   sass-rails (>= 6)
-  sidekiq (= 6.1.3)
+  sidekiq (= 6.2.1)
   sidekiq-scheduler (= 3.0.1)
   sidekiq-status (= 1.1.4)
   spring
