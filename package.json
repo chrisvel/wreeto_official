@@ -16,7 +16,7 @@
     "d3": "^6.5.0",
     "easymde": "^2.14.0",
     "jquery": "^3.5.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "popper.js": "^1.16.1",
     "pretty-checkbox": "^3.0.3",
     "rails-erb-loader": "^5.5.2",
