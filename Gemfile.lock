@@ -187,7 +187,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.0)
-    mini_portile2 (2.6.1)
+    mini_portile2 (2.8.0)
     minitest (5.14.4)
     minitest-reporters (1.4.3)
       ansi
@@ -200,8 +200,8 @@ GEM
     multipart-post (2.1.1)
     nested_form (0.3.2)
     nio4r (2.5.8)
-    nokogiri (1.12.3)
-      mini_portile2 (~> 2.6.1)
+    nokogiri (1.13.4)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     numerizer (0.1.1)
     oauth2 (1.4.7)
@@ -232,7 +232,7 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-attack (6.5.0)
       rack (>= 1.0, < 3)
@@ -396,7 +396,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   mocha
-  omniauth-google-oauth2 (~> 0.8.1)
+  omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (= 1.2.3)
   puma
